@@ -3,6 +3,7 @@ package com.example.daffolapmac.wealthbook.screen.splash.view;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.example.daffolapmac.wealthbook.MainActivity;
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.home.view.HomeActivity;
@@ -28,7 +29,7 @@ public class SplashActivity extends BaseActivityImpl implements ISplashView {
     public void onSplashTimeOut() {
         if (!isFinishing() && !isDestroyed()) {
             // TODO Check user session for a;lready login
-            startActivity(HomeActivity.class);
+            startActivity(MainActivity.class);
             finish();
         }
     }

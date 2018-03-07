@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="INTERNAL_SERVER_ERROR">Internal server error</string>
+    <string name="REQUEST_TIME_OUT">Request time out</string>
+</resources>
