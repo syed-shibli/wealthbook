@@ -7,6 +7,7 @@ import com.example.daffolapmac.wealthbook.MainActivity;
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.home.view.HomeActivity;
+import com.example.daffolapmac.wealthbook.screen.login.view.LoginActivity;
 import com.example.daffolapmac.wealthbook.screen.splash.presenter.SplashPresenter;
 
 import butterknife.ButterKnife;
@@ -29,7 +30,7 @@ public class SplashActivity extends BaseActivityImpl implements ISplashView {
     public void onSplashTimeOut() {
         if (!isFinishing() && !isDestroyed()) {
             // TODO Check user session for a;lready login
-            startActivity(MainActivity.class);
+            startActivity(LoginActivity.class);
             finish();
         }
     }

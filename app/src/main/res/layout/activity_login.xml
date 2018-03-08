@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.daffolapmac.wealthbook.screen.login.view.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin">
+
+        <com.example.daffolapmac.wealthbook.widget.wbedittext.WBEditTextWithRounded
+            android:id="@+id/edt_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:WBETRMaxChar="25"
+            app:WBETRHintText="@string/placeholder_user_name"
+            app:WBETRColor="@color/colorTextDefault" />
+
+        <com.example.daffolapmac.wealthbook.widget.wbedittext.WBEditTextWithRounded
+            android:id="@+id/edt_user_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edt_username"
+            app:WBETRMaxChar="25"
+            app:WBETRHintText="@string/placeholder_user_name"
+            app:WBETRColor="@color/colorTextDefault"
+            android:inputType="textPassword"
+            android:layout_marginTop="@dimen/margin_small"/>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edt_user_password"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/txt_login"
+            android:textAllCaps="false" />
+    </RelativeLayout>
+</RelativeLayout>

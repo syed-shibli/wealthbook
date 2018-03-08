@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WBEditTextWithRounded">
+        <attr name="WBETRFontName" format="string" />
+        <attr name="WBETRHintText" format="string" />
+        <attr name="WBETRText" format="string" />
+        <attr name="WBETRMaxChar" format="integer" />
+        <attr name="WBETRColor" format="color" />
+    </declare-styleable>
+</resources>
