@@ -15,7 +15,8 @@
         android:textAlignment="viewStart"
         android:textColor="@color/colorTextDefault"
         android:textColorHint="@color/colorHint"
-        android:padding="@dimen/padding_medium"/>
+        android:padding="@dimen/padding_medium"
+        android:maxLines="1"/>
 
     <TextView
         android:id="@+id/txv_error"

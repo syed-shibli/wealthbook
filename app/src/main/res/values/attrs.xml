@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="WBEditTextWithRounded">
+        <attr name="android:inputType" />
         <attr name="WBETRFontName" format="string" />
         <attr name="WBETRHintText" format="string" />
         <attr name="WBETRText" format="string" />

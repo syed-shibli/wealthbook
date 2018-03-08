@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
@@ -38,6 +39,12 @@ public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRo
         setAttributes(context, attrs);
     }
 
+    /**
+     * Set attribute of view
+     *
+     * @param context Context
+     * @param attrs   Attributes
+     */
     private void setAttributes(Context context, AttributeSet attrs) {
         if (attrs != null) {
             TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
@@ -47,6 +54,7 @@ public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRo
             String hintText = mTypedArray.getString(R.styleable.WBEditTextWithRounded_WBETRHintText);
             int maxChar = mTypedArray.getInt(R.styleable.WBEditTextWithRounded_WBETRMaxChar, Integer.MAX_VALUE);
             int color = mTypedArray.getColor(R.styleable.WBEditTextWithRounded_WBETRColor, getResources().getColor(R.color.colorTextDefault));
+            int editTextInputType = mTypedArray.getInt(R.styleable.WBEditTextWithRounded_android_inputType, InputType.TYPE_TEXT_VARIATION_NORMAL);
             //create typeface if provided , otherwise set default font
 //            Typeface typeface = (attr_font_name != null && attr_font_name.length() > 0) ? Typeface.createFromAsset(context.getAssets(), attr_font_name) :
 //                    Typeface.createFromAsset(context.getAssets(), getContext().getString(R.string.tt_regular_font));
@@ -58,6 +66,8 @@ public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRo
             setHint(hintText);
             setMaxChar(maxChar);
             setColorText(color);
+            //set input type for edit text
+            setInputType(editTextInputType);
         }
     }
 
@@ -110,6 +120,16 @@ public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRo
         mTxvError.setVisibility(VISIBLE);
     }
 
+    @Override
+    public void setInputType(int type) {
+        mEditText.setInputType(type);
+    }
+
+    @Override
+    public void clearData() {
+        mEditText.setText("");
+    }
+
     /**
      * Remove error messages if showing on typing
      */
@@ -128,9 +148,16 @@ public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRo
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                if (s.length() != 0)
+                if (s.length() != 0) {
                     setErrorVisibility(false);
+                } else {
+                    setErrorVisibility(true);
+                }
             }
         });
+    }
+
+    public void setError(String error) {
+        mTxvError.setText(error);
     }
 }

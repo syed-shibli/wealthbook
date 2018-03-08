@@ -30,7 +30,7 @@ public class SplashActivity extends BaseActivityImpl implements ISplashView {
     public void onSplashTimeOut() {
         if (!isFinishing() && !isDestroyed()) {
             // TODO Check user session for a;lready login
-            startActivity(LoginActivity.class);
+            launchActivity(this, LoginActivity.class);
             finish();
         }
     }

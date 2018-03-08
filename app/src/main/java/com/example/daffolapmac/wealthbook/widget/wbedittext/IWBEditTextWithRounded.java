@@ -43,4 +43,22 @@ public interface IWBEditTextWithRounded {
      * @param value True or false
      */
     void setErrorVisibility(boolean value);
+
+    /**
+     * set input type value from textNumber,text,textPassword
+     * @param type
+     */
+    void setInputType(int type);
+
+    /**
+     * clear edittext value
+     */
+    void clearData();
+
+    /**
+     * Set error value
+     *
+     * @param error Error message
+     */
+    public void setError(String error);
 }

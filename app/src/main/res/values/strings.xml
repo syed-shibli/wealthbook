@@ -15,7 +15,13 @@
     <string name="nav_updates">Updates</string>
     <string name="nav_news">News</string>
     <string name="nav_logout">Logout</string>
-    <string name="placeholder_user_name">Enter user name</string>
-    <string name="placeholder_passowrd">Enter the passowrd</string>
+
+    <!-- Login screen text -->
+    <string name="placeholder_email">Enter you email address</string>
+    <string name="placeholder_password">Enter password</string>
     <string name="txt_login">Login</string>
+    <string name="error_user_name">Please enter valid user name</string>
+    <string name="error_password">Password should be greater than 6</string>
+    <string name="txt_reset_password">Reset Password?</string>
+    <string name="txt_trouble_logging_in">Trouble Logging in?</string>
 </resources>
