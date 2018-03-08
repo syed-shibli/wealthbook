@@ -6,11 +6,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.example.daffolapmac.wealthbook.R;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
 
-public class BaseActivityImpl extends AppCompatActivity implements UIBase{
+public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDialogClickListener {
 
     private WBLoader mLoader;
 
@@ -68,4 +70,12 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase{
         }
     }
 
+    @Override
+    public void onDialogClick(int val) {
+        switch (val) {
+            case R.string.action_done:
+                Log.d("Action Done: ", "Click");
+                break;
+        }
+    }
 }

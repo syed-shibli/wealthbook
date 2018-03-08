@@ -17,14 +17,17 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
+import com.example.daffolapmac.wealthbook.common.AlertDialogModel;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.myallocation.view.MyAllocationFragment;
+import com.example.daffolapmac.wealthbook.screen.profile.view.ProfileFragment;
+import com.example.daffolapmac.wealthbook.utils.Utility;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivityImpl
-        implements NavigationView.OnNavigationItemSelectedListener, MyAllocationFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, MyAllocationFragment.OnFragmentInteractionListener, ProfileFragment.IProfileFragmentListener {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -34,12 +37,6 @@ public class HomeActivity extends BaseActivityImpl
 
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
-
-//    @BindView(R.id.txv_name)
-//    TextView mTxvName;
-//
-//    @BindView(R.id.txv_email)
-//    TextView mTxvEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +58,7 @@ public class HomeActivity extends BaseActivityImpl
     private void updateProfileView() {
         View headerLayout = mNavigationView.getHeaderView(0);
         TextView mTxvName = headerLayout.findViewById(R.id.txv_name);
-        TextView mTxvEmail = headerLayout.findViewById(R.id.txv_email);;
+        TextView mTxvEmail = headerLayout.findViewById(R.id.txv_email);
         mTxvName.setText("Name");
         mTxvEmail.setText("abc@gmail.com");
     }
@@ -118,8 +115,12 @@ public class HomeActivity extends BaseActivityImpl
             case R.id.nav_news:
                 replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
                 break;
+            case R.id.nav_profile:
+                replaceFragment(ProfileFragment.newInstance());
+                break;
             case R.id.nav_logout:
-                replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
+                AlertDialogModel alert = Utility.prepareDialogObj(getString(R.string.alert), getString(R.string.txt_logout_message), getString(R.string.txt_logout_yes), getString(R.string.txt_logout_cancel), R.string.action_done, false);
+                Utility.showDialog(this, this, alert);
                 break;
             default:
                 replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
@@ -141,7 +142,12 @@ public class HomeActivity extends BaseActivityImpl
     }
 
     @Override
+    public void onProfileInteraction() {
+        // TODO on profile interaction
+    }
+
+    @Override
     public void onFragmentInteraction(Uri uri) {
-        // TODO My allocation fragment interaction method
+
     }
 }

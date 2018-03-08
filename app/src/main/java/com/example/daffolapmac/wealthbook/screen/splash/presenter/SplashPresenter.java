@@ -1,6 +1,7 @@
 package com.example.daffolapmac.wealthbook.screen.splash.presenter;
 
 import com.example.daffolapmac.wealthbook.screen.splash.view.ISplashView;
+import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,30 +37,41 @@ public class SplashPresenter {
      */
     private void stopTimer() {
         // Cancel the existing timer task
-       if(mTimerTask != null){
-           mTimerTask.cancel();
-           mTimerTask = null;
-       }
-       // Cancel the existing timer
-        if(mTimer != null){
-           mTimer.cancel();
-           mTimer = null;
+        if (mTimerTask != null) {
+            mTimerTask.cancel();
+            mTimerTask = null;
+        }
+        // Cancel the existing timer
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
         }
     }
 
     /**
      * Creates a new instances of the Timer and TimerTasks.
      */
-    private void createTimer(){
-       mTimer = new Timer();
-       mTimerTask = new SplashTimer();
+    private void createTimer() {
+        mTimer = new Timer();
+        mTimerTask = new SplashTimer();
     }
 
     private class SplashTimer extends TimerTask {
         @Override
         public void run() {
             stopTimer();
-            mSplashView.onSplashTimeOut();
+            checkUserLoginOrNot();
+        }
+    }
+
+    /**
+     * Check user logged or not
+     */
+    public void checkUserLoginOrNot() {
+        if (SessionManager.getNewInstance().isCurrentUserLoggedIn()) {
+            mSplashView.redirectToHomeScreen();
+        } else {
+            mSplashView.redirectToLoginScreen();
         }
     }
 }
