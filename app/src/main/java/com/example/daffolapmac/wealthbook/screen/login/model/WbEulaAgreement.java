@@ -1,4 +1,4 @@
-package com.example.daffolapmac.wealthbook;
+package com.example.daffolapmac.wealthbook.screen.login.model;
 
 import com.google.gson.annotations.SerializedName;
 

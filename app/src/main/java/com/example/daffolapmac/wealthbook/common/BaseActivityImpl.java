@@ -1,10 +1,14 @@
 package com.example.daffolapmac.wealthbook.common;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.enums.SnackbarType;
 
 public class BaseActivityImpl extends AppCompatActivity implements UIBase{
 
@@ -23,17 +27,6 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-
-
-    /**
-     * Start activity
-     * @param type Type of activity class
-     */
-    protected void startActivity(Class type) {
-        Intent activity = new Intent(this, type);
-        startActivity(activity);
     }
 
     @Override
@@ -56,4 +49,23 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase{
             mLoader = null;
         }
     }
+
+    @Override
+    public void showSnackBar(int message, AppCompatActivity context) {
+        Snackbar.with(getApplicationContext()).type(SnackbarType.MULTI_LINE).text(message).show(context);
+    }
+
+    @Override
+    public void showSnackBar(String message, AppCompatActivity context) {
+        Snackbar.with(getApplicationContext()).type(SnackbarType.MULTI_LINE).text(message).show(context);
+    }
+
+    @Override
+    public <T> void launchActivity(Activity _context, Class<T> cls) {
+        if (_context != null) {
+            Intent intent = new Intent(_context, cls);
+            startActivity(intent);
+        }
+    }
+
 }

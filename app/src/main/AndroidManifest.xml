@@ -15,6 +15,7 @@
         <activity
             android:name=".screen.splash.view.SplashActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screen.home.view.HomeActivity" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".screen.home.view.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".screen.login.view.LoginActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

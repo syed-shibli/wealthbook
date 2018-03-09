@@ -1,10 +1,8 @@
 package com.example.daffolapmac.wealthbook.api;
 
-import com.example.daffolapmac.wealthbook.LoginRequest;
-import com.example.daffolapmac.wealthbook.LoginRes;
+import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
+import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
