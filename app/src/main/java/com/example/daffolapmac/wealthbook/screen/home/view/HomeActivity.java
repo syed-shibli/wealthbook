@@ -21,6 +21,8 @@ import com.example.daffolapmac.wealthbook.common.AlertDialogModel;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.myallocation.view.MyAllocationFragment;
 import com.example.daffolapmac.wealthbook.screen.profile.view.ProfileFragment;
+import com.example.daffolapmac.wealthbook.usersession.SessionManager;
+import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
 import com.example.daffolapmac.wealthbook.utils.Utility;
 
 import butterknife.BindView;
@@ -59,6 +61,16 @@ public class HomeActivity extends BaseActivityImpl
         View headerLayout = mNavigationView.getHeaderView(0);
         TextView mTxvName = headerLayout.findViewById(R.id.txv_name);
         TextView mTxvEmail = headerLayout.findViewById(R.id.txv_email);
+        UserSessionData data = SessionManager.getNewInstance().readSession();
+        if (data == null) {
+            return;
+        }
+        if (data.getmFirstName() != null) {
+            mTxvName.setText(data.getmFirstName());
+        }
+        if (data.getmEmail() != null) {
+            mTxvEmail.setText(data.getmEmail());
+        }
         mTxvName.setText("Name");
         mTxvEmail.setText("abc@gmail.com");
     }
