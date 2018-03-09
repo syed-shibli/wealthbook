@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.daffolapmac.wealthbook.screen.profile.view.ProfileFragment">
+
+    <TextView
+        android:id="@+id/txv_header"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/darker_gray"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/padding_normal"
+        android:paddingStart="@dimen/padding_normal"
+        android:text="@string/txt_my_profile"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="@dimen/txt_large" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txv_header">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/first_name"
+                layout="@layout/profile_item_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/last_name"
+                layout="@layout/profile_item_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/first_name" />
+
+            <include
+                android:id="@+id/mobile_no"
+                layout="@layout/profile_item_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/last_name" />
+
+            <include
+                android:id="@+id/e_mail"
+                layout="@layout/profile_item_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mobile_no" />
+
+            <include
+                android:id="@+id/country"
+                layout="@layout/profile_item_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/e_mail" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

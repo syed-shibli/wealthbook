@@ -9,6 +9,9 @@ import com.example.daffolapmac.wealthbook.api.RetrofitClient;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.login.presenter.ILoginResponseReceiver;
+import com.example.daffolapmac.wealthbook.usersession.SessionManager;
+import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 
@@ -32,6 +35,7 @@ public class LoginManager {
     private ResponseCallback<LoginRes> mLoginReqCallback = new ResponseCallback<LoginRes>() {
         @Override
         public void onSuccess(@NonNull LoginRes data) {
+            SessionManager.getNewInstance().saveSession(new Gson().fromJson(new Gson().toJson(data), UserSessionData.class));
             mLoginReceiver.onSuccess(data);
         }
 
