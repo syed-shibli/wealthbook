@@ -16,48 +16,9 @@
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="@dimen/txt_large" />
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txv_header">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include
-                android:id="@+id/first_name"
-                layout="@layout/profile_item_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                android:id="@+id/last_name"
-                layout="@layout/profile_item_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/first_name" />
-
-            <include
-                android:id="@+id/mobile_no"
-                layout="@layout/profile_item_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/last_name" />
-
-            <include
-                android:id="@+id/e_mail"
-                layout="@layout/profile_item_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/mobile_no" />
-
-            <include
-                android:id="@+id/country"
-                layout="@layout/profile_item_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/e_mail" />
-        </RelativeLayout>
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txv_header"/>
 </RelativeLayout>
