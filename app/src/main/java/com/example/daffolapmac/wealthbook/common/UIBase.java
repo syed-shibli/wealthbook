@@ -1,6 +1,7 @@
 package com.example.daffolapmac.wealthbook.common;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
@@ -37,4 +38,11 @@ public interface UIBase {
      * @param <T> Current activity context
      */
     <T> void launchActivity(Activity _context, Class<T> cls);
+
+    /**
+     * Method to launch another activity and finish current one without bundle
+     *
+     * @param <T> Current activity context
+     */
+    <T> void launchActivity(Intent _intent);
 }

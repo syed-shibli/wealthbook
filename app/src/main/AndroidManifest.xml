@@ -8,13 +8,11 @@
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".screen.splash.view.SplashActivity"
-            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -31,6 +29,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".screen.login.view.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".screen.news.view.NewsDetailsActivity"
             android:screenOrientation="portrait" />
     </application>
 

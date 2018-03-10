@@ -2,7 +2,7 @@ package com.example.daffolapmac.wealthbook.screen.login.model;
 
 import com.google.gson.annotations.SerializedName;
 
-class CurrentUserAttribute {
+public class CurrentUserAttribute {
 
     @SerializedName("label")
     private String label;

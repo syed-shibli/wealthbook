@@ -6,9 +6,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.daffolapmac.wealthbook.R;
+import com.example.daffolapmac.wealthbook.screen.login.view.LoginActivity;
+import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
 
@@ -54,28 +57,60 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
 
     @Override
     public void showSnackBar(int message, AppCompatActivity context) {
-        Snackbar.with(getApplicationContext()).type(SnackbarType.MULTI_LINE).text(message).show(context);
+        if (message != 0) {
+            Snackbar.with(getApplicationContext()).type(SnackbarType.MULTI_LINE).text(message).show(context);
+        }
     }
 
     @Override
     public void showSnackBar(String message, AppCompatActivity context) {
-        Snackbar.with(getApplicationContext()).type(SnackbarType.MULTI_LINE).text(message).show(context);
+        if (message != null) {
+            Snackbar.with(getApplicationContext()).type(SnackbarType.MULTI_LINE).text(message).show(context);
+        }
     }
 
     @Override
     public <T> void launchActivity(Activity _context, Class<T> cls) {
         if (_context != null) {
             Intent intent = new Intent(_context, cls);
+            overridePendingTransition(R.anim.trans_left_in, R.anim.trans_right_out);
             startActivity(intent);
         }
     }
 
     @Override
+    public <T> void launchActivity(Intent _intent) {
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_right_out);
+        startActivity(_intent);
+    }
+
+    @Override
     public void onDialogClick(int val) {
         switch (val) {
-            case R.string.action_done:
-                Log.d("Action Done: ", "Click");
+            case R.string.action_logout:
+                SessionManager.getNewInstance().destroySession();
+                launchActivity(this, LoginActivity.class);
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_pending_notification:
+                showSnackBar("action_pending_notification", this);
+                return true;
+            case R.id.action_alert:
+                showSnackBar("action_alert", this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

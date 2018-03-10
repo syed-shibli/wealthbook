@@ -33,6 +33,12 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
         mLoginPresenter = new LoginPresenter(this, new LoginManager());
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLoginPresenter.disconnect();
+    }
+
     /**
      * Set listener for all field
      */

@@ -29,25 +29,11 @@ public class MyAllocationFragment extends Fragment {
     @BindView(R.id.txv_)
     TextView mTxv;
 
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_TITLE = "title";
     private String mTitle;
 
     private OnFragmentInteractionListener mListener;
 
-    public MyAllocationFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param title Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyAllocationFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MyAllocationFragment newInstance(String title) {
         MyAllocationFragment fragment = new MyAllocationFragment();
         Bundle args = new Bundle();
