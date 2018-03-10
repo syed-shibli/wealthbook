@@ -1,17 +1,27 @@
 package com.example.daffolapmac.wealthbook.screen.profile.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
+import com.example.daffolapmac.wealthbook.screen.news.adapter.NewsAdapter;
+import com.example.daffolapmac.wealthbook.screen.news.model.NewsItem;
+import com.example.daffolapmac.wealthbook.screen.news.view.NewsDetailsActivity;
+import com.example.daffolapmac.wealthbook.screen.profile.adapter.ProfileAdapter;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
+import com.example.daffolapmac.wealthbook.widget.RecyclerItemClickListener;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,28 +35,12 @@ import butterknife.ButterKnife;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
-
-    @BindView(R.id.first_name)
-    View mFirstNameView;
-
-    @BindView(R.id.last_name)
-    View mLastNameView;
-
-    @BindView(R.id.mobile_no)
-    View mMobileNoView;
-
-    @BindView(R.id.e_mail)
-    View mEmailView;
-
-    @BindView(R.id.country)
-    View mCountryCodeView;
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
 
     private IProfileFragmentListener mListener;
-    private TextView mFirstName;
-    private TextView mLastName;
-    private TextView mMobileNo;
-    private TextView mEmail;
-    private TextView mCountry;
+    private ProfileAdapter mAdapter;
+    private UserSessionData data;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -81,52 +75,8 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        findId();
-        viewInitialize();
-    }
-
-    /**
-     * Initialize view
-     */
-    private void viewInitialize() {
-        // set value
-        UserSessionData data = SessionManager.getNewInstance().readSession();
-        if (data == null) {
-            return;
-        }
-        if (data.getmFirstName() != null) {
-            mFirstName.setText(data.getmFirstName());
-        }
-        if (data.getmLastName() != null) {
-            mLastName.setText(data.getmLastName());
-        }
-        if (data.getmPhone() != null) {
-            mMobileNo.setText(data.getmPhone());
-        }
-        if (data.getmEmail() != null) {
-            mEmail.setText(data.getmEmail());
-        }
-        if (data.getmCountry() != null) {
-            mCountry.setText(data.getmCountry());
-        }
-    }
-
-    /**
-     * Find id for every view
-     */
-    private void findId() {
-        // Get id for label
-        ((TextView) mFirstNameView.findViewById(R.id.txv_label)).setText(getString(R.string.lbl_first_name));
-        ((TextView) mLastNameView.findViewById(R.id.txv_label)).setText(getString(R.string.lbl_last_name));
-        ((TextView) mMobileNoView.findViewById(R.id.txv_label)).setText(getString(R.string.lbl_mobile_no));
-        ((TextView) mEmailView.findViewById(R.id.txv_label)).setText(getString(R.string.lbl_email));
-        ((TextView) mCountryCodeView.findViewById(R.id.txv_label)).setText(getString(R.string.lbl_country));
-        // Get id for value
-        mFirstName = (TextView) mFirstNameView.findViewById(R.id.txv_value);
-        mLastName = (TextView) mLastNameView.findViewById(R.id.txv_value);
-        mMobileNo = (TextView) mMobileNoView.findViewById(R.id.txv_value);
-        mEmail = (TextView) mEmailView.findViewById(R.id.txv_value);
-        mCountry = (TextView) mCountryCodeView.findViewById(R.id.txv_value);
+        data = SessionManager.getNewInstance().readSession();
+        setUpRecyclerView();
     }
 
     @Override
@@ -158,5 +108,20 @@ public class ProfileFragment extends Fragment {
      */
     public interface IProfileFragmentListener {
         void onProfileInteraction();
+    }
+
+    /**
+     * To setup recycler view for news list
+     */
+    private void setUpRecyclerView() {
+        mAdapter = new ProfileAdapter(data.getCurrentUserAttributes());
+        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity())
+                .color(ActivityCompat.getColor(getActivity(), R.color.colorNewsItemDivider))
+                .sizeResId(R.dimen.divider)
+                .build());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 }
