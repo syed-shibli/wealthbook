@@ -9,4 +9,9 @@ public interface ILoginScreenPresenter {
      * @param pass  Pass string
      */
     void performLogin(String email, String pass);
+
+    /**
+     * Disconnect api call
+     */
+    void disconnect();
 }

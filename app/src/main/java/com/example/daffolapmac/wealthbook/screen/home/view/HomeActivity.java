@@ -6,12 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -20,6 +18,7 @@ import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.AlertDialogModel;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.myallocation.view.MyAllocationFragment;
+import com.example.daffolapmac.wealthbook.screen.news.view.NewsFragment;
 import com.example.daffolapmac.wealthbook.screen.profile.view.ProfileFragment;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
@@ -46,11 +45,10 @@ public class HomeActivity extends BaseActivityImpl
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-        mToolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_check));
         setSupportActionBar(mToolbar);
         setUpSideNav();
         // Set default view my allocation frag in home activity
-        onNavigationItemSelected(mNavigationView.getMenu().getItem(0));
+        onNavigationItemSelected(mNavigationView.getMenu().getItem(3));
         updateProfileView();
     }
 
@@ -71,8 +69,9 @@ public class HomeActivity extends BaseActivityImpl
         if (data.getmEmail() != null) {
             mTxvEmail.setText(data.getmEmail());
         }
-        mTxvName.setText("Name");
-        mTxvEmail.setText("abc@gmail.com");
+        if(data.getmCompanyName() != null){
+            setTitle(data.getmCompanyName());
+        }
     }
 
     /**
@@ -95,21 +94,6 @@ public class HomeActivity extends BaseActivityImpl
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -125,20 +109,19 @@ public class HomeActivity extends BaseActivityImpl
                 replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
                 break;
             case R.id.nav_news:
-                replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
+                replaceFragment(NewsFragment.newInstance());
                 break;
             case R.id.nav_profile:
                 replaceFragment(ProfileFragment.newInstance());
                 break;
             case R.id.nav_logout:
-                AlertDialogModel alert = Utility.prepareDialogObj(getString(R.string.alert), getString(R.string.txt_logout_message), getString(R.string.txt_logout_yes), getString(R.string.txt_logout_cancel), R.string.action_done, false);
+                AlertDialogModel alert = Utility.prepareDialogObj(getString(R.string.alert), getString(R.string.txt_logout_message), getString(R.string.txt_logout_yes), getString(R.string.txt_logout_cancel), R.string.action_logout, false);
                 Utility.showDialog(this, this, alert);
                 break;
             default:
                 replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
         }
         menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
         mDrawer.closeDrawers();
         return true;
     }

@@ -28,6 +28,11 @@ public class LoginPresenter implements ILoginScreenPresenter, ILoginResponseRece
         }
     }
 
+    @Override
+    public void disconnect() {
+        mLoginManager.cancel();
+    }
+
     /**
      * To check email/password is valid or not
      *

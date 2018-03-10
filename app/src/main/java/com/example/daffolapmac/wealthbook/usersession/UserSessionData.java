@@ -1,6 +1,11 @@
 package com.example.daffolapmac.wealthbook.usersession;
 
+import com.example.daffolapmac.wealthbook.screen.login.model.CurrentUserAttribute;
+import com.example.daffolapmac.wealthbook.screen.login.model.RepAttribute;
+import com.example.daffolapmac.wealthbook.screen.login.model.RepDetails;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class UserSessionData {
 
@@ -27,6 +32,21 @@ public class UserSessionData {
 
     @SerializedName("token")
     private String mToken;
+
+    @SerializedName("company_name")
+    private String mCompanyName;
+
+    @SerializedName("user_type")
+    private int userType;
+
+    @SerializedName("rep_details")
+    private RepDetails repDetails;
+
+    @SerializedName("rep_attributes")
+    private List<RepAttribute> repAttributes = null;
+
+    @SerializedName("current_user_attributes")
+    private List<CurrentUserAttribute> currentUserAttributes = null;
 
     public String getmUserId() {
         return mUserId;
@@ -58,5 +78,77 @@ public class UserSessionData {
 
     public String getmCountry() {
         return mCountry;
+    }
+
+    public String getmCompanyName() {
+        return mCompanyName;
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public RepDetails getRepDetails() {
+        return repDetails;
+    }
+
+    public void setmUserId(String mUserId) {
+        this.mUserId = mUserId;
+    }
+
+    public void setmEmail(String mEmail) {
+        this.mEmail = mEmail;
+    }
+
+    public void setmFirstName(String mFirstName) {
+        this.mFirstName = mFirstName;
+    }
+
+    public void setmMiddleName(String mMiddleName) {
+        this.mMiddleName = mMiddleName;
+    }
+
+    public void setmLastName(String mLastName) {
+        this.mLastName = mLastName;
+    }
+
+    public void setmPhone(String mPhone) {
+        this.mPhone = mPhone;
+    }
+
+    public void setmCountry(String mCountry) {
+        this.mCountry = mCountry;
+    }
+
+    public void setmToken(String mToken) {
+        this.mToken = mToken;
+    }
+
+    public void setmCompanyName(String mCompanyName) {
+        this.mCompanyName = mCompanyName;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
+    }
+
+    public void setRepDetails(RepDetails repDetails) {
+        this.repDetails = repDetails;
+    }
+
+    public List<RepAttribute> getRepAttributes() {
+        return repAttributes;
+    }
+
+    public void setRepAttributes(List<RepAttribute> repAttributes) {
+        this.repAttributes = repAttributes;
+    }
+
+    public List<CurrentUserAttribute> getCurrentUserAttributes() {
+        return currentUserAttributes;
+    }
+
+    public void setCurrentUserAttributes(List<CurrentUserAttribute> currentUserAttributes) {
+        this.currentUserAttributes = currentUserAttributes;
     }
 }

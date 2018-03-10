@@ -9,7 +9,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Dialog button action -->
-    <string name="action_done">Action Done</string>
+    <string name="action_logout">Action Logout</string>
     <!-- Side menu text -->
     <string name="nav_my_allocations">My Allocations</string>
     <string name="nav_my_portfolios">My Portfolios</string>
@@ -39,5 +39,9 @@
     <string name="txt_logout_message">Are you sure want to Logout WealthBook?</string>
     <string name="txt_logout_yes">Yes I am sure</string>
     <string name="txt_logout_cancel">Cancel</string>
+
+    <!-- News screen text -->
+    <string name="txt_source">Source: %1$s</string>
+    <string name="txt_category">Category: %1$s</string>
 
 </resources>

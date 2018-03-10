@@ -2,6 +2,8 @@ package com.example.daffolapmac.wealthbook.api;
 
 import android.support.annotation.NonNull;
 
+import com.example.daffolapmac.wealthbook.usersession.SessionManager;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -12,7 +14,7 @@ class ApiInterceptor implements Interceptor {
 
     private static final String APP_CONTENT_TYPE = "Content-Type";
     private static final String APP_API_KEY = "api_key";
-    private static final String APP_AUTH_TOKEN = "Authorization";
+    private static final String APP_AUTH_TOKEN = "token";
 
     /**
      * Interceptor that modify/add header before outgoing request
@@ -38,8 +40,9 @@ class ApiInterceptor implements Interceptor {
     private Request modifyAuthHeader(Request request) {
         if (request != null) {
             Request.Builder builder = request.newBuilder();
-            // TODO Add auth token
-            /*builder.addHeader(APP_AUTH_TOKEN, "");*/
+            if (SessionManager.getNewInstance().isCurrentUserLoggedIn()) {
+                builder.addHeader(APP_AUTH_TOKEN, SessionManager.getNewInstance().readSession().getmToken());
+            }
             return builder.build();
         }
         return null;

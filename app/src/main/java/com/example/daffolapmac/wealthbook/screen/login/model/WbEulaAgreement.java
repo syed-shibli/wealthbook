@@ -2,8 +2,7 @@ package com.example.daffolapmac.wealthbook.screen.login.model;
 
 import com.google.gson.annotations.SerializedName;
 
-class WbEulaAgreement {
-
+public class WbEulaAgreement {
     @SerializedName("agreement_status")
     private Boolean agreementStatus;
 
