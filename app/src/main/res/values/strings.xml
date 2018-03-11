@@ -44,4 +44,9 @@
     <string name="txt_source">Source: %1$s</string>
     <string name="txt_category">Category: %1$s</string>
 
+    <!-- Adviser profile screen-->
+    <string name="lbl_work">Work:</string>
+    <string name="lbl_office">Office:</string>
+    <string name="txt_contact_information">Contact Information</string>
+
 </resources>
