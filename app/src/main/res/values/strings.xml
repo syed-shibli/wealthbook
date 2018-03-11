@@ -22,9 +22,9 @@
     <string name="placeholder_email">Enter you email address</string>
     <string name="placeholder_password">Enter password</string>
     <string name="txt_login">Login</string>
-    <string name="error_user_name">Please enter valid user name</string>
+    <string name="error_user_email">Please enter valid email</string>
     <string name="error_password">Password should be greater than 6</string>
-    <string name="txt_reset_password">Reset Password?</string>
+    <string name="btn_change_password">Change Password?</string>
     <string name="txt_trouble_logging_in">Trouble Logging in?</string>
 
     <!-- Profile screen text -->
@@ -49,4 +49,11 @@
     <string name="lbl_office">Office:</string>
     <string name="txt_contact_information">Contact Information</string>
 
+    <!-- Forgot password screen text -->
+    <string name="placeholder_otp">Enter valid OTP</string>
+    <string name="placeholder_confirm_password">Re-enter password</string>
+    <string name="txt_submit">Submit</string>
+    <string name="error_confirm_password">Please enter valid password </string>
+    <string name="error_empty_top">Please enter valid OTP code</string>
+    <string name="txt_change_password">Change Password</string>
 </resources>

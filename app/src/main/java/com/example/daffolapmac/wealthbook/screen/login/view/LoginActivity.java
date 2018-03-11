@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
+import com.example.daffolapmac.wealthbook.screen.forgotpassword.view.ForgotPasswordActivity;
 import com.example.daffolapmac.wealthbook.screen.home.view.HomeActivity;
 import com.example.daffolapmac.wealthbook.screen.login.manager.LoginManager;
 import com.example.daffolapmac.wealthbook.screen.login.presenter.ILoginScreenPresenter;
@@ -45,7 +46,7 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
     private void setListener() {
         mEdtEmailName.registerKeyListener();
         mEdtUserPassword.registerKeyListener();
-        mEdtEmailName.setError(getString(R.string.error_user_name));
+        mEdtEmailName.setError(getString(R.string.error_user_email));
         mEdtUserPassword.setError(getString(R.string.error_password));
     }
 
@@ -54,9 +55,9 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
         mLoginPresenter.performLogin(mEdtEmailName.getValue(), mEdtUserPassword.getValue());
     }
 
-    @OnClick(R.id.btn_reset_password)
+    @OnClick(R.id.btn_change_password)
     public void doResetPassword() {
-        showSnackBar(R.string.txt_reset_password, this);
+        launchActivity(this, ForgotPasswordActivity.class);
     }
 
     @OnClick(R.id.btn_trouble_login)

@@ -50,20 +50,20 @@
             app:WBETRMaxChar="25" />
 
         <TextView
-            android:id="@+id/btn_reset_password"
+            android:id="@+id/btn_change_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/edt_user_password"
             android:padding="@dimen/padding_normal"
-            android:text="@string/txt_reset_password"
+            android:text="@string/btn_change_password"
             android:textSize="@dimen/txt_normal" />
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_reset_password"
+            android:layout_below="@+id/btn_change_password"
             android:layout_marginTop="@dimen/margin_normal"
             android:background="@android:color/holo_blue_dark"
             android:text="@string/txt_login"

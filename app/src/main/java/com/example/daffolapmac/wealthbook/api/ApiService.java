@@ -1,5 +1,7 @@
 package com.example.daffolapmac.wealthbook.api;
 
+import com.example.daffolapmac.wealthbook.common.ConformationRes;
+import com.example.daffolapmac.wealthbook.screen.forgotpassword.model.ForgotPasswordReq;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.news.model.NewsRes;
@@ -14,7 +16,6 @@ public interface ApiService {
 
     /**
      * Relative login URL of the resource
-     *
      * @param request Request body
      * @return Return the converted result of this login if converter is not assign then use ResponseBody class
      */
@@ -23,9 +24,24 @@ public interface ApiService {
 
     /**
      * Relative get news list URL of the resource
-     *
      * @return Return list of news
      */
     @GET("news/all")
     Call<NewsRes> getNews(@Query("token") String token);
+
+    /**
+     * Relative URL to send reset OTP to email
+     * @param email Email where send OTP
+     * @return Return confirmation message
+     */
+    @GET("auth/reset_password")
+    Call<ConformationRes> emailOTP(@Query("email") String email);
+
+    /**
+     * Relative URL to change password
+     * @param request Request body
+     * @return Return Forgot password success or error response
+     */
+    @POST("auth/change_password")
+    Call<ConformationRes> forgotPassword(@Body ForgotPasswordReq request);
 }
