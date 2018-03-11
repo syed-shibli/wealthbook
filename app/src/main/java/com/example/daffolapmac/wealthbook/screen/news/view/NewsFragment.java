@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
+import com.example.daffolapmac.wealthbook.screen.adviserprofile.view.AdviserProfileActivity;
 import com.example.daffolapmac.wealthbook.screen.home.view.HomeActivity;
 import com.example.daffolapmac.wealthbook.screen.news.adapter.NewsAdapter;
 import com.example.daffolapmac.wealthbook.screen.news.manager.NewsManager;
@@ -185,6 +186,6 @@ public class NewsFragment extends Fragment implements INewsViewListener, SwipeRe
 
     @OnClick(R.id.adviser_container)
     public void openAdviserProfile() {
-        // TODO open adviser profile
+        mActivity.launchActivity(mActivity, AdviserProfileActivity.class);
     }
 }

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
+import com.example.daffolapmac.wealthbook.screen.adviserprofile.view.AdviserProfileActivity;
 import com.example.daffolapmac.wealthbook.screen.news.model.NewsItem;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
@@ -115,6 +116,6 @@ public class NewsDetailsActivity extends BaseActivityImpl {
 
     @OnClick(R.id.adviser_container)
     public void openAdviserProfile() {
-        // TODO open adviser profile
+        launchActivity(this, AdviserProfileActivity.class);
     }
 }
