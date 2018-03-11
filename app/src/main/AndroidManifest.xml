@@ -8,7 +8,6 @@
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -33,7 +32,8 @@
         <activity
             android:name=".screen.news.view.NewsDetailsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".screen.adviserprofile.view.AdviserProfileActivity"></activity>
+        <activity android:name=".screen.adviserprofile.view.AdviserProfileActivity" />
+        <activity android:name=".screen.forgotpassword.view.ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>
