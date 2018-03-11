@@ -6,6 +6,7 @@ import com.example.daffolapmac.wealthbook.api.ErrorResponse;
 import com.example.daffolapmac.wealthbook.screen.login.manager.LoginManager;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
+import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
 import com.example.daffolapmac.wealthbook.screen.login.view.ILoginView;
 import com.example.daffolapmac.wealthbook.utils.Utility;
 
@@ -31,6 +32,12 @@ public class LoginPresenter implements ILoginScreenPresenter, ILoginResponseRece
     @Override
     public void disconnect() {
         mLoginManager.cancel();
+    }
+
+    @Override
+    public void loginTroubleHelp() {
+        mLoginView.showLoader();
+        mLoginManager.reqLoginTrouble(this);
     }
 
     /**
@@ -62,5 +69,11 @@ public class LoginPresenter implements ILoginScreenPresenter, ILoginResponseRece
     public void onFailure(@NonNull ErrorResponse errorResponse) {
         mLoginView.hideLoader();
         mLoginView.showError(errorResponse.getErrorMessage());
+    }
+
+    @Override
+    public void onLoginTroubleSuccess(LoginTroubleRes data) {
+        mLoginView.hideLoader();
+        mLoginView.redirectToGmailApp(data);
     }
 }
