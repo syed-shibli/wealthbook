@@ -4,6 +4,7 @@ import com.example.daffolapmac.wealthbook.common.ConformationRes;
 import com.example.daffolapmac.wealthbook.screen.forgotpassword.model.ForgotPasswordReq;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
+import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
 import com.example.daffolapmac.wealthbook.screen.news.model.NewsRes;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
 
@@ -47,6 +48,13 @@ public interface ApiService {
      */
     @POST("auth/change_password")
     Call<ConformationRes> forgotPassword(@Body ForgotPasswordReq request);
+
+    /**
+     * Relative URL to login trouble
+     * @return Return Email value for send email
+     */
+    @GET("wb/tangram_support")
+    Call<LoginTroubleRes> loginTrouble();
 
     /**
      * Relative URL to get all update list

@@ -1,5 +1,7 @@
 package com.example.daffolapmac.wealthbook.screen.login.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.daffolapmac.wealthbook.R;
@@ -7,6 +9,7 @@ import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.forgotpassword.view.ForgotPasswordActivity;
 import com.example.daffolapmac.wealthbook.screen.home.view.HomeActivity;
 import com.example.daffolapmac.wealthbook.screen.login.manager.LoginManager;
+import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
 import com.example.daffolapmac.wealthbook.screen.login.presenter.ILoginScreenPresenter;
 import com.example.daffolapmac.wealthbook.screen.login.presenter.LoginPresenter;
 import com.example.daffolapmac.wealthbook.widget.wbedittext.WBEditTextWithRounded;
@@ -62,7 +65,7 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
 
     @OnClick(R.id.btn_trouble_login)
     public void doLoginTrouble() {
-        showSnackBar(R.string.txt_trouble_logging_in, this);
+        mLoginPresenter.loginTroubleHelp();
     }
 
     @Override
@@ -84,6 +87,18 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
     @Override
     public void showError(int errorMessage) {
         showSnackBar(errorMessage, this);
+    }
+
+    @Override
+    public void redirectToGmailApp(LoginTroubleRes data) {
+        if (data != null) {
+            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+            sendIntent.setType("plain/text");
+            sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+            sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{data.getSupportEmail()});
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, data.getSupportTitle());
+            launchActivity(sendIntent);
+        }
     }
 
     @Override
