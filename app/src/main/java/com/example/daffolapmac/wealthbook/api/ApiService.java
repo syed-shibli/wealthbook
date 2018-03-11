@@ -5,6 +5,9 @@ import com.example.daffolapmac.wealthbook.screen.forgotpassword.model.ForgotPass
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.news.model.NewsRes;
+import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -44,4 +47,11 @@ public interface ApiService {
      */
     @POST("auth/change_password")
     Call<ConformationRes> forgotPassword(@Body ForgotPasswordReq request);
+
+    /**
+     * Relative URL to get all update list
+     * @return Return list of update
+     */
+    @GET("doc/all")
+    Call<List<UpdateRes>> updateList(@Query("token") String token);
 }

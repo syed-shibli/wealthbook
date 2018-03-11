@@ -32,8 +32,12 @@
         <activity
             android:name=".screen.news.view.NewsDetailsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".screen.adviserprofile.view.AdviserProfileActivity" />
-        <activity android:name=".screen.forgotpassword.view.ForgotPasswordActivity"></activity>
+        <activity
+            android:name=".screen.adviserprofile.view.AdviserProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".screen.forgotpassword.view.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

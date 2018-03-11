@@ -20,6 +20,7 @@ import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.myallocation.view.MyAllocationFragment;
 import com.example.daffolapmac.wealthbook.screen.news.view.NewsFragment;
 import com.example.daffolapmac.wealthbook.screen.profile.view.ProfileFragment;
+import com.example.daffolapmac.wealthbook.screen.updates.view.UpdateFragment;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
 import com.example.daffolapmac.wealthbook.utils.Utility;
@@ -69,7 +70,7 @@ public class HomeActivity extends BaseActivityImpl
         if (data.getmEmail() != null) {
             mTxvEmail.setText(data.getmEmail());
         }
-        if(data.getmCompanyName() != null){
+        if (data.getmCompanyName() != null) {
             setTitle(data.getmCompanyName());
         }
     }
@@ -106,7 +107,7 @@ public class HomeActivity extends BaseActivityImpl
                 replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
                 break;
             case R.id.nav_updates:
-                replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
+                replaceFragment(UpdateFragment.newInstance());
                 break;
             case R.id.nav_news:
                 replaceFragment(NewsFragment.newInstance());
@@ -128,7 +129,6 @@ public class HomeActivity extends BaseActivityImpl
 
     /**
      * Replace fragment with selected nav view from side menu
-     *
      * @param fragment Selected view
      */
     private void replaceFragment(Fragment fragment) {
