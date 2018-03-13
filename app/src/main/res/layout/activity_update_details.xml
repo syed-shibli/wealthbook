@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.daffolapmac.wealthbook.screen.home.view.HomeActivity">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -16,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:navigationIcon="?attr/homeAsUpIndicator"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -24,12 +23,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <!-- The main content view where fragments are loaded -->
-        <FrameLayout
-            android:id="@+id/flContent"
+
+        <include
+            android:id="@+id/adviser_container"
+            layout="@layout/adviser_profile_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txv_news_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/adviser_container"
+            android:background="@color/colorUpdateTitleBg"
+            android:gravity="center"
+            android:padding="@dimen/padding_small"
+            android:text="@string/nav_updates"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/txt_normal" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottom_view" />
+            android:layout_above="@+id/bottom_view"
+            android:layout_below="@+id/txv_news_header"
+            android:paddingBottom="@dimen/padding_normal" />
+
         <!-- Logo -->
         <include
             android:id="@+id/bottom_view"
@@ -39,5 +59,4 @@
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true" />
     </RelativeLayout>
-
 </android.support.design.widget.CoordinatorLayout>

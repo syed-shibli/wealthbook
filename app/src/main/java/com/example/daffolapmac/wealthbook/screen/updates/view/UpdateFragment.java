@@ -1,6 +1,7 @@
 package com.example.daffolapmac.wealthbook.screen.updates.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -41,6 +42,8 @@ import butterknife.OnClick;
  * create an instance of this fragment.
  */
 public class UpdateFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, IUpdateView {
+
+    public static final String TAG_UPDATE_ID = "id";
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -96,19 +99,15 @@ public class UpdateFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private void setUpRecyclerView() {
         mAdapter = new UpdateAdapter(mUpdateList);
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity())
-                .color(ActivityCompat.getColor(getActivity(), R.color.colorNewsItemDivider))
-                .sizeResId(R.dimen.divider)
-                .build());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                /*NewsItem newsItem = mNewsList.get(position);
-                Intent newsIntent = new Intent(getActivity(), NewsDetailsActivity.class);
-                newsIntent.putExtra(TAG_NEWS_ITEM, newsItem);
-                mActivity.launchActivity(newsIntent);*/
+                UpdateRes updateItem = mUpdateList.get(position);
+                Intent newsIntent = new Intent(getActivity(), UpdateDetailsActivity.class);
+                newsIntent.putExtra(TAG_UPDATE_ID, updateItem.getId());
+                mActivity.launchActivity(newsIntent);
             }
         }));
     }

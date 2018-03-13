@@ -29,7 +29,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/txv_bottom_logo_view"
+            android:layout_above="@+id/bottom_view"
             android:paddingBottom="@dimen/padding_normal">
 
             <RelativeLayout
@@ -54,8 +54,8 @@
 
                         <ImageView
                             android:id="@+id/img_adviser_logo"
-                            android:layout_width="@dimen/advisor_logo_width"
-                            android:layout_height="@dimen/advisor_logo_height"
+                            android:layout_width="@dimen/logo_width"
+                            android:layout_height="@dimen/logo_height"
                             android:src="@mipmap/ic_launcher" />
 
                         <TextView
@@ -166,29 +166,13 @@
             </RelativeLayout>
         </ScrollView>
 
-        <LinearLayout
-            android:id="@+id/txv_bottom_logo_view"
+        <include
+            android:id="@+id/bottom_view"
+            layout="@layout/bottom_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerVertical="true"
-            android:background="@android:color/holo_blue_dark"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_smallest">
+            android:layout_centerVertical="true" />
 
-            <ImageView
-                android:layout_width="@dimen/advisor_logo_width"
-                android:layout_height="@dimen/advisor_logo_height"
-                android:src="@mipmap/ic_launcher" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
-                android:text="@string/app_name"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/txt_normal" />
-        </LinearLayout>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

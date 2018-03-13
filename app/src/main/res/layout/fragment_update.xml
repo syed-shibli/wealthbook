@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/adviser_container"
-        android:background="@android:color/holo_green_dark"
+        android:background="@color/colorUpdateTitleBg"
         android:gravity="center"
         android:padding="@dimen/padding_small"
         android:text="@string/nav_updates"

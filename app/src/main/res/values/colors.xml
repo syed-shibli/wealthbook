@@ -7,4 +7,18 @@
     <color name="colorTextDefault">@android:color/black</color>
     <color name="colorHint">@android:color/darker_gray</color>
     <color name="colorNewsItemDivider">#efefef</color>
+    <color name="colorNewsTitleBg">#17b044</color>
+    <color name="colorAdviserProfileView">#b2edfd</color>
+    <color name="colorBottomLogoView">#1d77f7</color>
+    <color name="colorMyProfileTitle">#147dc1</color>
+    <color name="colorMyProfileTitleBg">#e2e2e2</color>
+    <color name="colorUpdateTitleBg">#b12298</color>
+    <color name="colorMyAllocationTitleBg">#8a8a8a</color>
+    <color name="colorSelectPortfolioBg">#1e78f7</color>
+    <color name="colorSelectedPortfolioTitleBg">#c6c6c6</color>
+    <color name="colorAssetsByInvestTitleBg">#a5c071</color>
+    <color name="colorInvestTableTitleBg">#fffed8</color>
+    <color name="colorAllocation">#c7140f</color>
+    <color name="colorInternationalEquity">#147dc1</color>
+    <color name="colorUSEquity">#fefdb0</color>
 </resources>

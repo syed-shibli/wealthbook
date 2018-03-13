@@ -2,6 +2,8 @@ package com.example.daffolapmac.wealthbook.screen.updates.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class UpdateRes {
     @SerializedName("id")
     private String id;
@@ -17,6 +19,9 @@ public class UpdateRes {
 
     @SerializedName("description")
     private String description;
+
+    @SerializedName("images")
+    private List<UpdateDetailsImage> images;
 
     @SerializedName("date_published")
     private String datePublished;
@@ -50,5 +55,9 @@ public class UpdateRes {
 
     public int getAuthorId() {
         return authorId;
+    }
+
+    public List<UpdateDetailsImage> getImages() {
+        return images;
     }
 }

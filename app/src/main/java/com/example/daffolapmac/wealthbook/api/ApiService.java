@@ -62,4 +62,11 @@ public interface ApiService {
      */
     @GET("doc/all")
     Call<List<UpdateRes>> updateList(@Query("token") String token);
+
+    /**
+     * Relative URL to get selected update details
+     * @return Return details
+     */
+    @GET("doc/document")
+    Call<UpdateRes> getSelectedUpdateDetails(@Query("id") String id, @Query("token") String token);
 }

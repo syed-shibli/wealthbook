@@ -18,6 +18,7 @@ public class UpdateManager {
 
     private IUpdateResponseReceiver mResponseReceiver;
     private Call<List<UpdateRes>> mUpdateListCall;
+    private Call<UpdateRes> mSetectedUpdateDetailsCall;
 
     /**
      * Send request to fetch all update list
@@ -43,11 +44,38 @@ public class UpdateManager {
     };
 
     /**
+     * Send req for get selected update detail
+     * @param receiver Response receiver
+     * @param id       ID
+     */
+    public void reqGetUpdateDetails(IUpdateResponseReceiver receiver, String id) {
+        this.mResponseReceiver = receiver;
+        String token = SessionManager.getNewInstance().readSession().getmToken();
+        mSetectedUpdateDetailsCall = RetrofitClient.getApiService().getSelectedUpdateDetails(id, token);
+        mSetectedUpdateDetailsCall.enqueue(new ResponseWrapper<UpdateRes>(mSelectedUpdateDetailsCallback));
+    }
+
+    private ResponseCallback<UpdateRes> mSelectedUpdateDetailsCallback = new ResponseCallback<UpdateRes>() {
+        @Override
+        public void onSuccess(@NonNull UpdateRes data) {
+            mResponseReceiver.onGetDetailSuccess(data);
+        }
+
+        @Override
+        public void onFailure(@NonNull ErrorResponse errorResponse) {
+            mResponseReceiver.onFailure(errorResponse);
+        }
+    };
+
+    /**
      * Cancel all on going request
      */
     public void cancel() {
         if (mUpdateListCall != null && mUpdateListCall.isExecuted()) {
             mUpdateListCall.cancel();
+        }
+        if (mSetectedUpdateDetailsCall != null && mSetectedUpdateDetailsCall.isExecuted()) {
+            mSetectedUpdateDetailsCall.cancel();
         }
     }
 }
