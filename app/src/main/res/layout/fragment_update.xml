@@ -11,14 +11,14 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/txv_news_header"
+        android:id="@+id/txv_update_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/adviser_container"
-        android:background="@color/colorNewsTitleBg"
+        android:background="@color/colorUpdateTitleBg"
         android:gravity="center"
         android:padding="@dimen/padding_small"
-        android:text="@string/nav_news"
+        android:text="@string/nav_updates"
         android:textColor="@android:color/white"
         android:textSize="@dimen/txt_normal" />
 
@@ -26,7 +26,7 @@
         android:id="@+id/swipe_refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/txv_news_header">
+        android:layout_below="@+id/txv_update_header">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

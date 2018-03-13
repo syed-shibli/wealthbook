@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/adviser_container"
-            android:background="@android:color/holo_green_dark"
+            android:background="@color/colorNewsTitleBg"
             android:gravity="center"
             android:padding="@dimen/padding_small"
             android:text="@string/nav_news"
@@ -46,6 +46,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_view"
             android:layout_below="@+id/txv_news_header"
             android:paddingBottom="@dimen/padding_normal">
 
@@ -107,5 +108,13 @@
                     tools:text="News content" />
             </RelativeLayout>
         </ScrollView>
+        <!-- Logo -->
+        <include
+            android:id="@+id/bottom_view"
+            layout="@layout/bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -8,12 +8,12 @@
         android:id="@+id/txv_header"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/darker_gray"
+        android:background="@color/colorMyProfileTitleBg"
         android:gravity="center_vertical"
         android:paddingEnd="@dimen/padding_normal"
         android:paddingStart="@dimen/padding_normal"
         android:text="@string/txt_my_profile"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="@color/colorMyProfileTitle"
         android:textSize="@dimen/txt_large" />
 
     <android.support.v7.widget.RecyclerView

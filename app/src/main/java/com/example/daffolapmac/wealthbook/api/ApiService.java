@@ -6,6 +6,9 @@ import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
 import com.example.daffolapmac.wealthbook.screen.news.model.NewsRes;
+import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -52,4 +55,18 @@ public interface ApiService {
      */
     @GET("wb/tangram_support")
     Call<LoginTroubleRes> loginTrouble();
+
+    /**
+     * Relative URL to get all update list
+     * @return Return list of update
+     */
+    @GET("doc/all")
+    Call<List<UpdateRes>> updateList(@Query("token") String token);
+
+    /**
+     * Relative URL to get selected update details
+     * @return Return details
+     */
+    @GET("doc/document")
+    Call<UpdateRes> getSelectedUpdateDetails(@Query("id") String id, @Query("token") String token);
 }
