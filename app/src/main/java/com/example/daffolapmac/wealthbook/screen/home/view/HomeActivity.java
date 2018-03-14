@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivityImpl
-        implements NavigationView.OnNavigationItemSelectedListener, MyAllocationFragment.OnFragmentInteractionListener, ProfileFragment.IProfileFragmentListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.IProfileFragmentListener {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -101,10 +101,10 @@ public class HomeActivity extends BaseActivityImpl
 
         switch (menuItem.getItemId()) {
             case R.id.nav_my_allocation:
-                replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
+                replaceFragment(MyAllocationFragment.newInstance());
                 break;
             case R.id.nav_my_portfoilios:
-                replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
+                replaceFragment(MyAllocationFragment.newInstance());
                 break;
             case R.id.nav_updates:
                 replaceFragment(UpdateFragment.newInstance());
@@ -120,7 +120,7 @@ public class HomeActivity extends BaseActivityImpl
                 Utility.showDialog(this, this, alert);
                 break;
             default:
-                replaceFragment(MyAllocationFragment.newInstance(menuItem.getTitle().toString()));
+                replaceFragment(MyAllocationFragment.newInstance());
         }
         menuItem.setChecked(true);
         mDrawer.closeDrawers();
@@ -139,10 +139,5 @@ public class HomeActivity extends BaseActivityImpl
     @Override
     public void onProfileInteraction() {
         // TODO on profile interaction
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }

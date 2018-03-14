@@ -56,4 +56,15 @@
     <string name="error_confirm_password">Please enter valid password </string>
     <string name="error_empty_top">Please enter valid OTP code</string>
     <string name="txt_change_password">Change Password</string>
+
+    <!-- My allocation screen text -->
+    <string name="txt_fund_name">Fund Name</string>
+    <string name="txt_percentage">% percentage</string>
+    <string name="txt_portfolio">Select Portfolio</string>
+    <string-array name="spinner">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>

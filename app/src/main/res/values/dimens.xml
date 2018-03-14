@@ -8,6 +8,7 @@
     <dimen name="line_spacing_10">10dp</dimen>
     <dimen name="line_spacing_1">1dp</dimen>
     <dimen name="divider">1dp</dimen>
+    <dimen name="radious">10dp</dimen>
 
     <!-- Text size -->
     <dimen name="txt_small">8sp</dimen>
@@ -37,5 +38,4 @@
     <dimen name="adviser_logo_height">16dp</dimen>
     <dimen name="logo_width">24dp</dimen>
     <dimen name="logo_height">24dp</dimen>
-
 </resources>
