@@ -5,6 +5,7 @@ import com.example.daffolapmac.wealthbook.screen.forgotpassword.model.ForgotPass
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
+import com.example.daffolapmac.wealthbook.screen.myallocation.model.MyAllocationRes;
 import com.example.daffolapmac.wealthbook.screen.news.model.NewsRes;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
 
@@ -69,4 +70,12 @@ public interface ApiService {
      */
     @GET("doc/document")
     Call<UpdateRes> getSelectedUpdateDetails(@Query("id") String id, @Query("token") String token);
+
+    /**
+     * Relative URL to get all allocation
+     * @param token Token
+     * @return Return all allocation account data
+     */
+    @GET("va/account_allocation")
+    Call<MyAllocationRes> allAllocation(@Query("token") String token);
 }

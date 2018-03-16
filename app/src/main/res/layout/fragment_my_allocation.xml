@@ -1,0 +1,168 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.daffolapmac.wealthbook.screen.profile.view.ProfileFragment">
+
+    <TextView
+        android:id="@+id/txv_header"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorMyAllocationTitleBg"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_normal"
+        android:paddingStart="@dimen/padding_normal"
+        android:text="@string/txt_my_profile"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txt_large" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txv_header"
+        android:padding="@dimen/padding_small">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/select_speaker_spinner"
+                style="@style/spinner_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:drawableEnd="@drawable/ic_down_arrow"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/txt_portfolio"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txt_xx_normal" />
+
+            <TextView
+                android:id="@+id/txv_header1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/select_speaker_spinner"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@color/colorHint"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="@dimen/padding_x_small"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/txt_xx_normal"
+                tools:text="Jackson national life (Jackson Perspective)" />
+
+            <include
+                android:id="@+id/view_account_holder"
+                layout="@layout/my_allocation_details_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_header1" />
+
+            <include
+                android:id="@+id/view_account_title"
+                layout="@layout/my_allocation_details_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_account_holder" />
+
+            <include
+                android:id="@+id/view_account_no"
+                layout="@layout/my_allocation_details_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_account_title" />
+
+            <include
+                android:id="@+id/view_adviser_name"
+                layout="@layout/my_allocation_details_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_account_no" />
+
+            <include
+                android:id="@+id/view_adviser_contact"
+                layout="@layout/my_allocation_details_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_adviser_name" />
+
+            <include
+                android:id="@+id/view_account_portfolio"
+                layout="@layout/my_allocation_details_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_adviser_contact" />
+
+            <TextView
+                android:id="@+id/txv_assets_by_investment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_account_portfolio"
+                android:background="@color/colorAssetsByInvestTitleBg"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="@dimen/padding_x_small"
+                android:text="@string/txt_assets_by_invest"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txt_xx_normal" />
+
+            <LinearLayout
+                android:id="@+id/table_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txv_assets_by_investment"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@color/colorInvestTableTitleBg"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_smallest">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_fund_name"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_xx_normal" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_percentage"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/txt_xx_normal" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/table_header" />
+
+            <TextView
+                android:id="@+id/txv_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recycler_view"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@color/colorInvestTableTitleBg"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/padding_smallest"
+                android:paddingTop="@dimen/padding_smallest"
+                android:text="@string/txt_charts"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txt_xx_normal" />
+
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_below="@id/txv_chart" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
