@@ -29,9 +29,12 @@
 
     <!-- Padding -->
     <dimen name="padding_smallest">4dp</dimen>
+    <dimen name="padding_x_small">6dp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_medium">12dp</dimen>
     <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_x_normal">18dp</dimen>
+    <dimen name="padding_large">20dp</dimen>
 
     <!-- Height and weidth -->
     <dimen name="adviser_logo_width">16dp</dimen>
