@@ -7,6 +7,7 @@ import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
 import com.example.daffolapmac.wealthbook.screen.myallocation.model.MyAllocationRes;
 import com.example.daffolapmac.wealthbook.screen.news.model.NewsRes;
+import com.example.daffolapmac.wealthbook.screen.portfolio.model.AllPortfolioRes;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
 
 import java.util.List;
@@ -78,4 +79,12 @@ public interface ApiService {
      */
     @GET("va/account_allocation")
     Call<MyAllocationRes> allAllocation(@Query("token") String token);
+
+    /**
+     * Relative URL to get all portfolio data
+     * @param token Auth Token
+     * @return Return all portfolio data model
+     */
+    @GET("portfolio/all")
+    Call<AllPortfolioRes> getAllPortfolio(@Query("token") String token);
 }

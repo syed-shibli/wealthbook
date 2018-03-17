@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/padding_small"
+    android:paddingTop="@dimen/padding_small">
+
+    <TextView
+        android:id="@+id/txv_portfolio_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_smallest"
+        android:paddingStart="@dimen/padding_smallest"
+        android:textColor="@color/colorPrimaryDark"
+        tools:text="Sample Portfolio" />
+
+    <TextView
+        android:id="@+id/txv_market_close"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_smallest"
+        android:paddingStart="@dimen/padding_smallest"
+        android:textColor="@color/colorPrimaryDark"
+        tools:text="$464,417" />
+
+    <TextView
+        android:id="@+id/txv_ytd_rate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_smallest"
+        android:paddingStart="@dimen/padding_smallest"
+        android:textColor="@color/colorAssetsByInvestTitleBg"
+        tools:text="36.83" />
+
+    <TextView
+        android:id="@+id/txv_pr_yr_net"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_smallest"
+        android:paddingStart="@dimen/padding_smallest"
+        android:textColor="@color/colorAssetsByInvestTitleBg"
+        tools:text="+8.92" />
+
+    <TextView
+        android:id="@+id/txv_lifetime_rate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_smallest"
+        android:paddingStart="@dimen/padding_smallest"
+        android:textColor="@color/colorAssetsByInvestTitleBg"
+        tools:text="+22.57" />
+
+    <TextView
+        android:id="@+id/txv_incept_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_smallest"
+        android:paddingStart="@dimen/padding_smallest"
+        android:textColor="@android:color/black"
+        tools:text="05/13/2001" />
+</LinearLayout>

@@ -69,10 +69,16 @@
     <string name="txt_portfolio_as_of">Portfolio as of: </string>
     <string name="txt_assets_by_invest">Assets By Investment Type</string>
     <string name="txt_charts">Charts</string>
-    <string-array name="spinner">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-    </string-array>
+
+    <!-- My portfolio screen text -->
+    <string name="txt_portfolio_name">Portfolio Name</string>
+    <string name="txt_market_close">Market Close</string>
+    <string name="txt_ytd_ret">YTD RET. %</string>
+    <string name="txt_pr_yr_net">Pr. Yr.Net %</string>
+    <string name="txt_lifetime_ret">Lifetime RET. %</string>
+    <string name="txt_incept_date">Incept.Date</string>
+    <string name="txt_portfolio_empty_message">Currently, your portfolio is empty</string>
+    <string name="txt_eod_value">EOD value %1$s</string>
+    <string name="txt_ytd_value">YTD %1$s</string>
+    <string name="dolor">$</string>
 </resources>
