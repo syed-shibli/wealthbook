@@ -19,6 +19,7 @@ import com.example.daffolapmac.wealthbook.common.AlertDialogModel;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.myallocation.view.MyAllocationFragment;
 import com.example.daffolapmac.wealthbook.screen.news.view.NewsFragment;
+import com.example.daffolapmac.wealthbook.screen.portfolio.view.PortfolioFragment;
 import com.example.daffolapmac.wealthbook.screen.profile.view.ProfileFragment;
 import com.example.daffolapmac.wealthbook.screen.updates.view.UpdateFragment;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
@@ -49,7 +50,7 @@ public class HomeActivity extends BaseActivityImpl
         setSupportActionBar(mToolbar);
         setUpSideNav();
         // Set default view my allocation frag in home activity
-        onNavigationItemSelected(mNavigationView.getMenu().getItem(3));
+        onNavigationItemSelected(mNavigationView.getMenu().getItem(1));
         updateProfileView();
     }
 
@@ -104,7 +105,7 @@ public class HomeActivity extends BaseActivityImpl
                 replaceFragment(MyAllocationFragment.newInstance());
                 break;
             case R.id.nav_my_portfoilios:
-                replaceFragment(MyAllocationFragment.newInstance());
+                replaceFragment(PortfolioFragment.newInstance());
                 break;
             case R.id.nav_updates:
                 replaceFragment(UpdateFragment.newInstance());

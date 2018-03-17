@@ -28,6 +28,7 @@
     <dimen name="margin_30dp">30dp</dimen>
 
     <!-- Padding -->
+    <dimen name="padding_x_smallest">2dp</dimen>
     <dimen name="padding_smallest">4dp</dimen>
     <dimen name="padding_x_small">6dp</dimen>
     <dimen name="padding_small">8dp</dimen>

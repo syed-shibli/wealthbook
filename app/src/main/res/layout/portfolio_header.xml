@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:gravity="center"
+    android:padding="@dimen/padding_smallest">
+
+    <TextView
+        android:id="@+id/txv_portfolio_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/padding_smallest"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txt_normal"
+        android:text="@string/nav_my_portfolios" />
+
+    <TextView
+        android:id="@+id/txv_eod_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txv_portfolio_title"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/padding_smallest"
+        android:text="--"
+        android:textColor="@color/colorUSEquity"
+        android:textSize="@dimen/txt_normal" />
+
+    <TextView
+        android:id="@+id/txv_ytd_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/txv_portfolio_title"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/padding_smallest"
+        android:text="--"
+        android:textColor="@color/colorNewsTitleBg"
+        android:textSize="@dimen/txt_normal" />
+</RelativeLayout>

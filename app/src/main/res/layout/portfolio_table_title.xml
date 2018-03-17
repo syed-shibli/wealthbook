@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorMyProfileTitleBg"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/padding_smallest"
+    android:paddingTop="@dimen/padding_smallest">
+
+    <TextView
+        android:id="@+id/txv_portfolio_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
+        android:text="@string/txt_portfolio_name" />
+
+    <TextView
+        android:id="@+id/txv_market_close"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
+        android:text="@string/txt_market_close" />
+
+    <TextView
+        android:id="@+id/txv_ytd_rate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
+        android:text="@string/txt_ytd_ret" />
+
+    <TextView
+        android:id="@+id/txv_pr_yr_net"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
+        android:text="@string/txt_pr_yr_net" />
+
+    <TextView
+        android:id="@+id/txv_lifetime_rate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
+        android:text="@string/txt_lifetime_ret" />
+
+    <TextView
+        android:id="@+id/txv_incept_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
+        android:text="@string/txt_incept_date" />
+</LinearLayout>
