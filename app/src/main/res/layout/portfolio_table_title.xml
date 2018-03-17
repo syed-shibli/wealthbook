@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:text="@string/txt_portfolio_name" />
 
     <TextView
@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:text="@string/txt_market_close" />
 
     <TextView
@@ -33,8 +33,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:text="@string/txt_ytd_ret" />
 
     <TextView
@@ -43,8 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:text="@string/txt_pr_yr_net" />
 
     <TextView
@@ -53,8 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:text="@string/txt_lifetime_ret" />
 
     <TextView
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:text="@string/txt_incept_date" />
 </LinearLayout>

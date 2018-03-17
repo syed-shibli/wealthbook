@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:textColor="@color/colorPrimaryDark"
         tools:text="Sample Portfolio" />
 
@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:textColor="@color/colorPrimaryDark"
         tools:text="$464,417" />
 
@@ -35,8 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:textColor="@color/colorAssetsByInvestTitleBg"
         tools:text="36.83" />
 
@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:textColor="@color/colorAssetsByInvestTitleBg"
         tools:text="+8.92" />
 
@@ -57,8 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:textColor="@color/colorAssetsByInvestTitleBg"
         tools:text="+22.57" />
 
@@ -68,8 +68,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:paddingEnd="@dimen/padding_smallest"
-        android:paddingStart="@dimen/padding_smallest"
+        android:paddingEnd="@dimen/padding_x_smallest"
+        android:paddingStart="@dimen/padding_x_smallest"
         android:textColor="@android:color/black"
         tools:text="05/13/2001" />
 </LinearLayout>
