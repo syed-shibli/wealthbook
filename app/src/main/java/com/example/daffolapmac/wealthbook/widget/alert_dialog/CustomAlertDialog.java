@@ -7,9 +7,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -59,7 +62,6 @@ public class CustomAlertDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_aler_dialog, container, false);
     }
 
@@ -68,6 +70,16 @@ public class CustomAlertDialog extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         mListView = (ListView) view.findViewById(R.id.list_view);
         initializeView(mList);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Window window = getDialog().getWindow();
+        if(window == null) return;
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.height = heightInDpToPx();
+        window.setAttributes(params);
     }
 
     /**
@@ -104,6 +116,11 @@ public class CustomAlertDialog extends DialogFragment {
         } catch (IllegalStateException e) {
             getActivity().finish();
         }
+    }
+
+    private int heightInDpToPx() {
+        DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
+        return metrics.heightPixels-(metrics.heightPixels / 4);
     }
 
     /**

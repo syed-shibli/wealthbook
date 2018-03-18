@@ -10,14 +10,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.daffolapmac.wealthbook.R;
+import com.example.daffolapmac.wealthbook.api.ErrorResponse;
 import com.example.daffolapmac.wealthbook.screen.login.view.LoginActivity;
+import com.example.daffolapmac.wealthbook.screen.pendingalert.manager.IPendingAlertResponseReceiver;
+import com.example.daffolapmac.wealthbook.screen.pendingalert.manager.PendingAlertManager;
+import com.example.daffolapmac.wealthbook.screen.pendingalert.model.PendingAlertRes;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
+import com.example.daffolapmac.wealthbook.utils.Utility;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
 
-public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDialogClickListener {
+public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDialogClickListener, IPendingAlertResponseReceiver {
 
     private WBLoader mLoader;
+    private AlertDialogModel alert;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,6 +97,8 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
                 SessionManager.getNewInstance().destroySession();
                 launchActivity(this, LoginActivity.class);
                 break;
+            case R.string.action_empty_pending_alert:
+                break;
         }
     }
 
@@ -108,9 +116,29 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
                 showSnackBar("action_pending_notification", this);
                 return true;
             case R.id.action_alert:
-                showSnackBar("action_alert", this);
+                showProgress();
+                PendingAlertManager manager = new PendingAlertManager();
+                manager.getPendingAlertList(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSuccess(PendingAlertRes data) {
+        hideProgress();
+        if (data == null || data.getPendingAlertList() == null || data.getPendingAlertList().size() == 0) {
+            alert = Utility.prepareDialogObj("", getString(R.string.txt_empty_pending_alert), getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
+            Utility.showDialog(this, this, alert);
+            return;
+        }
+
+    }
+
+    @Override
+    public void onFailure(ErrorResponse errorResponse) {
+        hideProgress();
+        alert = Utility.prepareDialogObj("", getString(R.string.txt_empty_pending_alert), getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
+        Utility.showDialog(this, this, alert);
     }
 }

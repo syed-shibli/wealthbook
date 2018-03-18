@@ -8,6 +8,7 @@ import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
 import com.example.daffolapmac.wealthbook.screen.myallocation.model.MyAllocationRes;
 import com.example.daffolapmac.wealthbook.screen.news.model.NewsRes;
+import com.example.daffolapmac.wealthbook.screen.pendingalert.model.PendingAlertRes;
 import com.example.daffolapmac.wealthbook.screen.portfolio.model.AllPortfolioRes;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
 
@@ -97,4 +98,12 @@ public interface ApiService {
      */
     @GET("portfolio/hold")
     Call<PortfolioDetailRes> getSelectedPortfolio(@Query("id") int id, @Query("token") String token);
+
+    /**
+     * Relative URL to get all pending alert list
+     * @param token Auth token
+     * @return Return pending alert response data
+     */
+    @GET("va/pending_alerts")
+    Call<PendingAlertRes> getPendingAlert(@Query("token") String token);
 }

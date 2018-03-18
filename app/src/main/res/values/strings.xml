@@ -4,6 +4,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
+    <string name="btn_ok">OK</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -90,4 +91,8 @@
     <string name="txt_gain_or_loss">Gain or (Loss)</string>
     <string name="txt_default">--</string>
     <string name="txt_symbol">Symbol: </string>
+
+    <!-- Pending alert dialog screen -->
+    <string name="txt_empty_pending_alert">Woops! There are no pending listing.</string>
+    <string name="action_empty_pending_alert">Woops! There are no pending listing.</string>
 </resources>
