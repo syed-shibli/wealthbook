@@ -63,7 +63,6 @@ public class NewsFragment extends Fragment implements INewsViewListener, SwipeRe
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
      * @return A new instance of fragment NewsFragment.
      */
     public static NewsFragment newInstance() {
@@ -164,17 +163,17 @@ public class NewsFragment extends Fragment implements INewsViewListener, SwipeRe
     @Override
     public void bindNewsListToView(NewsRes data) {
         mSwipeRefreshLayout.setRefreshing(false);
-        if(data == null || data.getNewsList() == null || data.getNewsList().size() == 0){
-            return;
+        if (data != null && data.getNewsList() != null && data.getNewsList().size() != 0) {
+            mNewsList.clear();
+            mNewsList.addAll(data.getNewsList());
+            mAdapter.addAll(mNewsList);
+            mAdapter.notifyDataSetChanged();
         }
-        mNewsList.clear();
-        mNewsList.addAll(data.getNewsList());
-        mAdapter.addAll(mNewsList);
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showError(@StringRes int error) {
+        mSwipeRefreshLayout.setRefreshing(false);
         mActivity.showSnackBar(error, mActivity);
     }
 

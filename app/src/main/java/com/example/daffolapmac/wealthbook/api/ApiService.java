@@ -1,6 +1,7 @@
 package com.example.daffolapmac.wealthbook.api;
 
 import com.example.daffolapmac.wealthbook.common.ConformationRes;
+import com.example.daffolapmac.wealthbook.screen.detailportfolio.model.PortfolioDetailRes;
 import com.example.daffolapmac.wealthbook.screen.forgotpassword.model.ForgotPasswordReq;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
@@ -87,4 +88,13 @@ public interface ApiService {
      */
     @GET("portfolio/all")
     Call<AllPortfolioRes> getAllPortfolio(@Query("token") String token);
+
+    /**
+     * Relative URL to get selected portfolio details
+     * @param id    ID of portfolio
+     * @param token Auth token
+     * @return Return selected portfolio details
+     */
+    @GET("portfolio/hold")
+    Call<PortfolioDetailRes> getSelectedPortfolio(@Query("id") int id, @Query("token") String token);
 }

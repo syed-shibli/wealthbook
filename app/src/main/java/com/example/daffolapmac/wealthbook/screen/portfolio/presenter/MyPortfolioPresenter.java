@@ -17,8 +17,10 @@ public class MyPortfolioPresenter implements IMyPortfolioScreenPresenter, IMyPor
     }
 
     @Override
-    public void reqAllPortfolio() {
-        mViewListener.showLoader();
+    public void reqAllPortfolio(boolean isAppLoader) {
+        if (isAppLoader) {
+            mViewListener.showLoader();
+        }
         mMyPortfolioManager.getAllPortfolioList(this);
     }
 

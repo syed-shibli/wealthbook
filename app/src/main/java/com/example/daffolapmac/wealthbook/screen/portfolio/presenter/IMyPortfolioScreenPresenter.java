@@ -4,8 +4,9 @@ public interface IMyPortfolioScreenPresenter {
 
     /**
      * Req for get all portfolio data
+     * @param isAppLoader Want to show app loader
      */
-    void reqAllPortfolio();
+    void reqAllPortfolio(boolean isAppLoader);
 
     /**
      * Disconnect all on going request
