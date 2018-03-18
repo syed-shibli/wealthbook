@@ -81,4 +81,13 @@
     <string name="txt_eod_value">EOD value %1$s</string>
     <string name="txt_ytd_value">YTD %1$s</string>
     <string name="dolor">$</string>
+
+    <!-- Details of portfolio screen -->
+    <string name="txt_quantity">Quantity</string>
+    <string name="txt_eod_price">EOD price</string>
+    <string name="txt_eod_value_cost_basis">EOD value Cost Basis</string>
+    <string name="txt_of_assets">% of Assets</string>
+    <string name="txt_gain_or_loss">Gain or (Loss)</string>
+    <string name="txt_default">--</string>
+    <string name="txt_symbol">Symbol: </string>
 </resources>

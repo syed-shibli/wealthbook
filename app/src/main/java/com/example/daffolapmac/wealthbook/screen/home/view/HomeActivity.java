@@ -32,6 +32,8 @@ import butterknife.ButterKnife;
 public class HomeActivity extends BaseActivityImpl
         implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.IProfileFragmentListener {
 
+    private static final String VIEW_STATE_KEY = "view_state_key";
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
@@ -40,18 +42,27 @@ public class HomeActivity extends BaseActivityImpl
 
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
+    private int mSelectedNav = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-
+        if(savedInstanceState != null){
+            mSelectedNav = savedInstanceState.getInt(VIEW_STATE_KEY);
+        }
         setSupportActionBar(mToolbar);
         setUpSideNav();
         // Set default view my allocation frag in home activity
-        onNavigationItemSelected(mNavigationView.getMenu().getItem(1));
+        onNavigationItemSelected(mNavigationView.getMenu().getItem(mSelectedNav));
         updateProfileView();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(VIEW_STATE_KEY, mSelectedNav);
+        super.onSaveInstanceState(outState);
     }
 
     /**
@@ -102,21 +113,27 @@ public class HomeActivity extends BaseActivityImpl
 
         switch (menuItem.getItemId()) {
             case R.id.nav_my_allocation:
+                mSelectedNav = 0;
                 replaceFragment(MyAllocationFragment.newInstance());
                 break;
             case R.id.nav_my_portfoilios:
+                mSelectedNav = 1;
                 replaceFragment(PortfolioFragment.newInstance());
                 break;
             case R.id.nav_updates:
+                mSelectedNav = 2;
                 replaceFragment(UpdateFragment.newInstance());
                 break;
             case R.id.nav_news:
+                mSelectedNav = 3;
                 replaceFragment(NewsFragment.newInstance());
                 break;
             case R.id.nav_profile:
+                mSelectedNav = 4;
                 replaceFragment(ProfileFragment.newInstance());
                 break;
             case R.id.nav_logout:
+                mSelectedNav = 5;
                 AlertDialogModel alert = Utility.prepareDialogObj(getString(R.string.alert), getString(R.string.txt_logout_message), getString(R.string.txt_logout_yes), getString(R.string.txt_logout_cancel), R.string.action_logout, false);
                 Utility.showDialog(this, this, alert);
                 break;

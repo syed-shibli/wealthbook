@@ -1,4 +1,4 @@
-package com.example.daffolapmac.wealthbook.screen.portfolio.model;
+package com.example.daffolapmac.wealthbook.screen.detailportfolio.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,12 +7,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class AllPortfolioRes implements Parcelable {
+public class PortfolioDetailRes implements Parcelable{
     @SerializedName("data")
-    private List<Datum> data = null;
+    private List<PortfolioDataItem> data = null;
 
     @SerializedName("eod")
     private Integer eod;
+
+    @SerializedName("name")
+    private String name;
 
     @SerializedName("total_price")
     private Integer totalPrice;
@@ -32,12 +35,14 @@ public class AllPortfolioRes implements Parcelable {
     @SerializedName("formated_gain_loss_percent")
     private String formatedGainLossPercent;
 
-    protected AllPortfolioRes(Parcel in) {
+    protected PortfolioDetailRes(Parcel in) {
+        data = in.createTypedArrayList(PortfolioDataItem.CREATOR);
         if (in.readByte() == 0) {
             eod = null;
         } else {
             eod = in.readInt();
         }
+        name = in.readString();
         if (in.readByte() == 0) {
             totalPrice = null;
         } else {
@@ -60,12 +65,14 @@ public class AllPortfolioRes implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(data);
         if (eod == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
             dest.writeInt(eod);
         }
+        dest.writeString(name);
         if (totalPrice == null) {
             dest.writeByte((byte) 0);
         } else {
@@ -94,24 +101,28 @@ public class AllPortfolioRes implements Parcelable {
         return 0;
     }
 
-    public static final Creator<AllPortfolioRes> CREATOR = new Creator<AllPortfolioRes>() {
+    public static final Creator<PortfolioDetailRes> CREATOR = new Creator<PortfolioDetailRes>() {
         @Override
-        public AllPortfolioRes createFromParcel(Parcel in) {
-            return new AllPortfolioRes(in);
+        public PortfolioDetailRes createFromParcel(Parcel in) {
+            return new PortfolioDetailRes(in);
         }
 
         @Override
-        public AllPortfolioRes[] newArray(int size) {
-            return new AllPortfolioRes[size];
+        public PortfolioDetailRes[] newArray(int size) {
+            return new PortfolioDetailRes[size];
         }
     };
 
-    public List<Datum> getData() {
+    public List<PortfolioDataItem> getData() {
         return data;
     }
 
     public Integer getEod() {
         return eod;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Integer getTotalPrice() {

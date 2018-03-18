@@ -107,8 +107,8 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        mAllocationPresenter.reqAllAllocation();
         setUpRecyclerView();
+        mAllocationPresenter.reqAllAllocation();
     }
 
     /**
@@ -135,9 +135,9 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mActivity = null;
+    public void onDestroy() {
+        super.onDestroy();
+        mAllocationPresenter.disconnect();
     }
 
     @Override

@@ -2,10 +2,12 @@ package com.example.daffolapmac.wealthbook.screen.portfolio.view;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
+import com.example.daffolapmac.wealthbook.screen.detailportfolio.view.PortfolioDetailActivity;
 import com.example.daffolapmac.wealthbook.screen.home.view.HomeActivity;
 import com.example.daffolapmac.wealthbook.screen.portfolio.adapter.MyPortfolioAdapter;
 import com.example.daffolapmac.wealthbook.screen.portfolio.manager.MyPortfolioManager;
@@ -35,7 +38,9 @@ import butterknife.ButterKnife;
  * Use the {@link PortfolioFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PortfolioFragment extends Fragment implements IPortfolioFragmentView {
+public class PortfolioFragment extends Fragment implements IPortfolioFragmentView, SwipeRefreshLayout.OnRefreshListener {
+
+    private static final String VIEW_STATE_KEY = "view_state_key";
 
     @BindView(R.id.header)
     View mHeaderView;
@@ -46,10 +51,14 @@ public class PortfolioFragment extends Fragment implements IPortfolioFragmentVie
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.swipe_refresh_view)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
     private MyPortfolioAdapter mAdapter;
     private HomeActivity mActivity;
     private List<Datum> mPortfolioItemList = new ArrayList<>();
     private IMyPortfolioScreenPresenter mPortfolioPresenter;
+    private AllPortfolioRes resData;
 
     /**
      * Use this factory method to create a new instance of
@@ -77,11 +86,24 @@ public class PortfolioFragment extends Fragment implements IPortfolioFragmentVie
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            resData = savedInstanceState.getParcelable(VIEW_STATE_KEY);
+        }
+        if (resData == null) {
+            mPortfolioPresenter.reqAllPortfolio(true);
+        } else {
+            bindDataToView(resData);
+        }
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        setListener();
         setUpRecyclerView();
-        mPortfolioPresenter.reqAllPortfolio();
     }
 
     @Override
@@ -98,20 +120,31 @@ public class PortfolioFragment extends Fragment implements IPortfolioFragmentVie
         mPortfolioPresenter.disconnect();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(VIEW_STATE_KEY, resData);
+        super.onSaveInstanceState(outState);
+    }
+
+    /**
+     * Set listener
+     */
+    private void setListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+    }
+
     /**
      * Initialize header view of portfolio
      * @param data Data model of all portfolio
      */
     private void initializeHeaderView(AllPortfolioRes data) {
-        if (data == null) {
-            return;
-        }
-        if (data.getEod() != null) {
+        ((TextView) mHeaderView.findViewById(R.id.txv_portfolio_title)).setText(getString(R.string.nav_my_portfolios));
+        if (data != null && data.getEod() != null) {
             ((TextView) mHeaderView.findViewById(R.id.txv_eod_value)).setText(getString(R.string.txt_eod_value, getString(R.string.dolor) + data.getEod()));
         } else {
             ((TextView) mHeaderView.findViewById(R.id.txv_eod_value)).setText(getString(R.string.txt_eod_value, ""));
         }
-        if (data.getTotalPrice() != null) {
+        if (data != null && data.getTotalPrice() != null) {
             ((TextView) mHeaderView.findViewById(R.id.txv_ytd_value)).setText(getString(R.string.txt_ytd_value, data.getFormatedGainLossPercent()));
         } else {
             ((TextView) mHeaderView.findViewById(R.id.txv_ytd_value)).setText(getString(R.string.txt_ytd_value, ""));
@@ -134,7 +167,10 @@ public class PortfolioFragment extends Fragment implements IPortfolioFragmentVie
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                mActivity.showSnackBar("Selected Position: " + position, mActivity);
+                Intent intent = new Intent(getActivity(), PortfolioDetailActivity.class);
+                intent.putExtra(Intent.EXTRA_TITLE, mPortfolioItemList.get(position).getName());
+                intent.putExtra(Intent.EXTRA_UID, mPortfolioItemList.get(position).getId());
+                mActivity.startActivity(intent);
             }
         }));
     }
@@ -151,8 +187,11 @@ public class PortfolioFragment extends Fragment implements IPortfolioFragmentVie
 
     @Override
     public void bindDataToView(AllPortfolioRes data) {
+        mSwipeRefreshLayout.setRefreshing(false);
+        this.resData = data;
         initializeHeaderView(data);
         if (data != null && data.getData() != null && data.getData().size() != 0) {
+            mPortfolioItemList.clear();
             mPortfolioItemList.addAll(data.getData());
         } else {
             if (mPortfolioItemList.size() == 0) {
@@ -165,11 +204,18 @@ public class PortfolioFragment extends Fragment implements IPortfolioFragmentVie
 
     @Override
     public void onError(int error) {
+        mSwipeRefreshLayout.setRefreshing(false);
         mActivity.showSnackBar(error, mActivity);
         if (mPortfolioItemList.size() == 0) {
             mPortfolioItemList.clear();
             mAdapter.addAll(mPortfolioItemList);
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        mSwipeRefreshLayout.setRefreshing(true);
+        mPortfolioPresenter.reqAllPortfolio(false);
     }
 }
