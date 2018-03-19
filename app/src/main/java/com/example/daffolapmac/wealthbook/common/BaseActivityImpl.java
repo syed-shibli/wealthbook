@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.api.ErrorResponse;
 import com.example.daffolapmac.wealthbook.screen.login.view.LoginActivity;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.view.NotificationAlertFragment;
 import com.example.daffolapmac.wealthbook.screen.pendingalert.manager.IPendingAlertResponseReceiver;
 import com.example.daffolapmac.wealthbook.screen.pendingalert.manager.PendingAlertManager;
 import com.example.daffolapmac.wealthbook.screen.pendingalert.model.PendingAlertRes;
@@ -113,7 +114,8 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
         int id = item.getItemId();
         switch (id) {
             case R.id.action_pending_notification:
-                showSnackBar("action_pending_notification", this);
+                NotificationAlertFragment fragment = NotificationAlertFragment.newInstance();
+                fragment.show(getSupportFragmentManager(), "");
                 return true;
             case R.id.action_alert:
                 showProgress();

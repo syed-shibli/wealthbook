@@ -95,4 +95,7 @@
     <!-- Pending alert dialog screen -->
     <string name="txt_empty_pending_alert">Woops! There are no pending listing.</string>
     <string name="action_empty_pending_alert">Woops! There are no pending listing.</string>
+
+    <!-- Notification alert screen-->
+    <string name="txt_accepted_sucessfully">Accepted Sucessfully</string>
 </resources>
