@@ -90,4 +90,7 @@
     <string name="txt_gain_or_loss">Gain or (Loss)</string>
     <string name="txt_default">--</string>
     <string name="txt_symbol">Symbol: </string>
+
+    <!-- Notification alert screen-->
+    <string name="txt_accepted_sucessfully">Accepted Sucessfully</string>
 </resources>

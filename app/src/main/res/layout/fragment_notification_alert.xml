@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.daffolapmac.wealthbook.screen.notificationalert.view.NotificationAlertFragment">
+
+    <TextView
+        android:id="@+id/txv_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="@string/alert"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txt_large" />
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/txv_accepted_succ"
+        android:layout_below="@+id/txv_alert" />
+
+    <TextView
+        android:id="@+id/txv_accepted_succ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:paddingBottom="@dimen/padding_normal"
+        android:paddingTop="@dimen/padding_normal"
+        android:text="@string/txt_accepted_sucessfully"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/txt_large" />
+</RelativeLayout>

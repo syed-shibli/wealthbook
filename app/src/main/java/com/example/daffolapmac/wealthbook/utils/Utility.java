@@ -39,7 +39,6 @@ public class Utility {
 
     /**
      * Create alert model object
-     * @param icon          Icon
      * @param title         Title of alert
      * @param msg           Message body
      * @param positiveBtn   Positive button
@@ -134,8 +133,9 @@ public class Utility {
                 "            allowPointSelect: true,\n" +
                 "            cursor: 'pointer',\n" +
                 "            dataLabels: {\n" +
-                "                enabled: false,\n" +
-                "                format: '<b>{point.name}</b>: {point.percentage:.1f} %',\n" +
+                "                enabled: true,\n" +
+                "                format: '{point.percentage:.1f} %',\n" +
+                "                 distance: -25,\n" +
                 "                style: {\n" +
                 "                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'\n" +
                 "                }\n" +
@@ -149,7 +149,92 @@ public class Utility {
                 "    }]\n" +
                 "});\n" +
                 "</script>"
-                + "/body>"
+                + "</html>";
+    }
+
+    /**
+     * Create chart for notification alert
+     * @param data Chart data
+     * @return Return chart content
+     */
+    public static String createContentForNotificationAlert(String data) {
+        return "<html>"
+                + "<head>"
+                + "<script src=\"http://code.highcharts.com/highcharts.js\"></script>"
+                + "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js\"></script>"
+                + "</head>"
+                + "<body>"
+                + "<div id=\"fromContainer\" style=\"width: 100%; height: 100%;\"></div>"
+                + "<div id=\"toContainer\" style=\"width: 100%; height: 100%; margin-top: 10%\"></div>"
+                + "<script type=\"text/javascript\">\n" +
+                "    Highcharts.chart('fromContainer', {\n" +
+                "    chart: {\n" +
+                "        plotBackgroundColor: null,\n" +
+                "        plotBorderWidth: null,\n" +
+                "        plotShadow: false,\n" +
+                "        type: 'pie'\n" +
+                "    },\n" +
+                "    title: {\n" +
+                "        text: 'From'\n" +
+                "    },\n" +
+                "    tooltip: {\n" +
+                "        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'\n" +
+                "    },\n" +
+                "    plotOptions: {\n" +
+                "        pie: {\n" +
+                "            allowPointSelect: true,\n" +
+                "            cursor: 'pointer',\n" +
+                "            dataLabels: {\n" +
+                "                enabled: true,\n" +
+                "                format: '{point.percentage:.1f} %',\n" +
+                "                 distance: -25,\n" +
+                "                style: {\n" +
+                "                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'\n" +
+                "                }\n" +
+                "            },\n" +
+                "               showInLegend: true,\n" +
+                "        }\n" +
+                "    },\n" +
+                "    series: [{\n" +
+                "        name: 'Brands',\n" +
+                "        colorByPoint: true,\n" +
+                "        data: " + data +
+                "    }]\n" +
+                "});\n" +
+                "    Highcharts.chart('toContainer', {\n" +
+                "    chart: {\n" +
+                "        plotBackgroundColor: null,\n" +
+                "        plotBorderWidth: null,\n" +
+                "        plotShadow: false,\n" +
+                "        type: 'pie'\n" +
+                "    },\n" +
+                "    title: {\n" +
+                "        text: 'To'\n" +
+                "    },\n" +
+                "    tooltip: {\n" +
+                "        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'\n" +
+                "    },\n" +
+                "    plotOptions: {\n" +
+                "        pie: {\n" +
+                "            allowPointSelect: true,\n" +
+                "            cursor: 'pointer',\n" +
+                "            dataLabels: {\n" +
+                "                enabled: true,\n" +
+                "                format: '{point.percentage:.1f} %',\n" +
+                "                 distance: -25,\n" +
+                "                style: {\n" +
+                "                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'\n" +
+                "                }\n" +
+                "            }\n" +
+                "        }\n" +
+                "    },\n" +
+                "    series: [{\n" +
+                "        name: 'Brands',\n" +
+                "        colorByPoint: true,\n" +
+                "        data: " + data +
+                "    }]\n" +
+                "});\n" +
+                "</script>"
                 + "</html>";
     }
 }
