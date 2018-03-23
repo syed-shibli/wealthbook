@@ -95,6 +95,12 @@
     <!-- Pending alert dialog screen -->
     <string name="txt_empty_pending_alert">Woops! There are no pending listing.</string>
     <string name="action_empty_pending_alert">Woops! There are no pending listing.</string>
+    <string name="txt_pending_alert_heading">Pending Alert</string>
+    <string name="txt_account_title">Account Title:\ </string>
+    <string name="txt_account_no">Account no:\ </string>
+    <string name="txt_adviser_name">Advisor Name:\ </string>
+    <string name="txt_adviser_contact">Adviser Contact:\ </string>
+    <string name="txt_alert">Alert:\ </string>
 
     <!-- Notification alert screen-->
     <string name="txt_accepted_sucessfully">Accepted Sucessfully</string>

@@ -1,6 +1,8 @@
 package com.example.daffolapmac.wealthbook.screen.notificationalert.view;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -17,6 +19,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.example.daffolapmac.wealthbook.R;
+import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.manager.PendingNotificationManager;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.model.LatestPortfolioReviewRes;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.presenter.PendingNotificationPresenter;
 import com.example.daffolapmac.wealthbook.utils.Utility;
 
 import butterknife.BindView;
@@ -27,19 +33,24 @@ import butterknife.ButterKnife;
  * Use the {@link NotificationAlertFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotificationAlertFragment extends DialogFragment {
+public class NotificationAlertFragment extends DialogFragment implements INotificationAlertView {
 
     @BindView(R.id.web_view)
     WebView mWebView;
+
+    private int id;
+    private PendingNotificationPresenter mPresenter;
+    private BaseActivityImpl mActivity;
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      * @return A new instance of fragment NotificationAlertFragment.
      */
-    public static NotificationAlertFragment newInstance() {
+    public static NotificationAlertFragment newInstance(int id) {
         NotificationAlertFragment fragment = new NotificationAlertFragment();
         Bundle args = new Bundle();
+        args.putInt(Intent.EXTRA_UID, id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,6 +58,13 @@ public class NotificationAlertFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter = new PendingNotificationPresenter(this, new PendingNotificationManager());
+        if (getArguments() != null) {
+            id = getArguments().getInt(Intent.EXTRA_UID);
+        }
+        if (savedInstanceState != null) {
+            id = savedInstanceState.getInt(Intent.EXTRA_UID);
+        }
     }
 
     @Override
@@ -60,7 +78,29 @@ public class NotificationAlertFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        displayPieChartView();
+        if (id == -1) {
+            mPresenter.reqLatestPortfolioReview();
+        } else {
+//            mPresenter.reqPendingNotification(id);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = (BaseActivityImpl) context;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.disconnect();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(Intent.EXTRA_UID, id);
     }
 
     @Override
@@ -95,33 +135,42 @@ public class NotificationAlertFragment extends DialogFragment {
 
     /**
      * Display pi char
+     * @param from From view chart
+     * @param to   To view chat
      */
-    private void displayPieChartView() {
-        String chartContent = Utility.createContentForNotificationAlert("[{\n" +
-                "            name: 'Chrome',\n" +
-                "            y: 61.41,\n" +
-                "            sliced: true,\n" +
-                "            selected: true\n" +
-                "        }, {\n" +
-                "            name: 'Internet Explorer',\n" +
-                "            y: 11.84\n" +
-                "        }, {\n" +
-                "            name: 'Firefox',\n" +
-                "            y: 10.85\n" +
-                "        }, {\n" +
-                "            name: 'Edge',\n" +
-                "            y: 4.67\n" +
-                "        }, {\n" +
-                "            name: 'Safari',\n" +
-                "            y: 4.18\n" +
-                "        }, {\n" +
-                "            name: 'Other',\n" +
-                "            y: 7.05\n" +
-                "        }]");
+    private void displayPieChartView(String from, String to) {
+        String chartContent = Utility.createContentForNotificationAlert(from, to);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.requestFocusFromTouch();
         mWebView.loadDataWithBaseURL("file:///android_asset/", chartContent, "text/html", "utf-8", null);
+    }
+
+    @Override
+    public void showLoader() {
+        mActivity.showProgress();
+    }
+
+    @Override
+    public void hideLoader() {
+        mActivity.hideProgress();
+    }
+
+    @Override
+    public void bindViewModel() {
+
+    }
+
+    @Override
+    public void onError(int error) {
+        mActivity.showSnackBar(error, mActivity);
+    }
+
+    @Override
+    public void bindLatestPortfolioReviewViewModel(LatestPortfolioReviewRes data) {
+        if (data != null) {
+            displayPieChartView(data.getFrom(), data.getTo());
+        }
     }
 
     /**

@@ -154,10 +154,11 @@ public class Utility {
 
     /**
      * Create chart for notification alert
-     * @param data Chart data
+     * @param from Chart data
+     * @param to Chart data
      * @return Return chart content
      */
-    public static String createContentForNotificationAlert(String data) {
+    public static String createContentForNotificationAlert(String from ,String to) {
         return "<html>"
                 + "<head>"
                 + "<script src=\"http://code.highcharts.com/highcharts.js\"></script>"
@@ -198,7 +199,7 @@ public class Utility {
                 "    series: [{\n" +
                 "        name: 'Brands',\n" +
                 "        colorByPoint: true,\n" +
-                "        data: " + data +
+                "        data: " + from +
                 "    }]\n" +
                 "});\n" +
                 "    Highcharts.chart('toContainer', {\n" +
@@ -231,7 +232,7 @@ public class Utility {
                 "    series: [{\n" +
                 "        name: 'Brands',\n" +
                 "        colorByPoint: true,\n" +
-                "        data: " + data +
+                "        data: " + to +
                 "    }]\n" +
                 "});\n" +
                 "</script>"

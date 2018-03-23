@@ -8,6 +8,7 @@ import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
 import com.example.daffolapmac.wealthbook.screen.myallocation.model.MyAllocationRes;
 import com.example.daffolapmac.wealthbook.screen.news.model.NewsRes;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.model.LatestPortfolioReviewRes;
 import com.example.daffolapmac.wealthbook.screen.pendingalert.model.PendingAlertRes;
 import com.example.daffolapmac.wealthbook.screen.portfolio.model.AllPortfolioRes;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
@@ -106,4 +107,20 @@ public interface ApiService {
      */
     @GET("va/pending_alerts")
     Call<PendingAlertRes> getPendingAlert(@Query("token") String token);
+
+    /**
+     * Relative URL for accept/decline portfolio alert of notification
+     * @param token Token
+     * @return Return Updated result
+     */
+    @GET("va/update_portfolio_review")
+    Call<PendingAlertRes> updatePortfolioNotification(@Query("id") int id, @Query("status_id") int statusId, @Query("token") String token);
+
+    /**
+     * Relative URL to get latest review of portfolio data
+     * @param token Auth token
+     * @return Latest portfolio data
+     */
+    @GET("va/latest_review")
+    Call<LatestPortfolioReviewRes> latestPortfolioReview(@Query("token") String token);
 }

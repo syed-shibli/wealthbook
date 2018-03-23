@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,11 +16,17 @@ import com.example.daffolapmac.wealthbook.screen.login.view.LoginActivity;
 import com.example.daffolapmac.wealthbook.screen.notificationalert.view.NotificationAlertFragment;
 import com.example.daffolapmac.wealthbook.screen.pendingalert.manager.IPendingAlertResponseReceiver;
 import com.example.daffolapmac.wealthbook.screen.pendingalert.manager.PendingAlertManager;
-import com.example.daffolapmac.wealthbook.screen.pendingalert.model.PendingAlertRes;
+import com.example.daffolapmac.wealthbook.screen.pendingalert.model.PendingAlertViewModel;
+import com.example.daffolapmac.wealthbook.screen.pendingalert.view.PendingAlertFragment;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.utils.Utility;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 
 public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDialogClickListener, IPendingAlertResponseReceiver {
 
@@ -113,28 +120,29 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_pending_notification:
-                NotificationAlertFragment fragment = NotificationAlertFragment.newInstance();
-                fragment.show(getSupportFragmentManager(), "");
-                return true;
             case R.id.action_alert:
                 showProgress();
                 PendingAlertManager manager = new PendingAlertManager();
                 manager.getPendingAlertList(this);
+                return true;
+            case R.id.action_pending_notification:
+                NotificationAlertFragment pendingNotification = NotificationAlertFragment.newInstance(-1);
+                pendingNotification.show(getSupportFragmentManager(), "");
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onSuccess(PendingAlertRes data) {
+    public void onSuccess(ArrayList<PendingAlertViewModel> data) {
         hideProgress();
-        if (data == null || data.getPendingAlertList() == null || data.getPendingAlertList().size() == 0) {
+        if (data == null || data.size() == 0) {
             alert = Utility.prepareDialogObj("", getString(R.string.txt_empty_pending_alert), getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
             Utility.showDialog(this, this, alert);
             return;
         }
-
+        PendingAlertFragment pendingAlert = PendingAlertFragment.newInstance(data);
+        pendingAlert.show(getSupportFragmentManager(), "");
     }
 
     @Override
