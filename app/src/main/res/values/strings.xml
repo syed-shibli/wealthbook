@@ -57,6 +57,8 @@
     <string name="error_confirm_password">Please enter valid password </string>
     <string name="error_empty_top">Please enter valid OTP code</string>
     <string name="txt_change_password">Change Password</string>
+    <string name="txt_forgot_link_sent">6 digit code has been sent to your registered email \n%1$s</string>
+    <string name="txt_password_change_success">Your password change successfully</string>
 
     <!-- My allocation screen text -->
     <string name="txt_fund_name">Fund Name</string>
@@ -93,8 +95,8 @@
     <string name="txt_symbol">Symbol: </string>
 
     <!-- Pending alert dialog screen -->
-    <string name="txt_empty_pending_alert">Woops! There are no pending listing.</string>
-    <string name="action_empty_pending_alert">Woops! There are no pending listing.</string>
+    <string name="txt_empty_pending_alert">No Pending Alerts Found</string>
+    <string name="action_empty_pending_alert">Action No Pending Alerts Found</string>
     <string name="txt_pending_alert_heading">Pending Alert</string>
     <string name="txt_account_title">Account Title:\ </string>
     <string name="txt_account_no">Account no:\ </string>
@@ -103,5 +105,8 @@
     <string name="txt_alert">Alert:\ </string>
 
     <!-- Notification alert screen-->
-    <string name="txt_accepted_sucessfully">Accepted Sucessfully</string>
+    <string name="txt_accepted_successfully">%1$s \ Successfully</string>
+    <string name="txt_portfolio_change">Portfolio Changes\ %1$s</string>
+    <string name="txt_btn_accept">Accept</string>
+    <string name="txt_btn_decline">Decline</string>
 </resources>

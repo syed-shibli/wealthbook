@@ -3,6 +3,7 @@ package com.example.daffolapmac.wealthbook.screen.forgotpassword.view;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
@@ -32,6 +33,9 @@ public class ForgotPasswordActivity extends BaseActivityImpl implements IForgotP
 
     @BindView(R.id.btn_submit)
     Button mBtnChangePassword;
+
+    @BindView(R.id.txv_otp_sent)
+    TextView txvLinkSent;
 
     private boolean isChangePasswordView = false;
     private IForgotPasswordScreenPresenter mForgotPasswordPresenter;
@@ -84,6 +88,7 @@ public class ForgotPasswordActivity extends BaseActivityImpl implements IForgotP
 
     @Override
     public void redirectToLogin() {
+        showSnackBar(R.string.txt_password_change_success, this);
         launchActivity(this, LoginActivity.class);
         finish();
     }
@@ -91,11 +96,13 @@ public class ForgotPasswordActivity extends BaseActivityImpl implements IForgotP
     @Override
     public void redirectToChangePasswordView() {
         emial = mEdtEmail.getValue();
-        showChnagePasswordview();
+        showChangePasswordView();
     }
 
-    private void showChnagePasswordview() {
+    private void showChangePasswordView() {
         isChangePasswordView = true;
+        txvLinkSent.setVisibility(View.VISIBLE);
+        txvLinkSent.setText(getString(R.string.txt_forgot_link_sent, emial));
         mBtnChangePassword.setText(R.string.txt_change_password);
         mEdtEmail.setVisibility(View.GONE);
         mEdtUserPassword.setVisibility(View.VISIBLE);

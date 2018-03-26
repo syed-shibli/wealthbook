@@ -154,18 +154,19 @@ public class Utility {
 
     /**
      * Create chart for notification alert
-     * @param from Chart data
-     * @param to Chart data
+     * @param from   Chart data
+     * @param to     Chart data
+     * @param legend Legend value
      * @return Return chart content
      */
-    public static String createContentForNotificationAlert(String from ,String to) {
+    public static String createContentForNotificationAlert(String from, String to, String legend) {
         return "<html>"
                 + "<head>"
                 + "<script src=\"http://code.highcharts.com/highcharts.js\"></script>"
                 + "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js\"></script>"
                 + "</head>"
                 + "<body>"
-                + "<div id=\"fromContainer\" style=\"width: 100%; height: 100%;\"></div>"
+                + "<div id=\"fromContainer\" style=\"width: 100%; height: 400px;\"></div>"
                 + "<div id=\"toContainer\" style=\"width: 100%; height: 100%; margin-top: 10%\"></div>"
                 + "<script type=\"text/javascript\">\n" +
                 "    Highcharts.chart('fromContainer', {\n" +
@@ -193,7 +194,7 @@ public class Utility {
                 "                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'\n" +
                 "                }\n" +
                 "            },\n" +
-                "               showInLegend: true,\n" +
+                "               showInLegend: " + legend +
                 "        }\n" +
                 "    },\n" +
                 "    series: [{\n" +

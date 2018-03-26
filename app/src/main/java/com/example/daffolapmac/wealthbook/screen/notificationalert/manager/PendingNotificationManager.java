@@ -7,6 +7,7 @@ import com.example.daffolapmac.wealthbook.api.ResponseCallback;
 import com.example.daffolapmac.wealthbook.api.ResponseWrapper;
 import com.example.daffolapmac.wealthbook.api.RetrofitClient;
 import com.example.daffolapmac.wealthbook.screen.notificationalert.model.LatestPortfolioReviewRes;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.model.UpdatePortfolioReq;
 import com.example.daffolapmac.wealthbook.screen.notificationalert.presenter.IPendingNotificationResponseReceiver;
 import com.example.daffolapmac.wealthbook.screen.pendingalert.model.PendingAlertRes;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
@@ -25,10 +26,10 @@ public class PendingNotificationManager {
      * @param id       ID
      * @param statusID Status id
      */
-    public void getPendingNotification(IPendingNotificationResponseReceiver receiver, int id, int statusID) {
+    public void getPendingNotification(IPendingNotificationResponseReceiver receiver, UpdatePortfolioReq req) {
         this.mResponseReceiver = receiver;
         String token = SessionManager.getNewInstance().readSession().getmToken();
-        mUpdatePendingAlertCall = RetrofitClient.getApiService().updatePortfolioNotification(id, statusID, token);
+        mUpdatePendingAlertCall = RetrofitClient.getApiService().updatePortfolioNotification(token, req);
         mUpdatePendingAlertCall.enqueue(new ResponseWrapper<PendingAlertRes>(mUpdatePendingAlertCallback));
     }
 
@@ -44,10 +45,19 @@ public class PendingNotificationManager {
         }
     };
 
-    public void getLatestPortfolioReviewData(IPendingNotificationResponseReceiver receiver) {
+    /**
+     * Get latest portfolio review data
+     * @param receiver Response receiver
+     * @param id
+     */
+    public void getLatestPortfolioReviewData(IPendingNotificationResponseReceiver receiver, int id) {
         this.mResponseReceiver = receiver;
         String token = SessionManager.getNewInstance().readSession().getmToken();
-        mLatestPortfolioReviewCall = RetrofitClient.getApiService().latestPortfolioReview(token);
+        if (id == -1) {
+            mLatestPortfolioReviewCall = RetrofitClient.getApiService().latestPortfolioReview(token);
+        } else {
+            mLatestPortfolioReviewCall = RetrofitClient.getApiService().pendingPortfolioReview(token, id);
+        }
         mLatestPortfolioReviewCall.enqueue(new ResponseWrapper<LatestPortfolioReviewRes>(mLatestPortfolioReviewCallback));
     }
 

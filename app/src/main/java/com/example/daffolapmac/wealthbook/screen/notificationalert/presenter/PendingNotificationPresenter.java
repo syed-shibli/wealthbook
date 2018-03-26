@@ -3,6 +3,7 @@ package com.example.daffolapmac.wealthbook.screen.notificationalert.presenter;
 import com.example.daffolapmac.wealthbook.api.ErrorResponse;
 import com.example.daffolapmac.wealthbook.screen.notificationalert.manager.PendingNotificationManager;
 import com.example.daffolapmac.wealthbook.screen.notificationalert.model.LatestPortfolioReviewRes;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.model.UpdatePortfolioReq;
 import com.example.daffolapmac.wealthbook.screen.notificationalert.view.INotificationAlertView;
 
 public class PendingNotificationPresenter implements IPendingNotificationScreenPresenter, IPendingNotificationResponseReceiver {
@@ -17,7 +18,10 @@ public class PendingNotificationPresenter implements IPendingNotificationScreenP
     @Override
     public void reqPendingNotification(int id, int statusID) {
         mViewListener.showLoader();
-        mPendingNotificationManager.getPendingNotification(this, id, statusID);
+        UpdatePortfolioReq req = new UpdatePortfolioReq();
+        req.setId(id);
+        req.setStatusID(statusID);
+        mPendingNotificationManager.getPendingNotification(this, req);
     }
 
     @Override
@@ -26,15 +30,15 @@ public class PendingNotificationPresenter implements IPendingNotificationScreenP
     }
 
     @Override
-    public void reqLatestPortfolioReview() {
+    public void reqLatestPortfolioReview(int id) {
         mViewListener.showLoader();
-        mPendingNotificationManager.getLatestPortfolioReviewData(this);
+        mPendingNotificationManager.getLatestPortfolioReviewData(this, id);
     }
 
     @Override
     public void onSuccess() {
         mViewListener.hideLoader();
-        mViewListener.bindViewModel();
+        mViewListener.bindAcceptDeclineViewModel();
     }
 
     @Override

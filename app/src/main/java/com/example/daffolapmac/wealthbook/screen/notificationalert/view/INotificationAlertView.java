@@ -10,7 +10,7 @@ public interface INotificationAlertView extends ILoader {
     /**
      * Bind data to view
      */
-    void bindViewModel();
+    void bindAcceptDeclineViewModel();
 
     /**
      * To show error

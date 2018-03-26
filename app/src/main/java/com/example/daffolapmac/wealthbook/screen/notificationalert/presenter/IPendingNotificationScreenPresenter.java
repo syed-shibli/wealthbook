@@ -14,6 +14,7 @@ public interface IPendingNotificationScreenPresenter {
 
     /**
      * Create req for getting latest portfolio review data
+     * @param id
      */
-    void reqLatestPortfolioReview();
+    void reqLatestPortfolioReview(int id);
 }

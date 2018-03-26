@@ -19,16 +19,16 @@ public class LatestPortfolioReviewData {
     private String reviewDate;
 
     @SerializedName("is_editable")
-    private Integer isEditable;
+    private int isEditable;
 
     @SerializedName("wb_status_id")
-    private Integer wbStatusId;
+    private int wbStatusId;
 
     @SerializedName("wb_va_user_customer_account_id")
     private String wbVaUserCustomerAccountId;
 
     @SerializedName("wb_customer_user_id")
-    private Integer wbCustomerUserId;
+    private int wbCustomerUserId;
 
     @SerializedName("wb_status_updated_date")
     private String wbStatusUpdatedDate;
@@ -37,15 +37,15 @@ public class LatestPortfolioReviewData {
     private String portfolioType;
 
     @SerializedName("wb_va_category_id")
-    private Integer wbVaCategoryId;
+    private int wbVaCategoryId;
 
     @SerializedName("wb_va_company_id")
-    private Integer wbVaCompanyId;
+    private int wbVaCompanyId;
 
     @SerializedName("status_date")
     private String statusDate;
 
-    public Integer getWbVaUserCustomerPortfolioHistoryId() {
+    public int getWbVaUserCustomerPortfolioHistoryId() {
         return wbVaUserCustomerPortfolioHistoryId;
     }
 
@@ -65,11 +65,11 @@ public class LatestPortfolioReviewData {
         return reviewDate;
     }
 
-    public Integer getIsEditable() {
+    public int getIsEditable() {
         return isEditable;
     }
 
-    public Integer getWbStatusId() {
+    public int getWbStatusId() {
         return wbStatusId;
     }
 
@@ -77,7 +77,7 @@ public class LatestPortfolioReviewData {
         return wbVaUserCustomerAccountId;
     }
 
-    public Integer getWbCustomerUserId() {
+    public int getWbCustomerUserId() {
         return wbCustomerUserId;
     }
 
@@ -89,15 +89,19 @@ public class LatestPortfolioReviewData {
         return portfolioType;
     }
 
-    public Integer getWbVaCategoryId() {
+    public int getWbVaCategoryId() {
         return wbVaCategoryId;
     }
 
-    public Integer getWbVaCompanyId() {
+    public int getWbVaCompanyId() {
         return wbVaCompanyId;
     }
 
     public String getStatusDate() {
         return statusDate;
+    }
+
+    public void setWbStatusId(int wbStatusId) {
+        this.wbStatusId = wbStatusId;
     }
 }

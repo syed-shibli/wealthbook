@@ -99,7 +99,7 @@ public class PendingAlertFragment extends DialogFragment {
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                NotificationAlertFragment pendingNotification = NotificationAlertFragment.newInstance(-1);
+                NotificationAlertFragment pendingNotification = NotificationAlertFragment.newInstance(mPendingAlertList.get(position).getId());
                 pendingNotification.show(getActivity().getSupportFragmentManager(), "");
                 dismiss();
             }
@@ -112,12 +112,18 @@ public class PendingAlertFragment extends DialogFragment {
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         Window window = getDialog().getWindow();
         if (window == null) return;
         WindowManager.LayoutParams params = window.getAttributes();
         params.height = heightInDpToPx();
+        params.width = widthInDpToPx();
         window.setAttributes(params);
     }
 
@@ -144,7 +150,16 @@ public class PendingAlertFragment extends DialogFragment {
      */
     private int heightInDpToPx() {
         DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
-        return metrics.heightPixels - (metrics.heightPixels / 4);
+        return metrics.heightPixels - (metrics.heightPixels / 10);
+    }
+
+    /**
+     * Width of dialog fragment
+     * @return Return width
+     */
+    private int widthInDpToPx() {
+        DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
+        return metrics.widthPixels - (metrics.widthPixels / 20);
     }
 
     /**

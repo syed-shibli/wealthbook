@@ -17,16 +17,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.notificationalert.manager.PendingNotificationManager;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.model.LatestPortfolioReviewData;
 import com.example.daffolapmac.wealthbook.screen.notificationalert.model.LatestPortfolioReviewRes;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.presenter.IPendingNotificationScreenPresenter;
 import com.example.daffolapmac.wealthbook.screen.notificationalert.presenter.PendingNotificationPresenter;
 import com.example.daffolapmac.wealthbook.utils.Utility;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,9 +44,26 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
     @BindView(R.id.web_view)
     WebView mWebView;
 
+    @BindView(R.id.txv_customer_name)
+    TextView mTxvCustomerName;
+
+    @BindView(R.id.txv_product_name)
+    TextView mTxvProductName;
+
+    @BindView(R.id.txv_update_status_date)
+    TextView mTxvUpdatedDate;
+
+    @BindView(R.id.btn_container_view)
+    LinearLayout mLLViewContainer;
+
+    @BindView(R.id.txv_accepted_succ)
+    TextView mTxvAcceptSuccess;
+
     private int id;
-    private PendingNotificationPresenter mPresenter;
+    private IPendingNotificationScreenPresenter mPresenter;
     private BaseActivityImpl mActivity;
+    private LatestPortfolioReviewData mPendingAlertData;
+    private int isAccept = 0;
 
     /**
      * Use this factory method to create a new instance of
@@ -70,7 +93,6 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notification_alert, container, false);
     }
 
@@ -78,17 +100,19 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        if (id == -1) {
-            mPresenter.reqLatestPortfolioReview();
-        } else {
-//            mPresenter.reqPendingNotification(id);
-        }
+        mPresenter.reqLatestPortfolioReview(id);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (BaseActivityImpl) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity = null;
     }
 
     @Override
@@ -110,6 +134,7 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
         if (window == null) return;
         WindowManager.LayoutParams params = window.getAttributes();
         params.height = heightInDpToPx();
+        params.width = widthInDpToPx();
         window.setAttributes(params);
     }
 
@@ -130,7 +155,16 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
      */
     private int heightInDpToPx() {
         DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
-        return metrics.heightPixels - (metrics.heightPixels / 4);
+        return metrics.heightPixels - (metrics.heightPixels / 10);
+    }
+
+    /**
+     * Width of dialog fragment
+     * @return Return width
+     */
+    private int widthInDpToPx() {
+        DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
+        return metrics.widthPixels - (metrics.widthPixels / 20);
     }
 
     /**
@@ -138,8 +172,9 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
      * @param from From view chart
      * @param to   To view chat
      */
-    private void displayPieChartView(String from, String to) {
-        String chartContent = Utility.createContentForNotificationAlert(from, to);
+    private void displayPieChartView(String from, String to, String legend) {
+        String showLegend = legend.equalsIgnoreCase("1") ? "true" : "false";
+        String chartContent = Utility.createContentForNotificationAlert(from, to, showLegend);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.requestFocusFromTouch();
@@ -157,29 +192,75 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
     }
 
     @Override
-    public void bindViewModel() {
-
+    public void bindAcceptDeclineViewModel() {
+        if (isAccept == 1) {
+            // Accepted
+            this.mPendingAlertData.setWbStatusId(1);
+        } else if (isAccept == 2) {
+            // Declined
+            this.mPendingAlertData.setWbStatusId(2);
+        } else {
+            // Nothing happened
+            this.mPendingAlertData.setWbStatusId(0);
+        }
+        viewInitialize(mPendingAlertData);
     }
 
     @Override
     public void onError(int error) {
-        mActivity.showSnackBar(error, mActivity);
+        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void bindLatestPortfolioReviewViewModel(LatestPortfolioReviewRes data) {
         if (data != null) {
-            displayPieChartView(data.getFrom(), data.getTo());
+            this.mPendingAlertData = data.getData();
+            viewInitialize(mPendingAlertData);
+            displayPieChartView(data.getFrom(), data.getTo(), data.getShowLegend());
         }
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
+     * Initialize view
+     * @param customerDetails Latest review data
      */
-    public interface NotificationAlertDialogListener {
-        void onItemSelect(int pos);
+    private void viewInitialize(LatestPortfolioReviewData customerDetails) {
+        if (customerDetails == null) {
+            return;
+        }
+        if (customerDetails.getWbCustomerName() != null) {
+            mTxvCustomerName.setText(customerDetails.getWbCustomerName());
+        }
+        if (customerDetails.getWbVaProductName() != null) {
+            mTxvProductName.setText(customerDetails.getWbVaProductName());
+        }
+        if (customerDetails.getStatusDate() != null) {
+            mTxvUpdatedDate.setText(getString(R.string.txt_portfolio_change, customerDetails.getStatusDate()));
+        }
+        if (customerDetails.getWbStatusId() == 0) {
+            mTxvAcceptSuccess.setVisibility(View.GONE);
+            mLLViewContainer.setVisibility(View.VISIBLE);
+        } else if (customerDetails.getWbStatusId() == 1) {
+            mTxvAcceptSuccess.setVisibility(View.VISIBLE);
+            mTxvAcceptSuccess.setText(getString(R.string.txt_accepted_successfully, "Accepted"));
+            mLLViewContainer.setVisibility(View.GONE);
+        } else if (customerDetails.getWbStatusId() == 2) {
+            mTxvAcceptSuccess.setVisibility(View.VISIBLE);
+            mTxvAcceptSuccess.setText(getString(R.string.txt_accepted_successfully, "Declined"));
+            mLLViewContainer.setVisibility(View.GONE);
+        }
     }
+
+    @OnClick(R.id.btn_accept)
+    public void btnAccept() {
+        isAccept = 1;
+        mPresenter.reqPendingNotification(mPendingAlertData.getWbVaUserCustomerPortfolioHistoryId(), 1);
+    }
+
+    @OnClick(R.id.btn_decline)
+    public void btnDecline() {
+        isAccept = 2;
+        mPresenter.reqPendingNotification(mPendingAlertData.getWbVaUserCustomerPortfolioHistoryId(), 2);
+    }
+
 }

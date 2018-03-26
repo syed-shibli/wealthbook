@@ -16,6 +16,8 @@
             android:id="@+id/dialog_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_normal"
             android:gravity="center"
             android:textColor="@android:color/black"
@@ -28,11 +30,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/dialog_title"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
             android:gravity="center"
             android:lineSpacingExtra="@dimen/line_spacing_10"
-            android:padding="@dimen/padding_medium"
             android:textColor="@android:color/black"
             android:textSize="@dimen/txt_x_normal"
             tools:text="Here you can set your text message so user can be seen" />
@@ -42,14 +44,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/dialog_body"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="@dimen/margin_normal"/>
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:gravity="center"
+            android:layout_height="42dp"
             android:layout_below="@+id/horizontal_line"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
@@ -58,8 +60,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/white"
-                android:textColor="@android:color/holo_blue_dark"
                 android:textAllCaps="false"
+                android:textColor="@android:color/holo_blue_dark"
                 android:textSize="@dimen/txt_xx_normal"
                 tools:text="No" />
 
@@ -67,7 +69,7 @@
                 android:id="@+id/view"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray" />
 
             <Button
                 android:id="@+id/btn_positive"
@@ -75,8 +77,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/white"
-                android:textColor="@android:color/holo_blue_dark"
                 android:textAllCaps="false"
+                android:textColor="@android:color/holo_blue_dark"
                 android:textSize="@dimen/txt_xx_normal"
                 tools:text="Yes" />
 
