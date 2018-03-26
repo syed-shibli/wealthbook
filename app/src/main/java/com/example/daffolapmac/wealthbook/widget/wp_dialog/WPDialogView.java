@@ -110,7 +110,7 @@ public class WPDialogView extends DialogFragment {
 
     /** Initialize view */
     private void viewInitialize() {
-        if(!mTitle.equalsIgnoreCase(getString(R.string.alert))) {
+        if(!mTitle.isEmpty()) {
             mWPTxvTitle.setVisibility(View.VISIBLE);
             mWPTxvTitle.setText(mTitle);
         }else{

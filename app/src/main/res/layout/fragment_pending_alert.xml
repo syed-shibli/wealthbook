@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.daffolapmac.wealthbook.screen.notificationalert.view.NotificationAlertFragment">
+
+    <TextView
+        android:id="@+id/txv_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBottomLogoView"
+        android:gravity="center"
+        android:padding="@dimen/padding_smallest"
+        android:text="@string/txt_pending_alert_heading"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/txt_large" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txv_alert"
+        android:paddingEnd="@dimen/padding_small"
+        android:paddingStart="@dimen/padding_small" />
+</RelativeLayout>

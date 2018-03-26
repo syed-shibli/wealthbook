@@ -8,6 +8,9 @@ import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
 import com.example.daffolapmac.wealthbook.screen.myallocation.model.MyAllocationRes;
 import com.example.daffolapmac.wealthbook.screen.news.model.NewsRes;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.model.LatestPortfolioReviewRes;
+import com.example.daffolapmac.wealthbook.screen.notificationalert.model.UpdatePortfolioReq;
+import com.example.daffolapmac.wealthbook.screen.pendingalert.model.PendingAlertRes;
 import com.example.daffolapmac.wealthbook.screen.portfolio.model.AllPortfolioRes;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
 
@@ -97,4 +100,38 @@ public interface ApiService {
      */
     @GET("portfolio/hold")
     Call<PortfolioDetailRes> getSelectedPortfolio(@Query("id") int id, @Query("token") String token);
+
+    /**
+     * Relative URL to get all pending alert list
+     * @param token Auth token
+     * @return Return pending alert response data
+     */
+    @GET("va/pending_alerts")
+    Call<PendingAlertRes> getPendingAlert(@Query("token") String token);
+
+    /**
+     * Relative URL for accept/decline portfolio alert of notification
+     * @param token Token
+     * @param req   Update portfolio req
+     * @return Return Updated result
+     */
+    @POST("va/update_portfolio_review")
+    Call<PendingAlertRes> updatePortfolioNotification(@Query("token") String token, @Body UpdatePortfolioReq req);
+
+    /**
+     * Relative URL to get latest review of portfolio data
+     * @param token Auth token
+     * @return Latest portfolio data
+     */
+    @GET("va/latest_review")
+    Call<LatestPortfolioReviewRes> latestPortfolioReview(@Query("token") String token);
+
+    /**
+     * Relative URL to get latest review of portfolio data
+     * @param token Auth token
+     * @param id    Pending alert id
+     * @return Latest portfolio data
+     */
+    @GET("va/latest_review")
+    Call<LatestPortfolioReviewRes> pendingPortfolioReview(@Query("token") String token, @Query("pending_alert_id") int id);
 }

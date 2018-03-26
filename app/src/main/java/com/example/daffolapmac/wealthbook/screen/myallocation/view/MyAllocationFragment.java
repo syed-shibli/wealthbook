@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
@@ -49,6 +50,9 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
 
     @BindView(R.id.txv_header1)
     TextView mTxvHeader;
+
+    @BindView(R.id.scroll_view)
+    ScrollView mScrollView;
 
     @BindView(R.id.view_account_holder)
     View mAccountHolder;
@@ -137,7 +141,7 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mAllocationPresenter.disconnect();
+
     }
 
     @Override
@@ -187,13 +191,6 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
      * @param pos Selected position
      */
     private void viewInitialize(int pos) {
-        AccountItem data = mAllAllocationList.get(pos);
-        if (data == null) {
-            return;
-        }
-        displayChartTableView(data);
-        displayPieChartView(data);
-        mTxvHeader.setText(data.getDisplayName());
         // Set label name
         ((TextView) mAccountHolder.findViewById(R.id.txv_label)).setText(R.string.txt_acc_holder);
         ((TextView) mAccountTitle.findViewById(R.id.txv_label)).setText(R.string.txt_acc_title);
@@ -201,6 +198,18 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
         ((TextView) mAdviserName.findViewById(R.id.txv_label)).setText(R.string.txt_adv_name);
         ((TextView) mAdviserContact.findViewById(R.id.txv_label)).setText(R.string.txt_adv_contact);
         ((TextView) mAccountPortfolio.findViewById(R.id.txv_label)).setText(R.string.txt_portfolio_as_of);
+        AccountItem data = mAllAllocationList.get(pos);
+        if (data == null) {
+            return;
+        }
+        displayChartTableView(data);
+        displayPieChartView(data);
+        mScrollView.post(new Runnable() {
+            public void run() {
+                mScrollView.scrollTo(0, mScrollView.getBottom());
+            }
+        });
+        mTxvHeader.setText(data.getDisplayName());
 
         // Set value name
         ((TextView) mAccountHolder.findViewById(R.id.txv_value)).setText(data.getAccountHolder());
