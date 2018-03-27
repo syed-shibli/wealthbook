@@ -2,6 +2,8 @@ package com.example.daffolapmac.wealthbook.screen.splash.presenter;
 
 import com.example.daffolapmac.wealthbook.screen.splash.view.ISplashView;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
+import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
+import com.example.daffolapmac.wealthbook.utils.AppConstant;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -69,6 +71,12 @@ public class SplashPresenter {
      */
     public void checkUserLoginOrNot() {
         if (SessionManager.getNewInstance().isCurrentUserLoggedIn()) {
+            UserSessionData session = SessionManager.getNewInstance().readSession();
+            if (session.getUserType() == AppConstant.USER_TYPE_ADVISER
+                    && session.getUserAgreement() != null && !session.getUserAgreement().isAgreementStatus()) {
+                mSplashView.redirectToAdviserAgreementScreen();
+                return;
+            }
             mSplashView.redirectToHomeScreen();
         } else {
             mSplashView.redirectToLoginScreen();

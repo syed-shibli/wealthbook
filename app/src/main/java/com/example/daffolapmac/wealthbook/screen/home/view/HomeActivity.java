@@ -1,6 +1,5 @@
 package com.example.daffolapmac.wealthbook.screen.home.view;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -25,6 +25,7 @@ import com.example.daffolapmac.wealthbook.screen.profile.view.ProfileFragment;
 import com.example.daffolapmac.wealthbook.screen.updates.view.UpdateFragment;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
+import com.example.daffolapmac.wealthbook.utils.AppConstant;
 import com.example.daffolapmac.wealthbook.utils.Utility;
 
 import butterknife.BindView;
@@ -43,19 +44,25 @@ public class HomeActivity extends BaseActivityImpl
 
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
+
     private int mSelectedNav = 1;
+    private UserSessionData sessionData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        if(savedInstanceState != null){
+        sessionData = SessionManager.getNewInstance().readSession();
+        if (savedInstanceState != null) {
             mSelectedNav = savedInstanceState.getInt(VIEW_STATE_KEY);
         }
         setSupportActionBar(mToolbar);
         setUpSideNav();
         // Set default view my allocation frag in home activity
+        if (sessionData.getUserType() == AppConstant.USER_TYPE_ADVISER) {
+            hideItem();
+        }
         onNavigationItemSelected(mNavigationView.getMenu().getItem(mSelectedNav));
         updateProfileView();
     }
@@ -67,25 +74,32 @@ public class HomeActivity extends BaseActivityImpl
     }
 
     /**
+     * Hide some navigation item when user login as adviser
+     */
+    private void hideItem() {
+        Menu navMenu = mNavigationView.getMenu();
+        navMenu.findItem(R.id.nav_my_allocation).setVisible(false);
+    }
+
+    /**
      * Update user name and email on side menu
      */
     private void updateProfileView() {
         View headerLayout = mNavigationView.getHeaderView(0);
         TextView mTxvName = headerLayout.findViewById(R.id.txv_name);
         TextView mTxvEmail = headerLayout.findViewById(R.id.txv_email);
-        UserSessionData data = SessionManager.getNewInstance().readSession();
-        if (data == null) {
+        if (sessionData == null) {
             return;
         }
-        Log.d("Token : ", data.getmToken());
-        if (data.getmFirstName() != null) {
-            mTxvName.setText(data.getmFirstName());
+        Log.d("Token : ", sessionData.getmToken());
+        if (sessionData.getmFirstName() != null) {
+            mTxvName.setText(sessionData.getmFirstName());
         }
-        if (data.getmEmail() != null) {
-            mTxvEmail.setText(data.getmEmail());
+        if (sessionData.getmEmail() != null) {
+            mTxvEmail.setText(sessionData.getmEmail());
         }
-        if (data.getmCompanyName() != null) {
-            setTitle(data.getmCompanyName());
+        if (sessionData.getmCompanyName() != null) {
+            setTitle(sessionData.getmCompanyName());
         }
     }
 

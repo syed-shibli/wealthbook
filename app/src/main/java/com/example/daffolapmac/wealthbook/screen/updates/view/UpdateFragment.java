@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
@@ -24,6 +25,7 @@ import com.example.daffolapmac.wealthbook.screen.updates.presenter.IUpdateScreen
 import com.example.daffolapmac.wealthbook.screen.updates.presenter.UpdatePresenter;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
+import com.example.daffolapmac.wealthbook.utils.AppConstant;
 import com.example.daffolapmac.wealthbook.widget.RecyclerItemClickListener;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -50,6 +52,9 @@ public class UpdateFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     @BindView(R.id.txv_adviser_name)
     TextView mTxvAdviserName;
+
+    @BindView(R.id.adviser_logo_container)
+    LinearLayout mLLAdviserLogo;
 
     @BindView(R.id.swipe_refresh_view)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -117,9 +122,12 @@ public class UpdateFragment extends Fragment implements SwipeRefreshLayout.OnRef
      */
     private void viewInitialize() {
         UserSessionData data = SessionManager.getNewInstance().readSession();
-        if (data.getRepDetails() != null && data.getRepDetails().getFirstName() != null) {
-            String name = data.getRepDetails().getFirstName() + " " + (data.getRepDetails().getLastName() != null ? data.getRepDetails().getLastName() : "");
+        if (data.getmFirstName() != null) {
+            String name = data.getmFirstName() + " " + (data.getmLastName() != null ? data.getmLastName() : "");
             mTxvAdviserName.setText(name);
+        }
+        if(data.getUserType() == AppConstant.USER_TYPE_ADVISER){
+            mLLAdviserLogo.setVisibility(View.GONE);
         }
     }
 

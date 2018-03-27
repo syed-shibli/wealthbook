@@ -1,19 +1,25 @@
 package com.example.daffolapmac.wealthbook.screen.adviserprofile.view;
 
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.login.model.RepDetails;
+import com.example.daffolapmac.wealthbook.screen.profile.adapter.ProfileAdapter;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
 import com.example.daffolapmac.wealthbook.utils.AppConstant;
 import com.example.daffolapmac.wealthbook.utils.BitmapTransform;
 import com.squareup.picasso.Picasso;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +53,17 @@ public class AdviserProfileActivity extends BaseActivityImpl {
     @BindView(R.id.txv_declaimer)
     TextView mTxvDeclaimer;
 
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+
+    @BindView(R.id.scroll_view)
+    ScrollView mScrollView;
+
+    @BindView(R.id.txv_header)
+    TextView mTxvProfileHeader;
+
     private UserSessionData data;
+    private ProfileAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +73,14 @@ public class AdviserProfileActivity extends BaseActivityImpl {
         setSupportActionBar(mToolbar);
         setListener();
         data = SessionManager.getNewInstance().readSession();
-        viewInitialize();
+        if (data.getUserType() == AppConstant.USER_TYPE_CLIENT) {
+            viewInitialize();
+        } else {
+            setUpRecyclerView();
+        }
+        if (data.getmCompanyName() != null) {
+            setTitle(data.getmCompanyName());
+        }
     }
 
     /**
@@ -76,6 +99,9 @@ public class AdviserProfileActivity extends BaseActivityImpl {
      * View initialize
      */
     private void viewInitialize() {
+        mScrollView.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
+        mTxvProfileHeader.setVisibility(View.GONE);
         if (data != null && data.getRepDetails() != null) {
             RepDetails adviserDetails = data.getRepDetails();
             Picasso.with(this)
@@ -111,9 +137,24 @@ public class AdviserProfileActivity extends BaseActivityImpl {
             if (adviserDetails.getDiclaimerText() != null) {
                 mTxvDeclaimer.setText(adviserDetails.getDiclaimerText());
             }
-            if (data.getmCompanyName() != null) {
-                setTitle(data.getmCompanyName());
-            }
         }
+    }
+
+    /**
+     * To setup recycler view for news list
+     */
+    private void setUpRecyclerView() {
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mTxvProfileHeader.setVisibility(View.VISIBLE);
+        mScrollView.setVisibility(View.GONE);
+        mAdapter = new ProfileAdapter(data.getCurrentUserAttributes());
+        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this)
+                .color(ActivityCompat.getColor(this, R.color.colorNewsItemDivider))
+                .sizeResId(R.dimen.divider)
+                .build());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 }

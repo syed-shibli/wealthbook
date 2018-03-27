@@ -18,9 +18,14 @@ public interface ILoginView extends ILoader {
     void passwordInvalid();
 
     /**
-     * To redirect to home screen if login success
+     * To redirect to client home screen if login success
      */
-    void redirectToHomeScreen();
+    void redirectToClientHomeScreen();
+
+    /**
+     * To redirect to adviser home screen if login success
+     */
+    void redirectToAdviserHomeScreen();
 
     /**
      * To show error message

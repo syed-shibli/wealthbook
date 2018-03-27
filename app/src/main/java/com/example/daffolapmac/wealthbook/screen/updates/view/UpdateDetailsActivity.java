@@ -6,12 +6,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
 import com.example.daffolapmac.wealthbook.screen.adviserprofile.view.AdviserProfileActivity;
-import com.example.daffolapmac.wealthbook.screen.news.view.NewsFragment;
 import com.example.daffolapmac.wealthbook.screen.updates.adapter.UpdateDetailsAdapter;
 import com.example.daffolapmac.wealthbook.screen.updates.manager.UpdateManager;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateDetailsImage;
@@ -19,6 +19,7 @@ import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
 import com.example.daffolapmac.wealthbook.screen.updates.presenter.UpdatePresenter;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
+import com.example.daffolapmac.wealthbook.utils.AppConstant;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -38,6 +39,9 @@ public class UpdateDetailsActivity extends BaseActivityImpl implements IUpdateDe
 
     @BindView(R.id.txv_adviser_name)
     TextView mTxvAdviserName;
+
+    @BindView(R.id.adviser_logo_container)
+    LinearLayout mLLAdviserLogo;
 
     private UpdateDetailsAdapter mAdapter;
     private List<UpdateDetailsImage> mUpdateDetailsImageList = new ArrayList<>();
@@ -80,7 +84,7 @@ public class UpdateDetailsActivity extends BaseActivityImpl implements IUpdateDe
     /**
      * View initialize
      */
-    private void initializeView(){
+    private void initializeView() {
         UserSessionData data = SessionManager.getNewInstance().readSession();
         if (data == null) {
             return;
@@ -88,11 +92,15 @@ public class UpdateDetailsActivity extends BaseActivityImpl implements IUpdateDe
         if (data.getmCompanyName() != null) {
             setTitle(data.getmCompanyName());
         }
-        if (data.getRepDetails() != null && data.getRepDetails().getFirstName() != null) {
-            String name = data.getRepDetails().getFirstName() + " " + (data.getRepDetails().getLastName() != null ? data.getRepDetails().getLastName() : "");
+        if (data.getmFirstName() != null) {
+            String name = data.getmFirstName() + " " + (data.getmLastName() != null ? data.getmLastName() : "");
             mTxvAdviserName.setText(name);
         }
+        if (data.getUserType() == AppConstant.USER_TYPE_ADVISER) {
+            mLLAdviserLogo.setVisibility(View.GONE);
+        }
     }
+
     /**
      * To setup recycler view for news list
      */

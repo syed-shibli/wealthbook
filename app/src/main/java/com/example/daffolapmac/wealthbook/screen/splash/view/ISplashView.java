@@ -8,6 +8,11 @@ public interface ISplashView {
     void redirectToHomeScreen();
 
     /**
+     * Redirect user to agreement screen
+     */
+    void redirectToAdviserAgreementScreen();
+
+    /**
      * Called by presenter when user not logged in
      */
     void redirectToLoginScreen();

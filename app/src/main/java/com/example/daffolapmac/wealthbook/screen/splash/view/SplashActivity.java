@@ -5,6 +5,7 @@ import android.view.WindowManager;
 
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
+import com.example.daffolapmac.wealthbook.screen.advisoragreement.view.UserAgreementActivity;
 import com.example.daffolapmac.wealthbook.screen.home.view.HomeActivity;
 import com.example.daffolapmac.wealthbook.screen.login.view.LoginActivity;
 import com.example.daffolapmac.wealthbook.screen.splash.presenter.SplashPresenter;
@@ -29,6 +30,14 @@ public class SplashActivity extends BaseActivityImpl implements ISplashView {
     public void redirectToHomeScreen() {
         if (!isFinishing() && !isDestroyed()) {
             launchActivity(this, HomeActivity.class);
+            finish();
+        }
+    }
+
+    @Override
+    public void redirectToAdviserAgreementScreen() {
+        if (!isFinishing() && !isDestroyed()) {
+            launchActivity(this, UserAgreementActivity.class);
             finish();
         }
     }

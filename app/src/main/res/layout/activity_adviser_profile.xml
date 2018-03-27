@@ -27,6 +27,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <ScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/bottom_view"
@@ -165,6 +166,26 @@
 
             </RelativeLayout>
         </ScrollView>
+
+        <TextView
+            android:id="@+id/txv_header"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorMyProfileTitleBg"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/padding_normal"
+            android:paddingStart="@dimen/padding_normal"
+            android:text="@string/txt_my_profile"
+            android:textColor="@color/colorMyProfileTitle"
+            android:textSize="@dimen/txt_large"
+            android:visibility="gone" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/txv_header"
+            android:visibility="gone" />
 
         <include
             android:id="@+id/bottom_view"

@@ -8,6 +8,8 @@ import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
 import com.example.daffolapmac.wealthbook.screen.login.view.ILoginView;
+import com.example.daffolapmac.wealthbook.usersession.SessionManager;
+import com.example.daffolapmac.wealthbook.utils.AppConstant;
 import com.example.daffolapmac.wealthbook.utils.Utility;
 
 public class LoginPresenter implements ILoginScreenPresenter, ILoginResponseReceiver {
@@ -62,7 +64,11 @@ public class LoginPresenter implements ILoginScreenPresenter, ILoginResponseRece
     @Override
     public void onSuccess(LoginRes data) {
         mLoginView.hideLoader();
-        mLoginView.redirectToHomeScreen();
+        if(SessionManager.getNewInstance().readSession().getUserType() == AppConstant.USER_TYPE_CLIENT) {
+            mLoginView.redirectToClientHomeScreen();
+        }else{
+            mLoginView.redirectToAdviserHomeScreen();
+        }
     }
 
     @Override

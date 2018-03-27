@@ -48,6 +48,9 @@ public class UserSessionData {
     @SerializedName("current_user_attributes")
     private List<CurrentUserAttribute> currentUserAttributes = null;
 
+    @SerializedName("wb_eula_agreement")
+    private UserAgreement userAgreement;
+
     public String getmUserId() {
         return mUserId;
     }
@@ -150,5 +153,13 @@ public class UserSessionData {
 
     public void setCurrentUserAttributes(List<CurrentUserAttribute> currentUserAttributes) {
         this.currentUserAttributes = currentUserAttributes;
+    }
+
+    public UserAgreement getUserAgreement() {
+        return userAgreement;
+    }
+
+    public void setUserAgreement(UserAgreement userAgreement) {
+        this.userAgreement = userAgreement;
     }
 }
