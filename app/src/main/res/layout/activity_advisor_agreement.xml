@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_large"
+    tools:context="com.example.daffolapmac.wealthbook.screen.advisoragreement.view.UserAgreementActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_accept"
+        android:layout_marginBottom="@dimen/margin_normal">
+
+        <TextView
+            android:id="@+id/txv_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Agreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text Agreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement textAgreement text" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_accept_btn"
+        android:minWidth="100dp"
+        android:text="@string/txt_btn_accept"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btn_decline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-15dp"
+        android:background="@drawable/rounded_decline_btn"
+        android:minWidth="100dp"
+        android:text="@string/txt_btn_decline"
+        android:textAllCaps="false" />
+</RelativeLayout>

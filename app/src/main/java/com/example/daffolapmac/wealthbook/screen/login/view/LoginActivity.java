@@ -1,17 +1,19 @@
 package com.example.daffolapmac.wealthbook.screen.login.view;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
+import com.example.daffolapmac.wealthbook.screen.advisoragreement.view.UserAgreementActivity;
 import com.example.daffolapmac.wealthbook.screen.forgotpassword.view.ForgotPasswordActivity;
 import com.example.daffolapmac.wealthbook.screen.home.view.HomeActivity;
 import com.example.daffolapmac.wealthbook.screen.login.manager.LoginManager;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
 import com.example.daffolapmac.wealthbook.screen.login.presenter.ILoginScreenPresenter;
 import com.example.daffolapmac.wealthbook.screen.login.presenter.LoginPresenter;
+import com.example.daffolapmac.wealthbook.usersession.SessionManager;
+import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
 import com.example.daffolapmac.wealthbook.widget.wbedittext.WBEditTextWithRounded;
 
 import butterknife.BindView;
@@ -79,9 +81,20 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
     }
 
     @Override
-    public void redirectToHomeScreen() {
+    public void redirectToClientHomeScreen() {
         launchActivity(this, HomeActivity.class);
         finish();
+    }
+
+    @Override
+    public void redirectToAdviserHomeScreen() {
+        UserSessionData session = SessionManager.getNewInstance().readSession();
+        if (session.getUserAgreement() != null && !session.getUserAgreement().isAgreementStatus()) {
+            launchActivity(this, UserAgreementActivity.class);
+            finish();
+        } else {
+            redirectToClientHomeScreen();
+        }
     }
 
     @Override

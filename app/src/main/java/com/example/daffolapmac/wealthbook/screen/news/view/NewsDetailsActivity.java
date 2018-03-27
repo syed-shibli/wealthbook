@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
@@ -42,6 +43,9 @@ public class NewsDetailsActivity extends BaseActivityImpl {
 
     @BindView(R.id.txv_adviser_name)
     TextView mTxvAdviserName;
+
+    @BindView(R.id.adviser_logo_container)
+    LinearLayout mLLAdviserLogo;
 
     private NewsItem newsItem;
 
@@ -98,9 +102,12 @@ public class NewsDetailsActivity extends BaseActivityImpl {
         if (data.getmCompanyName() != null) {
             setTitle(data.getmCompanyName());
         }
-        if (data.getRepDetails() != null && data.getRepDetails().getFirstName() != null) {
-            String name = data.getRepDetails().getFirstName() + " " + (data.getRepDetails().getLastName() != null ? data.getRepDetails().getLastName() : "");
+        if (data.getmFirstName() != null) {
+            String name = data.getmFirstName() + " " + (data.getmLastName() != null ? data.getmLastName() : "");
             mTxvAdviserName.setText(name);
+        }
+        if(data.getUserType() == AppConstant.USER_TYPE_ADVISER){
+            mLLAdviserLogo.setVisibility(View.GONE);
         }
     }
 

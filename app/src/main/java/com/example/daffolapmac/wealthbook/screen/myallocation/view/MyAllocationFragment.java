@@ -212,12 +212,12 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
         mTxvHeader.setText(data.getDisplayName());
 
         // Set value name
-        ((TextView) mAccountHolder.findViewById(R.id.txv_value)).setText(data.getAccountHolder());
-        ((TextView) mAccountTitle.findViewById(R.id.txv_value)).setText(data.getAccountTitle());
-        ((TextView) mAccountNo.findViewById(R.id.txv_value)).setText(data.getAccountNumber());
-        ((TextView) mAdviserName.findViewById(R.id.txv_value)).setText(data.getAdvisorName());
-        ((TextView) mAdviserContact.findViewById(R.id.txv_value)).setText(data.getAdvisorContactNo());
-        ((TextView) mAccountPortfolio.findViewById(R.id.txv_value)).setText(data.getPortfolioAsOf());
+        ((TextView) mAccountHolder.findViewById(R.id.txv_value)).setText(String.format(": %s", data.getAccountHolder()));
+        ((TextView) mAccountTitle.findViewById(R.id.txv_value)).setText(String.format(": %s", data.getAccountTitle()));
+        ((TextView) mAccountNo.findViewById(R.id.txv_value)).setText(String.format(": %s", data.getAccountNumber()));
+        ((TextView) mAdviserName.findViewById(R.id.txv_value)).setText(String.format(": %s", data.getAdvisorName()));
+        ((TextView) mAdviserContact.findViewById(R.id.txv_value)).setText(String.format(": %s", data.getAdvisorContactNo()));
+        ((TextView) mAccountPortfolio.findViewById(R.id.txv_value)).setText(String.format(": %s", data.getPortfolioAsOf()));
     }
 
     /**

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight=".4"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/txt_large"
+        android:textSize="@dimen/txt_xx_normal"
         tools:text="Label: " />
 
     <TextView
@@ -22,6 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_weight=".6"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/txt_large"
+        android:textSize="@dimen/txt_xx_normal"
         tools:text="Value" />
 </LinearLayout>

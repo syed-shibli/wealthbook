@@ -1,6 +1,8 @@
 package com.example.daffolapmac.wealthbook.api;
 
 import com.example.daffolapmac.wealthbook.common.ConformationRes;
+import com.example.daffolapmac.wealthbook.screen.advisoragreement.mode.UserAgreementReq;
+import com.example.daffolapmac.wealthbook.screen.advisoragreement.mode.UserAgreementRes;
 import com.example.daffolapmac.wealthbook.screen.detailportfolio.model.PortfolioDetailRes;
 import com.example.daffolapmac.wealthbook.screen.forgotpassword.model.ForgotPasswordReq;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
@@ -134,4 +136,13 @@ public interface ApiService {
      */
     @GET("va/latest_review")
     Call<LatestPortfolioReviewRes> pendingPortfolioReview(@Query("token") String token, @Query("pending_alert_id") int id);
+
+    /**
+     * Relative URL to update user agreement status
+     * @param token Auth token
+     * @param req   Request body
+     * @return Agreement status res
+     */
+    @POST("wb/user_agreement")
+    Call<UserAgreementRes> updateUserAgreementStatus(@Query("token") String token, @Body UserAgreementReq req);
 }

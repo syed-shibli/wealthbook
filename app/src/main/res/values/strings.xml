@@ -20,7 +20,7 @@
     <string name="nav_logout">Logout</string>
 
     <!-- Login screen text -->
-    <string name="placeholder_email">Enter you email address</string>
+    <string name="placeholder_email">Enter your email address</string>
     <string name="placeholder_password">Enter password</string>
     <string name="txt_login">Login</string>
     <string name="error_user_email">Please enter valid email</string>
@@ -64,12 +64,12 @@
     <string name="txt_fund_name">Fund Name</string>
     <string name="txt_percentage">% percentage</string>
     <string name="txt_portfolio">Select Portfolio</string>
-    <string name="txt_acc_holder">Account Holder: </string>
-    <string name="txt_acc_title">Account Title: </string>
-    <string name="txt_acc_no">Account No: </string>
-    <string name="txt_adv_name">Advisor Name: </string>
-    <string name="txt_adv_contact">Advisor Contact: </string>
-    <string name="txt_portfolio_as_of">Portfolio as of: </string>
+    <string name="txt_acc_holder">Account Holder</string>
+    <string name="txt_acc_title">Account Title</string>
+    <string name="txt_acc_no">Account No</string>
+    <string name="txt_adv_name">Advisor Name</string>
+    <string name="txt_adv_contact">Advisor Contact</string>
+    <string name="txt_portfolio_as_of">Portfolio as of</string>
     <string name="txt_assets_by_invest">Assets By Investment Type</string>
     <string name="txt_charts">Charts</string>
 
