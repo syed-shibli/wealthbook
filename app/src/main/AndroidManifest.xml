@@ -44,7 +44,12 @@
         <activity
             android:name=".screen.detailportfolio.view.PortfolioDetailActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".screen.advisoragreement.view.UserAgreementActivity"></activity>
+        <activity
+            android:name=".screen.advisoragreement.view.UserAgreementActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".screen.stockeod.view.StockEodActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

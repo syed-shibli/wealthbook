@@ -19,9 +19,9 @@ import com.example.daffolapmac.wealthbook.screen.detailportfolio.model.Portfolio
 import com.example.daffolapmac.wealthbook.screen.detailportfolio.model.SectionHeader;
 import com.example.daffolapmac.wealthbook.screen.detailportfolio.presenter.IPortfolioDetailScreenPresenter;
 import com.example.daffolapmac.wealthbook.screen.detailportfolio.presenter.PortfolioDetailPresenter;
+import com.example.daffolapmac.wealthbook.screen.stockeod.view.StockEodActivity;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
-import com.example.daffolapmac.wealthbook.widget.RecyclerItemClickListener;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -32,6 +32,9 @@ import butterknife.ButterKnife;
 public class PortfolioDetailActivity extends BaseActivityImpl implements IPortfolioDetailView, PortfolioDetailAdapter.AdapterListener, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String VIEW_STATE_KEY = "view_state_key";
+    public static final String ID = "id";
+    public static final String TICKER_SYMBOL = "ticker_symbol";
+    public static final String TICKER_NAME = "ticker_name";
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -154,12 +157,6 @@ public class PortfolioDetailActivity extends BaseActivityImpl implements IPortfo
                 .build());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-            }
-        }));
     }
 
     @Override
@@ -202,8 +199,12 @@ public class PortfolioDetailActivity extends BaseActivityImpl implements IPortfo
     }
 
     @Override
-    public void onItemClick(Integer id) {
-        showSnackBar("Id: " + id, this);
+    public void onItemClick(Integer id, String tickerName, String tickerSymbol) {
+        Intent intent = new Intent(this, StockEodActivity.class);
+        intent.putExtra(ID, id);
+        intent.putExtra(TICKER_NAME, tickerName);
+        intent.putExtra(TICKER_SYMBOL, tickerSymbol);
+        launchActivity(intent);
     }
 
     @Override

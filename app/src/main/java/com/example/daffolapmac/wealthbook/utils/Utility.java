@@ -9,6 +9,12 @@ import com.example.daffolapmac.wealthbook.common.IDialogClickListener;
 import com.example.daffolapmac.wealthbook.widget.wp_dialog.IWPDialogListener;
 import com.example.daffolapmac.wealthbook.widget.wp_dialog.WPDialogView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 public class Utility {
@@ -18,6 +24,7 @@ public class Utility {
     private static WPDialogView mDialog;
     private static IDialogClickListener mListener;
     private static AlertDialogModel mAlertModel;
+    private static String DATE_FORMATTER = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'";
 
     /**
      * To verify email is valid or not
@@ -238,5 +245,61 @@ public class Utility {
                 "});\n" +
                 "</script>"
                 + "</html>";
+    }
+
+    /**
+     * Create content of chart and return string to load on web view
+     * @param data  Chart series data
+     * @return
+     */
+    public static String createContentForSingleLineChart(List data) {
+        return "<html>"
+                + "<head>"
+                + "<script src=\"https://code.jquery.com/jquery-3.1.1.min.js\"></script>"
+                + "<script src=\"https://code.highcharts.com/stock/highstock.js\"></script>"
+                + "</head>"
+                + "<body>"
+                + "<div id=\"container\" style=\"width: 100%; height: 100%;\"></div>"
+                + "<script type=\"text/javascript\">\n"
+                + " Highcharts.stockChart('container', {\n" +
+                "        rangeSelector: {\n" +
+                "            selected: 1\n" +
+                "        },\n" +
+                "       scrollbar: {\n" +
+                "        enabled: false\n" +
+                "       },\n" +
+                "       navigator: {\n" +
+                "           enabled: false\n" +
+                "       },\n" +
+                "        title: {\n" +
+                "            text: 'titleText'\n" +
+                "        },\n" +
+                "        series: [{\n" +
+                "            name: 'titleText',\n" +
+                "            data: " + data + ",\n" +
+                "            tooltip: {\n" +
+                "                valueDecimals: 2\n" +
+                "            }\n" +
+                "        }]\n" +
+                "    });" +
+                "</script>"
+                + "</html>";
+    }
+
+    /**
+     * Get date from date string
+     * @param dateString Date string
+     * @return Return time in millisecond
+     */
+    public static long getMillisecondFromDateString(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMATTER, Locale.getDefault());
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = null;
+        try {
+            date = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date.getTime();
     }
 }
