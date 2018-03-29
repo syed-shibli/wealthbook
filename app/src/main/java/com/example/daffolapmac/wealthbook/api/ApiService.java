@@ -14,6 +14,7 @@ import com.example.daffolapmac.wealthbook.screen.notificationalert.model.LatestP
 import com.example.daffolapmac.wealthbook.screen.notificationalert.model.UpdatePortfolioReq;
 import com.example.daffolapmac.wealthbook.screen.pendingalert.model.PendingAlertRes;
 import com.example.daffolapmac.wealthbook.screen.portfolio.model.AllPortfolioRes;
+import com.example.daffolapmac.wealthbook.screen.stockeod.model.StockEodRes;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
 
 import java.util.List;
@@ -145,4 +146,14 @@ public interface ApiService {
      */
     @POST("wb/user_agreement")
     Call<UserAgreementRes> updateUserAgreementStatus(@Query("token") String token, @Body UserAgreementReq req);
+
+    /**
+     * Relative URL to get specific stock of EOD
+     * @param token  Auth Token
+     * @param id     Stock id
+     * @param ticker Ticker
+     * @return Array of stock value
+     */
+    @GET("portfolio/eod")
+    Call<List<StockEodRes>> getSpecificStockEOD(@Query("token") String token, @Query("id") int id, @Query("ticker") String ticker);
 }

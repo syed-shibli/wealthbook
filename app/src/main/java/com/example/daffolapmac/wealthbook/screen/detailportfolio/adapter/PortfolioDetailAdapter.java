@@ -72,7 +72,7 @@ public class PortfolioDetailAdapter extends SectionRecyclerViewAdapter<SectionHe
         childViewHolder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemClick(item.getId());
+                listener.onItemClick(item.getId(), item.getTickerName(), item.getTickerSymbol());
             }
         });
     }
@@ -120,6 +120,6 @@ public class PortfolioDetailAdapter extends SectionRecyclerViewAdapter<SectionHe
     }
 
     public interface AdapterListener {
-        void onItemClick(Integer id);
+        void onItemClick(Integer id, String tickerName, String tickerSymbol);
     }
 }
