@@ -1,6 +1,7 @@
 package com.example.daffolapmac.wealthbook.screen.login.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.daffolapmac.wealthbook.R;
@@ -106,11 +107,12 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
     public void redirectToGmailApp(LoginTroubleRes data) {
         if (data != null) {
             Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-            sendIntent.setType("plain/text");
-            sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+            sendIntent.setData(Uri.parse("mailto:"));
             sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{data.getSupportEmail()});
             sendIntent.putExtra(Intent.EXTRA_SUBJECT, data.getSupportTitle());
-            launchActivity(sendIntent);
+            startActivity(sendIntent);
+            if(sendIntent.resolveActivity(getPackageManager()) != null) {
+            }
         }
     }
 

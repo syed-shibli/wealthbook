@@ -56,7 +56,7 @@ public class NewsDetailsActivity extends BaseActivityImpl {
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
         setListener();
-
+        initAdviserView(mTxvAdviserName, mLLAdviserLogo);
         getIntentData();
         initializeView();
     }
@@ -77,7 +77,6 @@ public class NewsDetailsActivity extends BaseActivityImpl {
      * View initialize
      */
     private void initializeView() {
-        UserSessionData data = SessionManager.getNewInstance().readSession();
         if (newsItem != null) {
             mTxvNewsTitle.setText(newsItem.getHeadline());
             if (newsItem.getSource() != null && newsItem.getSource().getName() != null) {
@@ -101,13 +100,6 @@ public class NewsDetailsActivity extends BaseActivityImpl {
         }
         if (data.getmCompanyName() != null) {
             setTitle(data.getmCompanyName());
-        }
-        if (data.getmFirstName() != null) {
-            String name = data.getmFirstName() + " " + (data.getmLastName() != null ? data.getmLastName() : "");
-            mTxvAdviserName.setText(name);
-        }
-        if(data.getUserType() == AppConstant.USER_TYPE_ADVISER){
-            mLLAdviserLogo.setVisibility(View.GONE);
         }
     }
 

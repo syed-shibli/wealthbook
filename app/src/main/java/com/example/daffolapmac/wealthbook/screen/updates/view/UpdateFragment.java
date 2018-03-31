@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,11 +22,7 @@ import com.example.daffolapmac.wealthbook.screen.updates.manager.UpdateManager;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
 import com.example.daffolapmac.wealthbook.screen.updates.presenter.IUpdateScreenPresenter;
 import com.example.daffolapmac.wealthbook.screen.updates.presenter.UpdatePresenter;
-import com.example.daffolapmac.wealthbook.usersession.SessionManager;
-import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
-import com.example.daffolapmac.wealthbook.utils.AppConstant;
 import com.example.daffolapmac.wealthbook.widget.RecyclerItemClickListener;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +88,7 @@ public class UpdateFragment extends Fragment implements SwipeRefreshLayout.OnRef
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         setListener();
-        viewInitialize();
+        mActivity.initAdviserView(mTxvAdviserName, mLLAdviserLogo);
         setUpRecyclerView();
         mUpdatePresenter.fetchUpdateItemList(true);
     }
@@ -115,20 +110,6 @@ public class UpdateFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 mActivity.launchActivity(newsIntent);
             }
         }));
-    }
-
-    /**
-     * Initialize view here
-     */
-    private void viewInitialize() {
-        UserSessionData data = SessionManager.getNewInstance().readSession();
-        if (data.getmFirstName() != null) {
-            String name = data.getmFirstName() + " " + (data.getmLastName() != null ? data.getmLastName() : "");
-            mTxvAdviserName.setText(name);
-        }
-        if(data.getUserType() == AppConstant.USER_TYPE_ADVISER){
-            mLLAdviserLogo.setVisibility(View.GONE);
-        }
     }
 
     /**
