@@ -66,9 +66,6 @@ public class PendingAlertFragment extends DialogFragment {
         if (getArguments() != null) {
             mPendingAlertList = getArguments().getParcelableArrayList(PENDING_ALERT_LIST);
         }
-        if (savedInstanceState != null) {
-            mPendingAlertList = savedInstanceState.getParcelableArrayList(PENDING_ALERT_LIST);
-        }
     }
 
     @Override
@@ -128,12 +125,6 @@ public class PendingAlertFragment extends DialogFragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(PENDING_ALERT_LIST, this.mPendingAlertList);
-    }
-
-    @Override
     public void show(FragmentManager manager, String tag) {
         try {
             FragmentTransaction ft = manager.beginTransaction();
@@ -159,7 +150,7 @@ public class PendingAlertFragment extends DialogFragment {
      */
     private int widthInDpToPx() {
         DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
-        return metrics.widthPixels - (metrics.widthPixels / 20);
+        return metrics.widthPixels;
     }
 
     /**

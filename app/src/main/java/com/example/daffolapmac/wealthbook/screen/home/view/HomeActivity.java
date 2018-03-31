@@ -54,9 +54,6 @@ public class HomeActivity extends BaseActivityImpl
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         sessionData = SessionManager.getNewInstance().readSession();
-        if (savedInstanceState != null) {
-            mSelectedNav = savedInstanceState.getInt(VIEW_STATE_KEY);
-        }
         setSupportActionBar(mToolbar);
         setUpSideNav();
         // Set default view my allocation frag in home activity
@@ -65,12 +62,6 @@ public class HomeActivity extends BaseActivityImpl
         }
         onNavigationItemSelected(mNavigationView.getMenu().getItem(mSelectedNav));
         updateProfileView();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(VIEW_STATE_KEY, mSelectedNav);
-        super.onSaveInstanceState(outState);
     }
 
     /**

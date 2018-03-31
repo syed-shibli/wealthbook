@@ -22,34 +22,34 @@
         </activity>
         <activity
             android:name=".screen.home.view.HomeActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".screen.login.view.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".screen.news.view.NewsDetailsActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".screen.adviserprofile.view.AdviserProfileActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".screen.forgotpassword.view.ForgotPasswordActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".screen.updates.view.UpdateDetailsActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".screen.detailportfolio.view.PortfolioDetailActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".screen.advisoragreement.view.UserAgreementActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".screen.stockeod.view.StockEodActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

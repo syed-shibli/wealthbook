@@ -60,9 +60,6 @@ public class PortfolioDetailActivity extends BaseActivityImpl implements IPortfo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_portfolio_detail);
         ButterKnife.bind(this);
-        if (savedInstanceState != null) {
-            resData = savedInstanceState.getParcelable(VIEW_STATE_KEY);
-        }
         setSupportActionBar(mToolbar);
         getIntentData();
         setListener();
@@ -70,17 +67,7 @@ public class PortfolioDetailActivity extends BaseActivityImpl implements IPortfo
         initializeHeaderView(resData);
         setUpRecyclerView();
         mPresenter = new PortfolioDetailPresenter(this, new PortfolioDetailManager());
-        if (resData == null) {
-            mPresenter.reqToGetPortfolioDetail(mID, true);
-        } else {
-            bindDataToView(resData);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable(VIEW_STATE_KEY, resData);
-        super.onSaveInstanceState(outState);
+        mPresenter.reqToGetPortfolioDetail(mID, true);
     }
 
     /**

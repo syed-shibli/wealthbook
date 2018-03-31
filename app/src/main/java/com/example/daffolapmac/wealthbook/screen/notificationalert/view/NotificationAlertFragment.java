@@ -85,9 +85,6 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
         if (getArguments() != null) {
             id = getArguments().getInt(Intent.EXTRA_UID);
         }
-        if (savedInstanceState != null) {
-            id = savedInstanceState.getInt(Intent.EXTRA_UID);
-        }
     }
 
     @Override
@@ -119,12 +116,6 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
     public void onDestroy() {
         super.onDestroy();
         mPresenter.disconnect();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(Intent.EXTRA_UID, id);
     }
 
     @Override
@@ -164,7 +155,7 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
      */
     private int widthInDpToPx() {
         DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
-        return metrics.widthPixels - (metrics.widthPixels / 20);
+        return metrics.widthPixels;
     }
 
     /**

@@ -88,14 +88,7 @@ public class PortfolioFragment extends Fragment implements IPortfolioFragmentVie
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            resData = savedInstanceState.getParcelable(VIEW_STATE_KEY);
-        }
-        if (resData == null) {
-            mPortfolioPresenter.reqAllPortfolio(true);
-        } else {
-            bindDataToView(resData);
-        }
+        mPortfolioPresenter.reqAllPortfolio(true);
     }
 
     @Override
@@ -118,12 +111,6 @@ public class PortfolioFragment extends Fragment implements IPortfolioFragmentVie
     public void onDestroy() {
         super.onDestroy();
         mPortfolioPresenter.disconnect();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable(VIEW_STATE_KEY, resData);
-        super.onSaveInstanceState(outState);
     }
 
     /**

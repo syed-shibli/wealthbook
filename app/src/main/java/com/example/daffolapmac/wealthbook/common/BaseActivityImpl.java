@@ -6,12 +6,14 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.api.ErrorResponse;
+import com.example.daffolapmac.wealthbook.screen.login.model.RepDetails;
 import com.example.daffolapmac.wealthbook.screen.login.view.LoginActivity;
 import com.example.daffolapmac.wealthbook.screen.notificationalert.view.NotificationAlertFragment;
 import com.example.daffolapmac.wealthbook.screen.pendingalert.manager.IPendingAlertResponseReceiver;
@@ -19,23 +21,24 @@ import com.example.daffolapmac.wealthbook.screen.pendingalert.manager.PendingAle
 import com.example.daffolapmac.wealthbook.screen.pendingalert.model.PendingAlertViewModel;
 import com.example.daffolapmac.wealthbook.screen.pendingalert.view.PendingAlertFragment;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
+import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
+import com.example.daffolapmac.wealthbook.utils.AppConstant;
 import com.example.daffolapmac.wealthbook.utils.Utility;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
 
 public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDialogClickListener, IPendingAlertResponseReceiver {
 
     private WBLoader mLoader;
     private AlertDialogModel alert;
+    protected UserSessionData data;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        data = SessionManager.getNewInstance().readSession();
     }
 
     @Override
@@ -150,5 +153,25 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
         hideProgress();
         alert = Utility.prepareDialogObj("", getString(R.string.txt_empty_pending_alert), getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
         Utility.showDialog(this, this, alert);
+    }
+
+    /**
+     * Init adviser view
+     * @param mTxvAdviserName Text view for adviser name
+     * @param mLLAdviserLogo  Adviser view container view
+     */
+    public void initAdviserView(TextView mTxvAdviserName, View mLLAdviserLogo) {
+        RepDetails adviserDetails = data.getRepDetails();
+        if (adviserDetails == null) {
+            return;
+        }
+        if (data.getUserType() == AppConstant.USER_TYPE_ADVISER) {
+            mLLAdviserLogo.setVisibility(View.GONE);
+            return;
+        }
+        if (adviserDetails.getFirstName() != null) {
+            String name = adviserDetails.getFirstName() + " " + (adviserDetails.getLastName() != null ? adviserDetails.getLastName() : "");
+            mTxvAdviserName.setText(name);
+        }
     }
 }

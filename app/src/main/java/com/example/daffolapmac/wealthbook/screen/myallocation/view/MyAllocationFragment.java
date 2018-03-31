@@ -141,7 +141,7 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        mAllocationPresenter.disconnect();
     }
 
     @Override

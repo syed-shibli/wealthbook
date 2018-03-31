@@ -95,23 +95,9 @@ public class NewsFragment extends Fragment implements INewsViewListener, SwipeRe
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         setListener();
-        viewInitialize();
+        mActivity.initAdviserView(mTxvAdviserName, mLLAdviserLogo);
         setUpRecyclerView();
         mNewsPresenter.fetchNewsReq(true);
-    }
-
-    /**
-     * View initialize
-     */
-    private void viewInitialize() {
-        UserSessionData data = SessionManager.getNewInstance().readSession();
-        if (data.getmFirstName() != null) {
-            String name = data.getmFirstName() + " " + (data.getmLastName() != null ? data.getmLastName() : "");
-            mTxvAdviserName.setText(name);
-        }
-        if(data.getUserType() == AppConstant.USER_TYPE_ADVISER){
-            mLLAdviserLogo.setVisibility(View.GONE);
-        }
     }
 
     /**

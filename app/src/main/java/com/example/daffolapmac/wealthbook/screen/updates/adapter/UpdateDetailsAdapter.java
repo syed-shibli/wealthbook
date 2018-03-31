@@ -9,8 +9,6 @@ import android.widget.ImageView;
 
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateDetailsImage;
-import com.example.daffolapmac.wealthbook.utils.AppConstant;
-import com.example.daffolapmac.wealthbook.utils.BitmapTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,10 +37,6 @@ public class UpdateDetailsAdapter extends RecyclerView.Adapter<UpdateDetailsAdap
         UpdateDetailsImage itemUpdate = mList.get(position);
         Picasso.with(mContext)
                 .load(itemUpdate.getPath())
-                .transform(new BitmapTransform(AppConstant.MAX_WIDTH, AppConstant.MAX_HEIGHT))
-                .resize(AppConstant.size, AppConstant.size)
-                .centerInside()
-                .error(R.mipmap.news_image_placeholder)
                 .into(holder.mImgUpdate);
         PhotoViewAttacher pAttacher;
         pAttacher = new PhotoViewAttacher(holder.mImgUpdate);

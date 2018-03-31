@@ -17,9 +17,6 @@ import com.example.daffolapmac.wealthbook.screen.updates.manager.UpdateManager;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateDetailsImage;
 import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
 import com.example.daffolapmac.wealthbook.screen.updates.presenter.UpdatePresenter;
-import com.example.daffolapmac.wealthbook.usersession.SessionManager;
-import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
-import com.example.daffolapmac.wealthbook.utils.AppConstant;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -59,6 +56,7 @@ public class UpdateDetailsActivity extends BaseActivityImpl implements IUpdateDe
         getIntentData();
         setUpRecyclerView();
         initializeView();
+        initAdviserView(mTxvAdviserName, mLLAdviserLogo);
         mUpdatePresenter = new UpdatePresenter(this, new UpdateManager());
         mUpdatePresenter.getUpdateDetails(mUpdateDetailsID);
     }
@@ -85,19 +83,8 @@ public class UpdateDetailsActivity extends BaseActivityImpl implements IUpdateDe
      * View initialize
      */
     private void initializeView() {
-        UserSessionData data = SessionManager.getNewInstance().readSession();
-        if (data == null) {
-            return;
-        }
         if (data.getmCompanyName() != null) {
             setTitle(data.getmCompanyName());
-        }
-        if (data.getmFirstName() != null) {
-            String name = data.getmFirstName() + " " + (data.getmLastName() != null ? data.getmLastName() : "");
-            mTxvAdviserName.setText(name);
-        }
-        if (data.getUserType() == AppConstant.USER_TYPE_ADVISER) {
-            mLLAdviserLogo.setVisibility(View.GONE);
         }
     }
 

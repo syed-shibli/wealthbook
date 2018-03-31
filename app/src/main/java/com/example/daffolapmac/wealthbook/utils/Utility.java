@@ -120,7 +120,7 @@ public class Utility {
                 + "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js\"></script>"
                 + "</head>"
                 + "<body>"
-                + "<div id=\"container\" style=\"width: 100%; height: 100%;\"></div>"
+                + "<div id=\"container\" style=\"width: 100%;\"></div>"
                 + "<script type=\"text/javascript\">\n" +
                 "    Highcharts.chart('container', {\n" +
                 "    chart: {\n" +
@@ -173,8 +173,8 @@ public class Utility {
                 + "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js\"></script>"
                 + "</head>"
                 + "<body>"
-                + "<div id=\"fromContainer\" style=\"width: 100%; height: 400px;\"></div>"
-                + "<div id=\"toContainer\" style=\"width: 100%; height: 100%; margin-top: 10%\"></div>"
+                + "<div id=\"fromContainer\" style=\"width: 100%;\"></div>"
+                + "<div id=\"toContainer\" style=\"width: 100%; margin-top: 10%\"></div>"
                 + "<script type=\"text/javascript\">\n" +
                 "    Highcharts.chart('fromContainer', {\n" +
                 "    chart: {\n" +
@@ -259,7 +259,7 @@ public class Utility {
                 + "<script src=\"https://code.highcharts.com/stock/highstock.js\"></script>"
                 + "</head>"
                 + "<body>"
-                + "<div id=\"container\" style=\"width: 100%; height: 100%;\"></div>"
+                + "<div id=\"container\" style=\"width: 100%;\"></div>"
                 + "<script type=\"text/javascript\">\n"
                 + " Highcharts.stockChart('container', {\n" +
                 "        rangeSelector: {\n" +
