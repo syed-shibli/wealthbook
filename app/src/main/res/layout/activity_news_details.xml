@@ -95,7 +95,7 @@
                     android:layout_below="@+id/txv_news_category"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/margin_normal"
-                    android:src="@mipmap/news_image_placeholder" />
+                    android:src="@drawable/ic_placeholder" />
 
                 <TextView
                     android:id="@+id/txv_news_content"

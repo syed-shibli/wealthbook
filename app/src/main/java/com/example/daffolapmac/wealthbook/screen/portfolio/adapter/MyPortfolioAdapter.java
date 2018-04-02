@@ -53,19 +53,19 @@ public class MyPortfolioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 if (item.getName() != null) {
                     viewHolder.mTxvPortfolioName.setText(item.getName());
                 }
-                if (item.getName() != null) {
-                    viewHolder.mTxvMarketClose.setText(String.format("%s%s", mContext.getString(R.string.dolor), item.getNetTeturn()));
+                if (item.getFormatedCurrentPrice() != null) {
+                    viewHolder.mTxvMarketClose.setText(item.getFormatedCurrentPrice());
                 }
-                if (item.getName() != null) {
-                    viewHolder.mTxvYTDRate.setText(item.getFormatedCurrentPrice());
+                if (item.getFormatedGainLossPercent() != null) {
+                    viewHolder.mTxvYTDRate.setText(item.getFormatedGainLossPercent().replace("%", ""));
                 }
-                if (item.getName() != null) {
-                    viewHolder.mTxvPrYrNet.setText(item.getFormatedCurrentPrice());
+                if (item.getFormattedNetReturn() != null) {
+                    viewHolder.mTxvPrYrNet.setText(item.getFormattedNetReturn().replace("%", ""));
                 }
-                if (item.getName() != null) {
-                    viewHolder.mTxvLifetimeRate.setText(item.getLifetimeReturn());
+                if (item.getFormattedLifetimeReturn() != null) {
+                    viewHolder.mTxvLifetimeRate.setText(item.getFormattedLifetimeReturn().replace("%", ""));
                 }
-                if (item.getName() != null) {
+                if (item.getInceptionDate() != null) {
                     viewHolder.mTxvInceptDate.setText(item.getInceptionDate());
                 }
                 break;

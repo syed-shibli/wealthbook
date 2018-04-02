@@ -1,8 +1,11 @@
 package com.example.daffolapmac.wealthbook.common;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +26,7 @@ import com.example.daffolapmac.wealthbook.screen.pendingalert.view.PendingAlertF
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
 import com.example.daffolapmac.wealthbook.utils.AppConstant;
+import com.example.daffolapmac.wealthbook.utils.BadgeDrawable;
 import com.example.daffolapmac.wealthbook.utils.Utility;
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
@@ -34,6 +38,9 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     private WBLoader mLoader;
     private AlertDialogModel alert;
     protected UserSessionData data;
+    private TextView mTxvCount;
+    private String count = "0";
+    protected LayerDrawable icon;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,7 +123,33 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem itemCart = menu.findItem(R.id.action_alert);
+        icon = (LayerDrawable) itemCart.getIcon();
+        setBadgeCount(this, icon, count);
         return true;
+    }
+
+    /**
+     * Set badge count
+     * @param context Context of activity
+     * @param icon    Icon
+     * @param count   Count
+     */
+    public static void setBadgeCount(Context context, LayerDrawable icon, String count) {
+
+        BadgeDrawable badge;
+
+        // Reuse drawable if possible
+        Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+        if (reuse != null && reuse instanceof BadgeDrawable) {
+            badge = (BadgeDrawable) reuse;
+        } else {
+            badge = new BadgeDrawable(context);
+        }
+
+        badge.setCount(count);
+        icon.mutate();
+        icon.setDrawableByLayerId(R.id.ic_badge, badge);
     }
 
     @Override

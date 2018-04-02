@@ -1,7 +1,6 @@
 package com.example.daffolapmac.wealthbook.screen.profile.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -11,17 +10,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.daffolapmac.wealthbook.R;
-import com.example.daffolapmac.wealthbook.screen.news.adapter.NewsAdapter;
-import com.example.daffolapmac.wealthbook.screen.news.model.NewsItem;
-import com.example.daffolapmac.wealthbook.screen.news.view.NewsDetailsActivity;
+import com.example.daffolapmac.wealthbook.screen.login.model.CurrentUserAttribute;
 import com.example.daffolapmac.wealthbook.screen.profile.adapter.ProfileAdapter;
 import com.example.daffolapmac.wealthbook.usersession.SessionManager;
 import com.example.daffolapmac.wealthbook.usersession.UserSessionData;
-import com.example.daffolapmac.wealthbook.widget.RecyclerItemClickListener;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,7 +47,6 @@ public class ProfileFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
      * @return A new instance of fragment ProfileFragment.
      */
     public static ProfileFragment newInstance() {
@@ -108,7 +105,8 @@ public class ProfileFragment extends Fragment {
      * To setup recycler view for news list
      */
     private void setUpRecyclerView() {
-        mAdapter = new ProfileAdapter(data.getCurrentUserAttributes());
+        List<CurrentUserAttribute> list = createProfileData(data);
+        mAdapter = new ProfileAdapter(list);
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity())
                 .color(ActivityCompat.getColor(getActivity(), R.color.colorNewsItemDivider))
@@ -117,5 +115,23 @@ public class ProfileFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Return formatted data for user profile
+     * @param data USer session data
+     * @return
+     */
+    private List<CurrentUserAttribute> createProfileData(UserSessionData data) {
+        List<CurrentUserAttribute> list = new ArrayList<>();
+        if (data.getCurrentUserAttributes() == null) {
+            return list;
+        }
+        for (CurrentUserAttribute item : data.getCurrentUserAttributes()) {
+            if (item != null && item.getValue() != null && !item.getValue().isEmpty()) {
+                list.add(item);
+            }
+        }
+        return list;
     }
 }

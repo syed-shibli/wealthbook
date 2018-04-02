@@ -17,7 +17,9 @@
             android:layout_weight="1"
             android:paddingEnd="@dimen/padding_x_smallest"
             android:paddingStart="@dimen/padding_x_smallest"
-            android:text="@string/txt_default" />
+            android:text="@string/txt_default"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
 
         <TextView
             android:id="@+id/txv_quantity"

@@ -39,11 +39,11 @@ public class UpdateAdapter extends RecyclerView.Adapter<UpdateAdapter.ViewHolder
         UpdateRes itemUpdate = mList.get(position);
         Picasso.with(mContext)
                 .load(itemUpdate.getFeaturedPage())
-                .placeholder(R.mipmap.news_image_placeholder)
+                .placeholder(R.drawable.ic_placeholder)
                 .transform(new BitmapTransform(AppConstant.MAX_WIDTH, AppConstant.MAX_HEIGHT))
                 .resize(AppConstant.size, AppConstant.size)
                 .centerInside()
-                .error(R.mipmap.news_image_placeholder)
+                .error(R.drawable.ic_placeholder)
                 .into(holder.mImgUpdate);
         holder.mTxvUpdateTitle.setText(itemUpdate.getTitle());
         holder.mTxvUpdateContent.setText(itemUpdate.getDatePublished());

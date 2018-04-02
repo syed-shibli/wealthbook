@@ -5,6 +5,7 @@ import com.example.daffolapmac.wealthbook.screen.advisoragreement.mode.UserAgree
 import com.example.daffolapmac.wealthbook.screen.advisoragreement.mode.UserAgreementRes;
 import com.example.daffolapmac.wealthbook.screen.detailportfolio.model.PortfolioDetailRes;
 import com.example.daffolapmac.wealthbook.screen.forgotpassword.model.ForgotPasswordReq;
+import com.example.daffolapmac.wealthbook.screen.home.model.PendingAlertCountRes;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRequest;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginRes;
 import com.example.daffolapmac.wealthbook.screen.login.model.LoginTroubleRes;
@@ -19,6 +20,7 @@ import com.example.daffolapmac.wealthbook.screen.updates.model.UpdateRes;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -156,4 +158,12 @@ public interface ApiService {
      */
     @GET("portfolio/eod")
     Call<List<StockEodRes>> getSpecificStockEOD(@Query("token") String token, @Query("id") int id, @Query("ticker") String ticker);
+
+    /**
+     * Get all pending alert count
+     * @param token Auth token
+     * @return Return count
+     */
+    @GET("va/pending_alert_count")
+    Call<PendingAlertCountRes> pendingAlertCount(@Query("token") String token);
 }

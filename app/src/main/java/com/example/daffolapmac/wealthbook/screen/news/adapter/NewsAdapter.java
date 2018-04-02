@@ -44,11 +44,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         holder.mTxvNewsContent.setText(newsItem.getStory());
         Picasso.with(mContext)
                 .load(newsItem.getImage())
-                .placeholder(R.mipmap.news_image_placeholder)
+                .placeholder(R.drawable.ic_placeholder)
                 .transform(new BitmapTransform(AppConstant.MAX_WIDTH, AppConstant.MAX_HEIGHT))
                 .resize(AppConstant.size, AppConstant.size)
                 .centerInside()
-                .error(R.mipmap.news_image_placeholder)
+                .error(R.drawable.ic_placeholder)
                 .into(holder.mNewsLogo);
     }
 
