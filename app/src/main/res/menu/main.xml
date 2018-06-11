@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/action_alert"
-        android:icon="@drawable/ic_check"
+        android:icon="@drawable/ic_menu_cart"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
         tools:ignore="MenuTitle" />

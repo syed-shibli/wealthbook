@@ -9,6 +9,7 @@ import com.example.daffolapmac.wealthbook.common.IDialogClickListener;
 import com.example.daffolapmac.wealthbook.widget.wp_dialog.IWPDialogListener;
 import com.example.daffolapmac.wealthbook.widget.wp_dialog.WPDialogView;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -301,5 +302,16 @@ public class Utility {
             e.printStackTrace();
         }
         return date.getTime();
+    }
+
+    /**
+     * Convert decimal no to no of precision
+     * @param val      Number
+     * @param formator Formator string
+     * @return Return string
+     */
+    public static String decimalFormator(Double val, String formator) {
+        DecimalFormat df = new DecimalFormat(formator);
+        return df.format(val);
     }
 }

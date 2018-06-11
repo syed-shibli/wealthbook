@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.screen.detailportfolio.model.Hold;
 import com.example.daffolapmac.wealthbook.screen.detailportfolio.model.SectionHeader;
+import com.example.daffolapmac.wealthbook.utils.Utility;
 import com.intrusoft.sectionedrecyclerview.SectionRecyclerViewAdapter;
 
 import java.util.List;
@@ -54,20 +55,20 @@ public class PortfolioDetailAdapter extends SectionRecyclerViewAdapter<SectionHe
         if (item.getQuantity() != null) {
             childViewHolder.mTxvQuantity.setText(String.format(Locale.getDefault(), "%d", item.getQuantity()));
         }
-        if (item.getEodPrice() != null) {
-            childViewHolder.mTxvEODPrice.setText(String.format("%s", item.getEodPrice()));
-        }
         if (item.getFormatedEodPrice() != null) {
-            childViewHolder.mTxvEODValue.setText(item.getFormatedEodPrice());
+            childViewHolder.mTxvEODPrice.setText(String.format("%s", item.getFormatedEodPrice()));
         }
-        if (item.getPurchasePrice() != null) {
-            childViewHolder.mTxvAssets.setText(String.format("%s", item.getPurchasePrice()));
+        if (item.getFormatedPurchasePrice() != null) {
+            childViewHolder.mTxvEODValue.setText(item.getFormatedPurchasePrice());
         }
-        if (item.getFormatedGainLossPercent() != null) {
-            childViewHolder.mTxvGainLoss.setText(String.format("%s", item.getFormatedGainLossPercent()));
+        if (item.getTickerWeightPercent() != null) {
+            childViewHolder.mTxvAssets.setText(String.format("%s", Utility.decimalFormator(item.getTickerWeightPercent(), "0.00")));
+        }
+        if (item.getFormatedTickerWeightPercent() != null) {
+            childViewHolder.mTxvGainLoss.setText(String.format("%s", item.getFormatedTickerWeightPercent()));
         }
         if (item.getTickerSymbol() != null) {
-            childViewHolder.mTxvSymbol.setText(String.format("%s%s%s", context.getString(R.string.txt_symbol), " ", item.getTickerSymbol()));
+            childViewHolder.mTxvSymbol.setText(String.format("%s %s", context.getString(R.string.txt_symbol),item.getTickerSymbol()));
         }
         childViewHolder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override

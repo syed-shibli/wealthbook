@@ -119,12 +119,12 @@ public class PortfolioDetailActivity extends BaseActivityImpl implements IPortfo
      */
     private void initializeHeaderView(PortfolioDetailRes data) {
         ((TextView) mHeaderView.findViewById(R.id.txv_portfolio_title)).setText(mTitle);
-        if (data != null && data.getEod() != null) {
-            ((TextView) mHeaderView.findViewById(R.id.txv_eod_value)).setText(getString(R.string.txt_eod_value, getString(R.string.dolor) + data.getEod()));
+        if (data != null && data.getFormatedTotalPrice() != null) {
+            ((TextView) mHeaderView.findViewById(R.id.txv_eod_value)).setText(getString(R.string.txt_eod_value, data.getFormatedTotalPrice()));
         } else {
             ((TextView) mHeaderView.findViewById(R.id.txv_eod_value)).setText(getString(R.string.txt_eod_value, ""));
         }
-        if (data != null && data.getTotalPrice() != null) {
+        if (data != null && data.getFormatedGainLossPercent() != null) {
             ((TextView) mHeaderView.findViewById(R.id.txv_ytd_value)).setText(getString(R.string.txt_ytd_value, data.getFormatedGainLossPercent()));
         } else {
             ((TextView) mHeaderView.findViewById(R.id.txv_ytd_value)).setText(getString(R.string.txt_ytd_value, ""));

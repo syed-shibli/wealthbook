@@ -87,11 +87,11 @@ public class NewsDetailsActivity extends BaseActivityImpl {
             }
             Picasso.with(this)
                     .load(newsItem.getImage())
-                    .placeholder(R.mipmap.news_image_placeholder)
+                    .placeholder(R.drawable.ic_placeholder)
                     .transform(new BitmapTransform(AppConstant.MAX_WIDTH, AppConstant.MAX_HEIGHT))
                     .centerInside()
                     .resize(AppConstant.size, AppConstant.size)
-                    .error(R.mipmap.news_image_placeholder)
+                    .error(R.drawable.ic_placeholder)
                     .into(mImgNews);
             mTxvNewsContent.setText(newsItem.getStory());
         }

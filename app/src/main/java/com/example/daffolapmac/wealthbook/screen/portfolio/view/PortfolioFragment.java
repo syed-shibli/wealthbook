@@ -126,12 +126,12 @@ public class PortfolioFragment extends Fragment implements IPortfolioFragmentVie
      */
     private void initializeHeaderView(AllPortfolioRes data) {
         ((TextView) mHeaderView.findViewById(R.id.txv_portfolio_title)).setText(getString(R.string.nav_my_portfolios));
-        if (data != null && data.getEod() != null) {
-            ((TextView) mHeaderView.findViewById(R.id.txv_eod_value)).setText(getString(R.string.txt_eod_value, getString(R.string.dolor) + data.getEod()));
+        if (data != null && data.getFormatedTotalPrice() != null) {
+            ((TextView) mHeaderView.findViewById(R.id.txv_eod_value)).setText(getString(R.string.txt_eod_value,  data.getFormatedTotalPrice()));
         } else {
             ((TextView) mHeaderView.findViewById(R.id.txv_eod_value)).setText(getString(R.string.txt_eod_value, ""));
         }
-        if (data != null && data.getTotalPrice() != null) {
+        if (data != null && data.getFormatedGainLossPercent() != null) {
             ((TextView) mHeaderView.findViewById(R.id.txv_ytd_value)).setText(getString(R.string.txt_ytd_value, data.getFormatedGainLossPercent()));
         } else {
             ((TextView) mHeaderView.findViewById(R.id.txv_ytd_value)).setText(getString(R.string.txt_ytd_value, ""));

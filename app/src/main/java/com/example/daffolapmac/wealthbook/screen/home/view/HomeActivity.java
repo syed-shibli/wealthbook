@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.example.daffolapmac.wealthbook.R;
 import com.example.daffolapmac.wealthbook.common.AlertDialogModel;
 import com.example.daffolapmac.wealthbook.common.BaseActivityImpl;
+import com.example.daffolapmac.wealthbook.screen.home.manager.HomeManager;
+import com.example.daffolapmac.wealthbook.screen.home.presenter.HomePresenter;
 import com.example.daffolapmac.wealthbook.screen.myallocation.view.MyAllocationFragment;
 import com.example.daffolapmac.wealthbook.screen.news.view.NewsFragment;
 import com.example.daffolapmac.wealthbook.screen.portfolio.view.PortfolioFragment;
@@ -32,7 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivityImpl
-        implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.IProfileFragmentListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ProfileFragment.IProfileFragmentListener, IViewListener {
 
     private static final String VIEW_STATE_KEY = "view_state_key";
 
@@ -47,12 +49,14 @@ public class HomeActivity extends BaseActivityImpl
 
     private int mSelectedNav = 1;
     private UserSessionData sessionData;
+    private HomePresenter mHomePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+        mHomePresenter = new HomePresenter(this, new HomeManager());
         sessionData = SessionManager.getNewInstance().readSession();
         setSupportActionBar(mToolbar);
         setUpSideNav();
@@ -62,6 +66,13 @@ public class HomeActivity extends BaseActivityImpl
         }
         onNavigationItemSelected(mNavigationView.getMenu().getItem(mSelectedNav));
         updateProfileView();
+        mHomePresenter.reqAlertCount(); // Get alert count
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHomePresenter.disconnect();
     }
 
     /**
@@ -164,5 +175,25 @@ public class HomeActivity extends BaseActivityImpl
     @Override
     public void onProfileInteraction() {
         // TODO on profile interaction
+    }
+
+    @Override
+    public void showLoader() {
+        showProgress();
+    }
+
+    @Override
+    public void hideLoader() {
+        hideProgress();
+    }
+
+    @Override
+    public void bindPendingAlertCountToView(int count) {
+        setBadgeCount(this, icon, String.valueOf(count));
+    }
+
+    @Override
+    public void onError(int error) {
+        showSnackBar(error, this);
     }
 }
