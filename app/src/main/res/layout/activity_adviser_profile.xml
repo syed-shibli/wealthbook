@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/padding_normal">
 
-                <RelativeLayout
+                <LinearLayout
                     android:id="@+id/logo_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,17 +46,16 @@
 
                     <LinearLayout
                         android:id="@+id/adviser_logo_container"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:background="@android:color/white"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/img_adviser_logo"
-                            android:layout_width="@dimen/logo_width"
-                            android:layout_height="@dimen/logo_height"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:src="@mipmap/ic_launcher" />
 
                         <TextView
@@ -70,13 +69,12 @@
 
                     <ImageView
                         android:id="@+id/txv_adviser_company_logo"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_normal"
+                        android:layout_weight="1"
                         android:scaleType="fitCenter" />
-                </RelativeLayout>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/txv_name"
@@ -119,38 +117,30 @@
                 <include
                     android:id="@+id/mobile_view_container"
                     layout="@layout/adviser_profile_item"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txv_contact_info"
-                    android:layout_marginEnd="@dimen/margin_large"
-                    android:layout_marginStart="@dimen/margin_large" />
+                    android:layout_below="@+id/txv_contact_info" />
 
                 <include
                     android:id="@+id/work_view_container"
                     layout="@layout/adviser_profile_item"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/mobile_view_container"
-                    android:layout_marginEnd="@dimen/margin_large"
-                    android:layout_marginStart="@dimen/margin_large" />
+                    android:layout_below="@+id/mobile_view_container" />
 
                 <include
                     android:id="@+id/email_view_container"
                     layout="@layout/adviser_profile_item"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/work_view_container"
-                    android:layout_marginEnd="@dimen/margin_large"
-                    android:layout_marginStart="@dimen/margin_large" />
+                    android:layout_below="@+id/work_view_container" />
 
                 <include
                     android:id="@+id/office_view_container"
                     layout="@layout/adviser_profile_item"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/email_view_container"
-                    android:layout_marginEnd="@dimen/margin_large"
-                    android:layout_marginStart="@dimen/margin_large" />
+                    android:layout_below="@+id/email_view_container" />
 
                 <TextView
                     android:id="@+id/txv_declaimer"
