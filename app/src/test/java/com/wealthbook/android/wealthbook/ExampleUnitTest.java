@@ -1,4 +1,4 @@
-package com.example.daffolapmac.wealthbook;
+package com.wealthbook.android.wealthbook;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.daffolapmac.wealthbook;
+package com.wealthbook.android.wealthbook;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

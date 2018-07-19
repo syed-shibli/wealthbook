@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_large"
-    tools:context="com.example.daffolapmac.wealthbook.screen.advisoragreement.view.UserAgreementActivity">
+    android:layout_margin="@dimen/margin_large">
 
     <ScrollView
         android:layout_width="match_parent"
