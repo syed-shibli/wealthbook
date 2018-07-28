@@ -22,6 +22,7 @@ import com.wealthbook.android.screen.home.manager.HomeManager;
 import com.wealthbook.android.screen.home.presenter.HomePresenter;
 import com.wealthbook.android.screen.myallocation.view.MyAllocationFragment;
 import com.wealthbook.android.screen.news.view.NewsFragment;
+import com.wealthbook.android.screen.notificationalert.view.NotificationAlertFragment;
 import com.wealthbook.android.screen.portfolio.view.PortfolioFragment;
 import com.wealthbook.android.screen.profile.view.ProfileFragment;
 import com.wealthbook.android.screen.updates.view.UpdateFragment;
@@ -67,6 +68,12 @@ public class HomeActivity extends BaseActivityImpl
         onNavigationItemSelected(mNavigationView.getMenu().getItem(mSelectedNav));
         updateProfileView();
         mHomePresenter.reqAlertCount(); // Get alert count
+    }
+
+    private void handlePushTypeDialog() {
+        if (getIntent().hasExtra(AppConstant.ID)) {
+            showPendingAlert(getIntent().getIntExtra(AppConstant.ID, -1));
+        }
     }
 
     @Override
@@ -189,11 +196,13 @@ public class HomeActivity extends BaseActivityImpl
 
     @Override
     public void bindPendingAlertCountToView(int count) {
-        setBadgeCount(this, icon, String.valueOf(count));
+        setBadgeCount(this, icon, count);
+        handlePushTypeDialog();
     }
 
     @Override
     public void onError(int error) {
         showSnackBar(error, this);
+        handlePushTypeDialog();
     }
 }

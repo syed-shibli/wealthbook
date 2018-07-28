@@ -1,11 +1,16 @@
 package com.wealthbook.android.screen.login.manager;
 
 import android.support.annotation.NonNull;
+
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.gson.Gson;
 import com.wealthbook.android.api.ErrorResponse;
 import com.wealthbook.android.api.ResponseCallback;
 import com.wealthbook.android.api.ResponseWrapper;
 import com.wealthbook.android.api.RetrofitClient;
+import com.wealthbook.android.deviceregistration.manager.DeviceRegistrationManager;
+import com.wealthbook.android.notification.MyFirebaseMessagingService;
 import com.wealthbook.android.screen.login.model.LoginRequest;
 import com.wealthbook.android.screen.login.model.LoginRes;
 import com.wealthbook.android.screen.login.model.LoginTroubleRes;
@@ -38,6 +43,8 @@ public class LoginManager {
         public void onSuccess(@NonNull LoginRes data) {
             SessionManager.getNewInstance().saveSession(new Gson().fromJson(new Gson().toJson(data), UserSessionData.class));
             mResponseReceiver.onSuccess(data);
+            DeviceRegistrationManager manager = new DeviceRegistrationManager();
+            manager.reqDeviceRegister(data.getToken(), FirebaseInstanceId.getInstance().getToken());
         }
 
         @Override
@@ -46,7 +53,7 @@ public class LoginManager {
         }
     };
 
-    public void reqLoginTrouble(ILoginResponseReceiver receiver){
+    public void reqLoginTrouble(ILoginResponseReceiver receiver) {
         this.mResponseReceiver = receiver;
         mLoginTroubleCall = RetrofitClient.getApiService().loginTrouble();
         mLoginTroubleCall.enqueue(new ResponseWrapper<LoginTroubleRes>(mLoginTroubleCallback));

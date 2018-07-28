@@ -39,5 +39,8 @@ dependencies {
     implementation 'com.android.support:percent:26.1.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.commit451:PhotoView:1.2.4'
-    compile 'com.github.IntruderShanky:Sectioned-RecyclerView:2.1.1'
+    implementation 'com.github.IntruderShanky:Sectioned-RecyclerView:2.1.1'
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
 }
+apply plugin: 'com.google.gms.google-services'

@@ -165,7 +165,8 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
      */
     private void displayPieChartView(String from, String to, String legend) {
         String showLegend = legend.equalsIgnoreCase("1") ? "true" : "false";
-        String chartContent = Utility.createContentForNotificationAlert(from, to, showLegend);
+        int size = widthInDpToPx()/6;
+        String chartContent = Utility.createContentForNotificationAlert(from, to, showLegend, size);;
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.requestFocusFromTouch();

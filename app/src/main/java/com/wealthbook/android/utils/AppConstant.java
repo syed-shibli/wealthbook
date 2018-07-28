@@ -7,4 +7,6 @@ public interface AppConstant {
     int size = (int) Math.ceil(Math.sqrt(MAX_WIDTH * MAX_HEIGHT));
     int USER_TYPE_ADVISER = 0;
     int USER_TYPE_CLIENT = 1;
+    String ID = "id";
+    String PAYLOAD = "payload";
 }

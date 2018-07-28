@@ -162,20 +162,21 @@ public class Utility {
 
     /**
      * Create chart for notification alert
-     * @param from   Chart data
-     * @param to     Chart data
-     * @param legend Legend value
+     * @param from     Chart data
+     * @param to       Chart data
+     * @param legend   Legend value
+     * @param size pie char size
      * @return Return chart content
      */
-    public static String createContentForNotificationAlert(String from, String to, String legend) {
+    public static String createContentForNotificationAlert(String from, String to, String legend, int size) {
         return "<html>"
                 + "<head>"
                 + "<script src=\"http://code.highcharts.com/highcharts.js\"></script>"
                 + "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js\"></script>"
                 + "</head>"
                 + "<body>"
-                + "<div id=\"fromContainer\" style=\"width: 100%;\"></div>"
-                + "<div id=\"toContainer\" style=\"width: 100%; margin-top: 10%\"></div>"
+                + "<div id=\"fromContainer\"></div>"
+                + "<div id=\"toContainer\"></div>"
                 + "<script type=\"text/javascript\">\n" +
                 "    Highcharts.chart('fromContainer', {\n" +
                 "    chart: {\n" +
@@ -185,7 +186,11 @@ public class Utility {
                 "        type: 'pie'\n" +
                 "    },\n" +
                 "    title: {\n" +
-                "        text: 'From'\n" +
+                "        text: 'From',\n" +
+                "        margin: 20,\n" +
+                "     },\n" +
+                "       legend: {\n" +
+                "        margin: 20\n" +
                 "    },\n" +
                 "    tooltip: {\n" +
                 "        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'\n" +
@@ -193,6 +198,7 @@ public class Utility {
                 "    plotOptions: {\n" +
                 "        pie: {\n" +
                 "            allowPointSelect: true,\n" +
+                "size: " + size + ",\n" +
                 "            cursor: 'pointer',\n" +
                 "            dataLabels: {\n" +
                 "                enabled: true,\n" +
@@ -219,7 +225,7 @@ public class Utility {
                 "        type: 'pie'\n" +
                 "    },\n" +
                 "    title: {\n" +
-                "        text: 'To'\n" +
+                "        text: 'To',\n" +
                 "    },\n" +
                 "    tooltip: {\n" +
                 "        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'\n" +
@@ -227,6 +233,7 @@ public class Utility {
                 "    plotOptions: {\n" +
                 "        pie: {\n" +
                 "            allowPointSelect: true,\n" +
+                "size: " + size + ",\n" +
                 "            cursor: 'pointer',\n" +
                 "            dataLabels: {\n" +
                 "                enabled: true,\n" +
@@ -250,8 +257,7 @@ public class Utility {
 
     /**
      * Create content of chart and return string to load on web view
-     * @param data  Chart series data
-     * @return
+     * @param data Chart series data
      */
     public static String createContentForSingleLineChart(List data) {
         return "<html>"

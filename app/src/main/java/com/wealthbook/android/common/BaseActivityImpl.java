@@ -18,6 +18,7 @@ import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
 import com.wealthbook.android.R;
 import com.wealthbook.android.api.ErrorResponse;
+import com.wealthbook.android.eventbus.Events;
 import com.wealthbook.android.screen.login.model.RepDetails;
 import com.wealthbook.android.screen.login.view.LoginActivity;
 import com.wealthbook.android.screen.notificationalert.view.NotificationAlertFragment;
@@ -31,6 +32,9 @@ import com.wealthbook.android.utils.AppConstant;
 import com.wealthbook.android.utils.BadgeDrawable;
 import com.wealthbook.android.utils.Utility;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 
 public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDialogClickListener, IPendingAlertResponseReceiver {
@@ -39,7 +43,7 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     private AlertDialogModel alert;
     protected UserSessionData data;
     private TextView mTxvCount;
-    private String count = "0";
+    private int count = 0;
     protected LayerDrawable icon;
 
     @Override
@@ -56,6 +60,18 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -135,7 +151,7 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
      * @param icon    Icon
      * @param count   Count
      */
-    public static void setBadgeCount(Context context, LayerDrawable icon, String count) {
+    public static void setBadgeCount(Context context, LayerDrawable icon, int count) {
 
         BadgeDrawable badge;
 
@@ -146,8 +162,7 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
         } else {
             badge = new BadgeDrawable(context);
         }
-
-        badge.setCount(count);
+        badge.setCount(String.valueOf(count + badge.getCount()));
         icon.mutate();
         icon.setDrawableByLayerId(R.id.ic_badge, badge);
     }
@@ -162,11 +177,15 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
                 manager.getPendingAlertList(this);
                 return true;
             case R.id.action_pending_notification:
-                NotificationAlertFragment pendingNotification = NotificationAlertFragment.newInstance(-1);
-                pendingNotification.show(getSupportFragmentManager(), "");
+                showPendingAlert(-1);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void showPendingAlert(int id) {
+        NotificationAlertFragment pendingNotification = NotificationAlertFragment.newInstance(id);
+        pendingNotification.show(getSupportFragmentManager(), "");
     }
 
     @Override
@@ -205,6 +224,14 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
         if (adviserDetails.getFirstName() != null) {
             String name = adviserDetails.getFirstName() + " " + (adviserDetails.getLastName() != null ? adviserDetails.getLastName() : "");
             mTxvAdviserName.setText(name);
+        }
+    }
+
+    @Subscribe
+    public void pendingAlertEvent(Events.PendingAlertType pendingAlertType) {
+        if (pendingAlertType != null) {
+            setBadgeCount(this, icon, 1);
+            showPendingAlert(pendingAlertType.getId());
         }
     }
 }
