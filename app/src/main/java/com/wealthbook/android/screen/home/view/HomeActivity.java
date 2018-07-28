@@ -88,6 +88,7 @@ public class HomeActivity extends BaseActivityImpl
     private void hideItem() {
         Menu navMenu = mNavigationView.getMenu();
         navMenu.findItem(R.id.nav_my_allocation).setVisible(false);
+
     }
 
     /**

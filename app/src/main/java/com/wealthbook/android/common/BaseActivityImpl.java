@@ -130,6 +130,7 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
             case R.string.action_logout:
                 SessionManager.getNewInstance().destroySession();
                 launchActivity(this, LoginActivity.class);
+                finish();
                 break;
             case R.string.action_empty_pending_alert:
                 break;
@@ -140,6 +141,11 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         MenuItem itemCart = menu.findItem(R.id.action_alert);
+        if (data.getUserType() == AppConstant.USER_TYPE_ADVISER) {
+            itemCart.setVisible(false);
+        } else {
+            itemCart.setVisible(true);
+        }
         icon = (LayerDrawable) itemCart.getIcon();
         setBadgeCount(this, icon, count);
         return true;
