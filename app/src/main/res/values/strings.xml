@@ -105,7 +105,7 @@
     <string name="txt_alert">Alert:\ </string>
 
     <!-- Notification alert screen-->
-    <string name="txt_accepted_successfully">%1$s \ Successfully</string>
+    <string name="txt_pending_alert">%1$s %2$s</string>
     <string name="txt_portfolio_change">Portfolio Changes\ %1$s</string>
     <string name="txt_btn_accept">Accept</string>
     <string name="txt_btn_decline">Decline</string>

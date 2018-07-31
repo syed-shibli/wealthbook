@@ -165,8 +165,9 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
      */
     private void displayPieChartView(String from, String to, String legend) {
         String showLegend = legend.equalsIgnoreCase("1") ? "true" : "false";
-        int size = widthInDpToPx()/6;
-        String chartContent = Utility.createContentForNotificationAlert(from, to, showLegend, size);;
+        int size = widthInDpToPx() / 6;
+        String chartContent = Utility.createContentForNotificationAlert(from, to, showLegend, size);
+        ;
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.requestFocusFromTouch();
@@ -229,17 +230,21 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
         if (customerDetails.getStatusDate() != null) {
             mTxvUpdatedDate.setText(getString(R.string.txt_portfolio_change, customerDetails.getStatusDate()));
         }
-        if (customerDetails.getWbStatusId() == 0) {
+        if (customerDetails.getIsEditable() == 0) {
+            mLLViewContainer.setVisibility(View.GONE);
+            if (customerDetails.getWbStatusId() == 0) {
+                mTxvAcceptSuccess.setVisibility(View.VISIBLE);
+                mTxvAcceptSuccess.setText(getString(R.string.txt_pending_alert, "Proposed", customerDetails.getStatusDate()));
+            } else if (customerDetails.getWbStatusId() == 1) {
+                mTxvAcceptSuccess.setVisibility(View.VISIBLE);
+                mTxvAcceptSuccess.setText(getString(R.string.txt_pending_alert, "Accepted", customerDetails.getStatusDate()));
+            } else if (customerDetails.getWbStatusId() == 2) {
+                mTxvAcceptSuccess.setVisibility(View.VISIBLE);
+                mTxvAcceptSuccess.setText(getString(R.string.txt_pending_alert, "Declined", customerDetails.getStatusDate()));
+            }
+        } else {
             mTxvAcceptSuccess.setVisibility(View.GONE);
             mLLViewContainer.setVisibility(View.VISIBLE);
-        } else if (customerDetails.getWbStatusId() == 1) {
-            mTxvAcceptSuccess.setVisibility(View.VISIBLE);
-            mTxvAcceptSuccess.setText(getString(R.string.txt_accepted_successfully, "Accepted"));
-            mLLViewContainer.setVisibility(View.GONE);
-        } else if (customerDetails.getWbStatusId() == 2) {
-            mTxvAcceptSuccess.setVisibility(View.VISIBLE);
-            mTxvAcceptSuccess.setText(getString(R.string.txt_accepted_successfully, "Declined"));
-            mLLViewContainer.setVisibility(View.GONE);
         }
     }
 

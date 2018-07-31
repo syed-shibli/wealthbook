@@ -39,14 +39,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private void handleDataMessage(String title, String payload) {
         Intent resultIntent;
-        resultIntent = new Intent();
-        resultIntent.putExtra(AppConstant.ID, 1);
         Gson gson = new Gson();
         PushDataPayload pushPayload = gson.fromJson(payload, PushDataPayload.class);
         if (!NotificationUtils.isAppInBackground(getApplicationContext())) {
             switch (pushPayload.getNotification().getAlert().getNotificationType()) {
                 case "1":
-                    Events.PendingAlertType pendingAlertType = new Events.PendingAlertType(223);
+                    Events.PendingAlertType pendingAlertType = new Events.PendingAlertType(-1);
                     EventBus.getDefault().post(pendingAlertType);
                     break;
             }

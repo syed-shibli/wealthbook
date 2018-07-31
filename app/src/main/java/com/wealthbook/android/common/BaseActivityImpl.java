@@ -234,10 +234,15 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     }
 
     @Subscribe
-    public void pendingAlertEvent(Events.PendingAlertType pendingAlertType) {
+    public void pendingAlertEvent(final Events.PendingAlertType pendingAlertType) {
         if (pendingAlertType != null) {
-            setBadgeCount(this, icon, 1);
-            showPendingAlert(pendingAlertType.getId());
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setBadgeCount(BaseActivityImpl.this, icon, 1);
+                    showPendingAlert(pendingAlertType.getId());
+                }
+            });
         }
     }
 }
