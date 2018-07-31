@@ -167,7 +167,6 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
         String showLegend = legend.equalsIgnoreCase("1") ? "true" : "false";
         int size = widthInDpToPx() / 6;
         String chartContent = Utility.createContentForNotificationAlert(from, to, showLegend, size);
-        ;
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.requestFocusFromTouch();
