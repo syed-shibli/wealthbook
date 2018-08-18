@@ -139,7 +139,7 @@ public class UpdateDetailsActivity extends BaseActivityImpl implements IUpdateDe
     }
 
     @Override
-    public void showError(int error) {
+    public void showError(String error) {
         showSnackBar(error, this);
     }
 }

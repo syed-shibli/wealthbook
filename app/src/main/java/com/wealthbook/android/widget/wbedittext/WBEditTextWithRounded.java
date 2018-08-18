@@ -6,9 +6,13 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wealthbook.android.R;
@@ -16,6 +20,7 @@ import com.wealthbook.android.widget.BaseView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRounded {
 
@@ -24,6 +29,10 @@ public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRo
 
     @BindView(R.id.txv_error)
     TextView mTxvError;
+
+    @BindView(R.id.ic_show_password)
+    ImageView mImgShowPassword;
+    private boolean mToggle = false;
 
     public WBEditTextWithRounded(Context context) {
         super(context);
@@ -41,7 +50,6 @@ public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRo
 
     /**
      * Set attribute of view
-     *
      * @param context Context
      * @param attrs   Attributes
      */
@@ -118,16 +126,40 @@ public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRo
             return;
         }
         mTxvError.setVisibility(VISIBLE);
+        mTxvError.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
     }
 
     @Override
     public void setInputType(int type) {
-        mEditText.setInputType(type);
+        mEditText.setInputType(InputType.TYPE_CLASS_TEXT | type);
+    }
+
+    private void setShowPasswordIcon(int visible) {
+        mImgShowPassword.setVisibility(visible);
+        int padding = mContext.getResources().getDimensionPixelSize(R.dimen.padding_medium);
+        int rightPadding = mContext.getResources().getDimensionPixelSize(R.dimen.padding_34dp);
+        if (visible == VISIBLE) {
+            mEditText.setPadding(padding, padding, rightPadding, padding);
+        } else {
+            mEditText.setPadding(padding, padding, padding, padding);
+        }
     }
 
     @Override
     public void clearData() {
         mEditText.setText("");
+    }
+
+    @OnClick(R.id.ic_show_password)
+    public void ToggleShowHidePassword() {
+        mToggle = !mToggle;
+        if (mToggle) {
+            setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            mImgShowPassword.setImageResource(R.drawable.ic_eye_visibility_on);
+        } else {
+            mImgShowPassword.setImageResource(R.mipmap.ic_eye_visibility_off);
+            setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }
     }
 
     /**
@@ -152,6 +184,9 @@ public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRo
                     setErrorVisibility(false);
                 } else {
                     setErrorVisibility(true);
+                }
+                if (129 == mEditText.getInputType()) {
+                    setShowPasswordIcon(VISIBLE);
                 }
             }
         });

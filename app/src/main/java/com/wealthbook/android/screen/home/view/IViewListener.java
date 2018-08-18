@@ -16,5 +16,5 @@ public interface IViewListener extends ILoader {
      * To show error response
      * @param error Error
      */
-    void onError(@StringRes int error);
+    void onError(String error);
 }

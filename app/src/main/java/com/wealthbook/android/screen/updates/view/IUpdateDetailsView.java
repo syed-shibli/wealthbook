@@ -18,5 +18,5 @@ public interface IUpdateDetailsView extends ILoader {
      * Show error
      * @param error Error message
      */
-    void showError(@StringRes int error);
+    void showError(String error);
 }

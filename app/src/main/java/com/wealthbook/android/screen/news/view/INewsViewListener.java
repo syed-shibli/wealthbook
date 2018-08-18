@@ -19,5 +19,5 @@ public interface INewsViewListener extends ILoader {
      *
      * @param error Error message
      */
-    void showError(@StringRes int error);
+    void showError(String error);
 }

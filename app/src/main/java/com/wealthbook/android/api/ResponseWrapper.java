@@ -19,17 +19,16 @@ import retrofit2.Response;
 /**
  * A wrapper layer over the retrofit callback, written for distinguishing the success
  * and failure responses.
- *
  * @param <T> the class type of the success response expected.
  */
 public class ResponseWrapper<T> implements Callback<T> {
 
     private final ResponseCallback<T> mResponseCallback;
+    private final String INTERNAL_ERROR = "Internal server error";
 
     /**
      * Creates an instance without the error mapper,
      * in case of all errors we would get the default response.
-     *
      * @param responseCallback implementation of the response callback.
      */
     public ResponseWrapper(ResponseCallback<T> responseCallback) {
@@ -55,11 +54,11 @@ public class ResponseWrapper<T> implements Callback<T> {
                 if (errorBodyPayload != null) {
                     mResponseCallback.onFailure(parseError(errorBodyPayload));
                 } else {
-                    mResponseCallback.onFailure(new ErrorResponse(R.string.INTERNAL_SERVER_ERROR, "500"));
+                    mResponseCallback.onFailure(new ErrorResponse(INTERNAL_ERROR, "500"));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                mResponseCallback.onFailure(new ErrorResponse(R.string.INTERNAL_SERVER_ERROR, "500"));
+                mResponseCallback.onFailure(new ErrorResponse(INTERNAL_ERROR, "500"));
             }
         }
     }
@@ -75,45 +74,34 @@ public class ResponseWrapper<T> implements Callback<T> {
         if (throwable instanceof ConnectException
                 || throwable instanceof UnknownHostException) {
             // Network error
-            errorResponse = new ErrorResponse(0, "012");
+            errorResponse = new ErrorResponse("0", "012");
         } else {
             // some more complex error occurred like conversion etc.
-            errorResponse = new ErrorResponse(R.string.REQUEST_TIME_OUT, "500");
+            errorResponse = new ErrorResponse("Request time out", "500");
         }
         mResponseCallback.onFailure(errorResponse);
     }
 
     /**
      * Parse error response
-     *
      * @param errorBodyPayload Error body
      * @return Return error response
      */
     private ErrorResponse parseError(String errorBodyPayload) {
         try {
             JSONObject jsonObject = new JSONObject(errorBodyPayload);
-            String errorCode = jsonObject.optString("code");
-            int errorMessage;
-            if (errorCode != null) {
-                errorMessage = ApiErrorHandler.resolve(errorCode);
-            } else {
-                errorMessage = R.string.INTERNAL_SERVER_ERROR; // Unable to process request at this time, please try again in sometime.
+            String errorMessage = jsonObject.optString("error");
+            if (errorMessage == null ||errorMessage == "") {
+                errorMessage = INTERNAL_ERROR;
             }
-            if (errorCode != null && errorCode.equals(AppConstant.INVALID_AUTH)) {
-                // Account disabled
-                errorMessage = 0;
-//                Events.AccountReLogin rLogin = new Events.AccountReLogin(true);
-//                GlobalBus.getBus().post(rLogin);
-            }
-            return new ErrorResponse(errorMessage, errorCode);
+            return new ErrorResponse(errorMessage, "500");
         } catch (JSONException e) {
-            return new ErrorResponse(R.string.INTERNAL_SERVER_ERROR, "500"); // Unable to process request at this time.
+            return new ErrorResponse(INTERNAL_ERROR, "500"); // Unable to process request at this time.
         }
     }
 
     /**
      * Save Toke to session
-     *
      * @param token User Token
      */
     private void saveTokenToSession(String token) {

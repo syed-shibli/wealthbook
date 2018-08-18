@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edt_text"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edit_text"
-        android:inputType="text"
-        android:textAlignment="viewStart"
-        android:textColor="@color/colorTextDefault"
-        android:textColorHint="@color/colorHint"
-        android:padding="@dimen/padding_medium"
-        android:maxLines="1"/>
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edt_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edit_text"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="@dimen/padding_medium"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorTextDefault"
+            android:textColorHint="@color/colorHint" />
+
+        <ImageView
+            android:id="@+id/ic_show_password"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:paddingEnd="@dimen/padding_smallest"
+            android:visibility="gone"
+            app:srcCompat="@mipmap/ic_eye_visibility_off" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/txv_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="error message"
-        android:textColor="@color/colorAccent"
         android:padding="@dimen/padding_small"
+        android:textColor="@color/colorAccent"
         android:textSize="@dimen/txt_medium"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        tools:text="error message" />
 
 </LinearLayout>

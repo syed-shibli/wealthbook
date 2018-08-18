@@ -163,7 +163,7 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
     }
 
     @Override
-    public void onError(int error) {
+    public void onError(String error) {
         mActivity.showSnackBar(error, mActivity);
     }
 

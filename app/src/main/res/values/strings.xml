@@ -25,7 +25,8 @@
     <string name="txt_login">Login</string>
     <string name="error_user_email">Please enter valid email</string>
     <string name="error_password">Password should be greater than 6</string>
-    <string name="btn_change_password">Change Password?</string>
+    <string name="error_otp">OTP should not be empty</string>
+    <string name="btn_change_password">Reset Password?</string>
     <string name="txt_trouble_logging_in">Trouble Logging in?</string>
 
     <!-- Profile screen text -->
@@ -54,6 +55,7 @@
     <string name="placeholder_otp">Enter valid OTP</string>
     <string name="placeholder_confirm_password">Re-enter password</string>
     <string name="txt_submit">Submit</string>
+    <string name="reset_my_password">Reset My Password</string>
     <string name="error_confirm_password">Please enter valid password </string>
     <string name="error_empty_top">Please enter valid OTP code</string>
     <string name="txt_change_password">Change Password</string>

@@ -190,7 +190,7 @@ public class Utility {
                 "        margin: 20,\n" +
                 "     },\n" +
                 "       legend: {\n" +
-                "        margin: 20\n" +
+                "        padding: 10\n" +
                 "    },\n" +
                 "    tooltip: {\n" +
                 "        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'\n" +

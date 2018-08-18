@@ -45,6 +45,7 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     private TextView mTxvCount;
     private int count = 0;
     protected LayerDrawable icon;
+    private NotificationAlertFragment pendingNotification;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -190,13 +191,23 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     }
 
     protected void showPendingAlert(int id) {
-        NotificationAlertFragment pendingNotification = NotificationAlertFragment.newInstance(id);
-        pendingNotification.show(getSupportFragmentManager(), "");
+        if (pendingNotification == null) {
+            pendingNotification = NotificationAlertFragment.newInstance(id);
+            pendingNotification.show(getSupportFragmentManager(), "");
+        } else if (pendingNotification.isVisible()) {
+            pendingNotification.setId(id);
+            pendingNotification.refresh();
+        } else {
+            pendingNotification.show(getSupportFragmentManager(), "");
+            pendingNotification.setId(id);
+            pendingNotification.refresh();
+        }
     }
 
     @Override
     public void onSuccess(ArrayList<PendingAlertViewModel> data) {
         hideProgress();
+        setBadgeCount(this, icon, count);
         if (data == null || data.size() == 0) {
             alert = Utility.prepareDialogObj("", getString(R.string.txt_empty_pending_alert), getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
             Utility.showDialog(this, this, alert);
@@ -209,6 +220,7 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     @Override
     public void onFailure(ErrorResponse errorResponse) {
         hideProgress();
+        setBadgeCount(this, icon, count);
         alert = Utility.prepareDialogObj("", getString(R.string.txt_empty_pending_alert), getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
         Utility.showDialog(this, this, alert);
     }

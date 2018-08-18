@@ -6,7 +6,7 @@ package com.wealthbook.android.api;
 public class ErrorResponse {
 
 
-    private final int mErrorMessage;
+    private final String mErrorMessage;
     private String mErrorCode;
     private String error;
     private String error_description;
@@ -17,7 +17,7 @@ public class ErrorResponse {
      * @param errorMessage the error message equivalent.
      * @param errorCode Error code
      */
-    ErrorResponse(int errorMessage, String errorCode) {
+    ErrorResponse(String errorMessage, String errorCode) {
         mErrorMessage = errorMessage;
         mErrorCode = errorCode;
     }
@@ -27,7 +27,7 @@ public class ErrorResponse {
      *
      * @return the error message.
      */
-    public int getErrorMessage() {
+    public String getErrorMessage() {
         return mErrorMessage;
     }
     

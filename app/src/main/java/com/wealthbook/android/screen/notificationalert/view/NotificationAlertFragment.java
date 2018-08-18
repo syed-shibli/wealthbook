@@ -165,7 +165,7 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
      */
     private void displayPieChartView(String from, String to, String legend) {
         String showLegend = legend.equalsIgnoreCase("1") ? "true" : "false";
-        int size = widthInDpToPx() / 6;
+        int size = widthInDpToPx() / 4;
         String chartContent = Utility.createContentForNotificationAlert(from, to, showLegend, size);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -175,21 +175,27 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
 
     @Override
     public void showLoader() {
-        mActivity.showProgress();
+        if (mActivity != null) {
+            mActivity.showProgress();
+        }
     }
 
     @Override
     public void hideLoader() {
-        mActivity.hideProgress();
+        if (mActivity != null) {
+            mActivity.hideProgress();
+        }
     }
 
     @Override
     public void bindAcceptDeclineViewModel() {
         if (isAccept == 1) {
             // Accepted
+            this.mPendingAlertData.setIsEditable(0);
             this.mPendingAlertData.setWbStatusId(1);
         } else if (isAccept == 2) {
             // Declined
+            this.mPendingAlertData.setIsEditable(0);
             this.mPendingAlertData.setWbStatusId(2);
         } else {
             // Nothing happened
@@ -199,7 +205,7 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
     }
 
     @Override
-    public void onError(int error) {
+    public void onError(String error) {
         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
     }
 
@@ -259,4 +265,11 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
         mPresenter.reqPendingNotification(mPendingAlertData.getWbVaUserCustomerPortfolioHistoryId(), 2);
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void refresh() {
+        mPresenter.reqLatestPortfolioReview(id);
+    }
 }

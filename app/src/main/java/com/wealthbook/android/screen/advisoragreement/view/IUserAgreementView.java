@@ -16,5 +16,5 @@ public interface IUserAgreementView extends ILoader {
      * to show error
      * @param error Error message
      */
-    void onError(@StringRes int error);
+    void onError(String error);
 }

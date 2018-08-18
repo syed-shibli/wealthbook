@@ -17,5 +17,5 @@ public interface IMyAllocationView extends ILoader {
      * To show Error message
      * @param error Error message
      */
-    void onError(@StringRes int error);
+    void onError(String error);
 }

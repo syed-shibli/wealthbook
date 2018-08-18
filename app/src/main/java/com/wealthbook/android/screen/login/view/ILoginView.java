@@ -31,7 +31,7 @@ public interface ILoginView extends ILoader {
      * To show error message
      * @param errorMessage Error message
      */
-    void showError(@StringRes int errorMessage);
+    void showError(String errorMessage);
 
     /**
      * Redirect user to Gmail app for send email

@@ -17,5 +17,5 @@ public interface IPortfolioFragmentView extends ILoader {
      * To show error message which is coming from server
      * @param error Error message
      */
-    void onError(@StringRes int error);
+    void onError(String error);
 }

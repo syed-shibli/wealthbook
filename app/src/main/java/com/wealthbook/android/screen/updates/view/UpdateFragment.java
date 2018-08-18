@@ -167,7 +167,7 @@ public class UpdateFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     @Override
-    public void showError(int error) {
+    public void showError(String error) {
         mActivity.showSnackBar(error, mActivity);
     }
 }

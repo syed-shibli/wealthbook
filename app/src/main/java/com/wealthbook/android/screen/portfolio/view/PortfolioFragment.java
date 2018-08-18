@@ -190,7 +190,7 @@ public class PortfolioFragment extends Fragment implements IPortfolioFragmentVie
     }
 
     @Override
-    public void onError(int error) {
+    public void onError(String error) {
         mSwipeRefreshLayout.setRefreshing(false);
         mActivity.showSnackBar(error, mActivity);
         if (mPortfolioItemList.size() == 0) {

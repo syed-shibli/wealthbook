@@ -81,7 +81,7 @@ public class UserAgreementActivity extends BaseActivityImpl implements IUserAgre
     }
 
     @Override
-    public void onError(int error) {
+    public void onError(String error) {
         showSnackBar(error, this);
     }
 }

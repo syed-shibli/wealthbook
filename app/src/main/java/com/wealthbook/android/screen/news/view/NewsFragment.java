@@ -163,7 +163,7 @@ public class NewsFragment extends Fragment implements INewsViewListener, SwipeRe
     }
 
     @Override
-    public void showError(@StringRes int error) {
+    public void showError(String error) {
         mSwipeRefreshLayout.setRefreshing(false);
         mActivity.showSnackBar(error, mActivity);
     }

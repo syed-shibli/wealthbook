@@ -16,7 +16,7 @@ public interface INotificationAlertView extends ILoader {
      * To show error
      * @param error Error message
      */
-    void onError(@StringRes int error);
+    void onError(String error);
 
     /**
      * Bind latest portfolio review view model

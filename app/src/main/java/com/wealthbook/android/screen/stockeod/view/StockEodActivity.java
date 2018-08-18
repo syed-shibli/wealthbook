@@ -115,7 +115,7 @@ public class StockEodActivity extends BaseActivityImpl implements IStockEodView 
     }
 
     @Override
-    public void onError(int error) {
+    public void onError(String error) {
         mTxvTickerName.setVisibility(View.GONE);
         showSnackBar(error, this);
     }

@@ -53,12 +53,14 @@
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_normal"
         android:layout_below="@+id/txv_update_status_date" />
 
     <RelativeLayout
         android:id="@+id/bnt_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
         android:layout_alignParentBottom="true">
 
         <TextView

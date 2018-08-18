@@ -1,12 +1,15 @@
 package com.wealthbook.android.screen.forgotpassword.view;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.wealthbook.android.R;
 import com.wealthbook.android.common.BaseActivityImpl;
+import com.wealthbook.android.common.ConformationRes;
 import com.wealthbook.android.screen.forgotpassword.manager.ForgotPasswordManager;
 import com.wealthbook.android.screen.forgotpassword.presenter.ForgotPasswordPresenter;
 import com.wealthbook.android.screen.forgotpassword.presenter.IForgotPasswordScreenPresenter;
@@ -19,6 +22,7 @@ import butterknife.OnClick;
 
 public class ForgotPasswordActivity extends BaseActivityImpl implements IForgotPasswordView {
 
+    private static final long DELAY_TIME = 3000;
     @BindView(R.id.edt_email)
     WBEditTextWithRounded mEdtEmail;
 
@@ -40,6 +44,7 @@ public class ForgotPasswordActivity extends BaseActivityImpl implements IForgotP
     private boolean isChangePasswordView = false;
     private IForgotPasswordScreenPresenter mForgotPasswordPresenter;
     private String emial;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,13 @@ public class ForgotPasswordActivity extends BaseActivityImpl implements IForgotP
      * Set listener for all field
      */
     private void setListener() {
+        mEdtUserPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        mEdtUserPassword.setError(getString(R.string.error_password));
+        mEdtUserConfirmPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        mEdtUserConfirmPassword.setError(getString(R.string.error_password));
+        mEdtOTP.setError(getString(R.string.error_otp));
+        mEdtEmail.setError(getString(R.string.error_user_email));
+        mEdtOTP.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         mEdtEmail.registerKeyListener();
         mEdtUserPassword.registerKeyListener();
         mEdtUserConfirmPassword.registerKeyListener();
@@ -87,22 +99,29 @@ public class ForgotPasswordActivity extends BaseActivityImpl implements IForgotP
     }
 
     @Override
-    public void redirectToLogin() {
-        showSnackBar(R.string.txt_password_change_success, this);
-        launchActivity(this, LoginActivity.class);
-        finish();
+    public void redirectToLogin(ConformationRes data) {
+        showSnackBar(data.getMessage(), this);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                launchActivity(ForgotPasswordActivity.this, LoginActivity.class);
+                finish();
+            }
+        }, DELAY_TIME);
     }
 
     @Override
-    public void redirectToChangePasswordView() {
+    public void redirectToChangePasswordView(ConformationRes data) {
         emial = mEdtEmail.getValue();
-        showChangePasswordView();
+        showError(data.getMessage());
+        showChangePasswordView(data.getMessage());
     }
 
-    private void showChangePasswordView() {
+    private void showChangePasswordView(String title) {
         isChangePasswordView = true;
         txvLinkSent.setVisibility(View.VISIBLE);
-        txvLinkSent.setText(getString(R.string.txt_forgot_link_sent, emial));
+        txvLinkSent.setText(title);
+//        txvLinkSent.setText(getString(R.string.txt_forgot_link_sent, emial));
         mBtnChangePassword.setText(R.string.txt_change_password);
         mEdtEmail.setVisibility(View.GONE);
         mEdtUserPassword.setVisibility(View.VISIBLE);
@@ -111,7 +130,7 @@ public class ForgotPasswordActivity extends BaseActivityImpl implements IForgotP
     }
 
     @Override
-    public void showError(int error) {
+    public void showError(String error) {
         showSnackBar(error, this);
     }
 

@@ -104,4 +104,8 @@ public class LatestPortfolioReviewData {
     public void setWbStatusId(int wbStatusId) {
         this.wbStatusId = wbStatusId;
     }
+
+    public void setIsEditable(int isEditable) {
+        this.isEditable = isEditable;
+    }
 }

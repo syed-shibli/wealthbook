@@ -18,5 +18,5 @@ public interface IStockEodView extends ILoader {
      * To show error message to user which is coming from server
      * @param error Error message
      */
-    void onError(@StringRes int error);
+    void onError(String error);
 }

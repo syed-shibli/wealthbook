@@ -1,5 +1,6 @@
 package com.wealthbook.android.screen.home.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -22,7 +23,6 @@ import com.wealthbook.android.screen.home.manager.HomeManager;
 import com.wealthbook.android.screen.home.presenter.HomePresenter;
 import com.wealthbook.android.screen.myallocation.view.MyAllocationFragment;
 import com.wealthbook.android.screen.news.view.NewsFragment;
-import com.wealthbook.android.screen.notificationalert.view.NotificationAlertFragment;
 import com.wealthbook.android.screen.portfolio.view.PortfolioFragment;
 import com.wealthbook.android.screen.profile.view.ProfileFragment;
 import com.wealthbook.android.screen.updates.view.UpdateFragment;
@@ -48,7 +48,7 @@ public class HomeActivity extends BaseActivityImpl
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
 
-    private int mSelectedNav = 1;
+    private int mSelectedNav = 3;
     private UserSessionData sessionData;
     private HomePresenter mHomePresenter;
 
@@ -70,8 +70,8 @@ public class HomeActivity extends BaseActivityImpl
         mHomePresenter.reqAlertCount(); // Get alert count
     }
 
-    private void handlePushTypeDialog() {
-        if (getIntent().hasExtra(AppConstant.ID)) {
+    private void handlePushTypeDialog(Intent intent) {
+        if (intent.hasExtra(AppConstant.ID)) {
             showPendingAlert(getIntent().getIntExtra(AppConstant.ID, -1));
         }
     }
@@ -198,12 +198,18 @@ public class HomeActivity extends BaseActivityImpl
     @Override
     public void bindPendingAlertCountToView(int count) {
         setBadgeCount(this, icon, count);
-        handlePushTypeDialog();
+        handlePushTypeDialog(getIntent());
     }
 
     @Override
-    public void onError(int error) {
+    public void onError(String error) {
         showSnackBar(error, this);
-        handlePushTypeDialog();
+        handlePushTypeDialog(getIntent());
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handlePushTypeDialog(intent);
     }
 }

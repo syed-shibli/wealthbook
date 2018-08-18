@@ -44,13 +44,13 @@ public class ForgotPasswordPresenter implements IForgotPasswordScreenPresenter, 
     @Override
     public void onOTPSendSuccess(ConformationRes data) {
         mIForgotPasswordView.hideLoader();
-        mIForgotPasswordView.redirectToChangePasswordView();
+        mIForgotPasswordView.redirectToChangePasswordView(data);
     }
 
     @Override
     public void onChangePasswordSuccess(ConformationRes data) {
         mIForgotPasswordView.hideLoader();
-        mIForgotPasswordView.redirectToLogin();
+        mIForgotPasswordView.redirectToLogin(data);
     }
 
     @Override

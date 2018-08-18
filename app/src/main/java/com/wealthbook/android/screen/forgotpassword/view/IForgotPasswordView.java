@@ -2,6 +2,7 @@ package com.wealthbook.android.screen.forgotpassword.view;
 
 import android.support.annotation.StringRes;
 
+import com.wealthbook.android.common.ConformationRes;
 import com.wealthbook.android.common.ILoader;
 
 public interface IForgotPasswordView extends ILoader {
@@ -9,21 +10,23 @@ public interface IForgotPasswordView extends ILoader {
     /**
      * If password has been changed successful then
      * redirect user to login screen
+     * @param data
      */
-    void redirectToLogin();
+    void redirectToLogin(ConformationRes data);
 
     /**
      * If user email is exist and OTP send to that email
      * then redirect to user to change their password using OTP verification
+     * @param data
      */
-    void redirectToChangePasswordView();
+    void redirectToChangePasswordView(ConformationRes data);
 
     /**
      * To show server error
      *
      * @param error Error message
      */
-    void showError(@StringRes int error);
+    void showError(String error);
 
     /**
      * To show email invalid message

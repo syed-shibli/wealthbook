@@ -3,6 +3,7 @@ package com.wealthbook.android.screen.login.view;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 
 import com.wealthbook.android.R;
 import com.wealthbook.android.common.BaseActivityImpl;
@@ -50,10 +51,12 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
      * Set listener for all field
      */
     private void setListener() {
-        mEdtEmailName.registerKeyListener();
-        mEdtUserPassword.registerKeyListener();
         mEdtEmailName.setError(getString(R.string.error_user_email));
         mEdtUserPassword.setError(getString(R.string.error_password));
+        mEdtEmailName.setInputType(InputType.TYPE_CLASS_TEXT);
+        mEdtUserPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        mEdtEmailName.registerKeyListener();
+        mEdtUserPassword.registerKeyListener();
     }
 
     @OnClick(R.id.btn_login)
@@ -99,7 +102,7 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
     }
 
     @Override
-    public void showError(int errorMessage) {
+    public void showError(String errorMessage) {
         showSnackBar(errorMessage, this);
     }
 
