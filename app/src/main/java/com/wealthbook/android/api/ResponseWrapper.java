@@ -74,7 +74,7 @@ public class ResponseWrapper<T> implements Callback<T> {
         if (throwable instanceof ConnectException
                 || throwable instanceof UnknownHostException) {
             // Network error
-            errorResponse = new ErrorResponse("0", "012");
+            errorResponse = new ErrorResponse("Please check your internet connection.", "012");
         } else {
             // some more complex error occurred like conversion etc.
             errorResponse = new ErrorResponse("Request time out", "500");

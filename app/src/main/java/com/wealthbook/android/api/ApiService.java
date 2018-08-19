@@ -22,6 +22,7 @@ import com.wealthbook.android.screen.updates.model.UpdateRes;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -32,7 +33,6 @@ public interface ApiService {
 
     /**
      * Relative login URL of the resource
-     *
      * @param request Request body
      * @return Return the converted result of this login if converter is not assign then use ResponseBody class
      */
@@ -41,7 +41,6 @@ public interface ApiService {
 
     /**
      * Relative get news list URL of the resource
-     *
      * @return Return list of news
      */
     @GET("news/all")
@@ -49,7 +48,6 @@ public interface ApiService {
 
     /**
      * Relative URL to send reset OTP to email
-     *
      * @param email Email where send OTP
      * @return Return confirmation message
      */
@@ -58,7 +56,6 @@ public interface ApiService {
 
     /**
      * Relative URL to change password
-     *
      * @param request Request body
      * @return Return Forgot password success or error response
      */
@@ -67,7 +64,6 @@ public interface ApiService {
 
     /**
      * Relative URL to login trouble
-     *
      * @return Return Email value for send email
      */
     @GET("wb/tangram_support")
@@ -75,7 +71,6 @@ public interface ApiService {
 
     /**
      * Relative URL to get all update list
-     *
      * @return Return list of update
      */
     @GET("doc/all")
@@ -83,7 +78,6 @@ public interface ApiService {
 
     /**
      * Relative URL to get selected update details
-     *
      * @return Return details
      */
     @GET("doc/document")
@@ -91,7 +85,6 @@ public interface ApiService {
 
     /**
      * Relative URL to get all allocation
-     *
      * @param token Token
      * @return Return all allocation account data
      */
@@ -100,7 +93,6 @@ public interface ApiService {
 
     /**
      * Relative URL to get all portfolio data
-     *
      * @param token Auth Token
      * @return Return all portfolio data model
      */
@@ -109,7 +101,6 @@ public interface ApiService {
 
     /**
      * Relative URL to get selected portfolio details
-     *
      * @param id    ID of portfolio
      * @param token Auth token
      * @return Return selected portfolio details
@@ -119,7 +110,6 @@ public interface ApiService {
 
     /**
      * Relative URL to get all pending alert list
-     *
      * @param token Auth token
      * @return Return pending alert response data
      */
@@ -128,7 +118,6 @@ public interface ApiService {
 
     /**
      * Relative URL for accept/decline portfolio alert of notification
-     *
      * @param token Token
      * @param req   Update portfolio req
      * @return Return Updated result
@@ -138,7 +127,6 @@ public interface ApiService {
 
     /**
      * Relative URL to get latest review of portfolio data
-     *
      * @param token Auth token
      * @return Latest portfolio data
      */
@@ -147,7 +135,6 @@ public interface ApiService {
 
     /**
      * Relative URL to get latest review of portfolio data
-     *
      * @param token Auth token
      * @param id    Pending alert id
      * @return Latest portfolio data
@@ -157,7 +144,6 @@ public interface ApiService {
 
     /**
      * Relative URL to update user agreement status
-     *
      * @param token Auth token
      * @param req   Request body
      * @return Agreement status res
@@ -167,7 +153,6 @@ public interface ApiService {
 
     /**
      * Relative URL to get specific stock of EOD
-     *
      * @param token  Auth Token
      * @param id     Stock id
      * @param ticker Ticker
@@ -178,7 +163,6 @@ public interface ApiService {
 
     /**
      * Get all pending alert count
-     *
      * @param token Auth token
      * @return Return count
      */
@@ -187,4 +171,7 @@ public interface ApiService {
 
     @POST("auth/register_token")
     Call<DeviceRegistrationResponse> deviceRegister(@Body DeviceRegistrationReq registrationReq);
+
+    @POST("auth/deregister_token")
+    Call<ResponseBody> deviceDeRegister();
 }

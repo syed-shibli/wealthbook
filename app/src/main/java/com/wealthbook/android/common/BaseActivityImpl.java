@@ -18,6 +18,7 @@ import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
 import com.wealthbook.android.R;
 import com.wealthbook.android.api.ErrorResponse;
+import com.wealthbook.android.deviceregistration.manager.DeviceRegistrationManager;
 import com.wealthbook.android.eventbus.Events;
 import com.wealthbook.android.screen.login.model.RepDetails;
 import com.wealthbook.android.screen.login.view.LoginActivity;
@@ -130,7 +131,9 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
         switch (val) {
             case R.string.action_logout:
                 SessionManager.getNewInstance().destroySession();
-                launchActivity(this, LoginActivity.class);
+                DeviceRegistrationManager manager = new DeviceRegistrationManager();
+                manager.reqDeviceDeRegister();
+                launchActivity(BaseActivityImpl.this, LoginActivity.class);
                 finish();
                 break;
             case R.string.action_empty_pending_alert:
