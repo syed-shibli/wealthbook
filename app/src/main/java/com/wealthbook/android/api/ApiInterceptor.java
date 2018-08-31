@@ -41,7 +41,7 @@ class ApiInterceptor implements Interceptor {
         if (request != null) {
             Request.Builder builder = request.newBuilder();
             if (SessionManager.getNewInstance().isCurrentUserLoggedIn()) {
-                builder.addHeader(APP_AUTH_TOKEN, SessionManager.getNewInstance().readSession().getmToken());
+                builder.addHeader(APP_AUTH_TOKEN, SessionManager.getNewInstance().readSession().getToken());
             }
             return builder.build();
         }

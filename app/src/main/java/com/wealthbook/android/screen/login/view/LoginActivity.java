@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.wealthbook.android.R;
 import com.wealthbook.android.common.BaseActivityImpl;
@@ -16,21 +18,25 @@ import com.wealthbook.android.screen.login.presenter.ILoginScreenPresenter;
 import com.wealthbook.android.screen.login.presenter.LoginPresenter;
 import com.wealthbook.android.usersession.SessionManager;
 import com.wealthbook.android.usersession.UserSessionData;
+import com.wealthbook.android.utils.Utility;
 import com.wealthbook.android.widget.wbedittext.WBEditTextWithRounded;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.internal.Util;
 
-public class LoginActivity extends BaseActivityImpl implements ILoginView {
+public class LoginActivity extends BaseActivityImpl implements ILoginView, WBEditTextWithRounded.EditTextClickCallback {
 
     @BindView(R.id.edt_username)
-    WBEditTextWithRounded mEdtEmailName;
+    WBEditTextWithRounded mEdtEmail;
 
     @BindView(R.id.edt_user_password)
     WBEditTextWithRounded mEdtUserPassword;
 
     private ILoginScreenPresenter mLoginPresenter;
+    private String email;
+    private String maskEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,24 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
         ButterKnife.bind(this);
         setListener();
         mLoginPresenter = new LoginPresenter(this, new LoginManager());
+        email = SessionManager.getNewInstance().getKeyValue(SessionManager.USER_EMAIL_KEY);
+        setMask(email, true);
+        mEdtEmail.setClickListener(this);
+    }
+
+    private void setMask(String email, boolean mask) {
+        if (email != null) {
+            if (mask) {
+                try {
+                    maskEmail = Utility.maskString(email, 5, email.length(), '*');
+                    mEdtEmail.setValue(maskEmail);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                mEdtEmail.setValue(email);
+            }
+        }
     }
 
     @Override
@@ -51,17 +75,24 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
      * Set listener for all field
      */
     private void setListener() {
-        mEdtEmailName.setError(getString(R.string.error_user_email));
+        mEdtEmail.setError(getString(R.string.error_user_email));
         mEdtUserPassword.setError(getString(R.string.error_password));
-        mEdtEmailName.setInputType(InputType.TYPE_CLASS_TEXT);
+        mEdtEmail.setInputType(InputType.TYPE_CLASS_TEXT);
         mEdtUserPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        mEdtEmailName.registerKeyListener();
+        mEdtEmail.registerKeyListener();
         mEdtUserPassword.registerKeyListener();
     }
 
     @OnClick(R.id.btn_login)
     public void doLogin() {
-        mLoginPresenter.performLogin(mEdtEmailName.getValue(), mEdtUserPassword.getValue());
+        if (email != null) {
+            if (!mEdtEmail.getValue().equalsIgnoreCase(maskEmail)) {
+                email = mEdtEmail.getValue();
+            }
+        } else {
+            email = mEdtEmail.getValue();
+        }
+        mLoginPresenter.performLogin(email, mEdtUserPassword.getValue());
     }
 
     @OnClick(R.id.btn_change_password)
@@ -76,7 +107,7 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
 
     @Override
     public void emailInvalid() {
-        mEdtEmailName.setErrorVisibility(true);
+        mEdtEmail.setErrorVisibility(true);
     }
 
     @Override
@@ -114,7 +145,7 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
             sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{data.getSupportEmail()});
             sendIntent.putExtra(Intent.EXTRA_SUBJECT, data.getSupportTitle());
             startActivity(sendIntent);
-            if(sendIntent.resolveActivity(getPackageManager()) != null) {
+            if (sendIntent.resolveActivity(getPackageManager()) != null) {
             }
         }
     }
@@ -127,5 +158,10 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView {
     @Override
     public void hideLoader() {
         hideProgress();
+    }
+
+    @Override
+    public void onClick() {
+        setMask(email, false);
     }
 }

@@ -27,7 +27,7 @@ public class PendingAlertManager {
      */
     public void getPendingAlertList(IPendingAlertResponseReceiver responseReceiver) {
         this.mPendingAlertReceiver = responseReceiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mPendingAlertCall = RetrofitClient.getApiService().getPendingAlert(token);
         mPendingAlertCall.enqueue(new ResponseWrapper<PendingAlertRes>(mPendingAlertCallback));
     }

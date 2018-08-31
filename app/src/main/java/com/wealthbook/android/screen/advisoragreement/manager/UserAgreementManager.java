@@ -22,7 +22,7 @@ public class UserAgreementManager {
 
     public void sendReqToUpdateAgreement(IUserAgreementResponseReceiver receiver, UserAgreementReq req) {
         this.mResponseReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mUserAgreementCall = RetrofitClient.getApiService().updateUserAgreementStatus(token, req);
         mUserAgreementCall.enqueue(new ResponseWrapper<UserAgreementRes>(mUserAgreementCallback));
     }

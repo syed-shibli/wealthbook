@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group>
         <item
             android:id="@+id/nav_my_allocation"
-            android:title="@string/nav_my_allocations" />
+            android:title="@string/nav_my_allocations"
+            android:actionLayout="@layout/text"/>
         <item
             android:id="@+id/nav_my_portfoilios"
             android:title="@string/nav_my_portfolios" />

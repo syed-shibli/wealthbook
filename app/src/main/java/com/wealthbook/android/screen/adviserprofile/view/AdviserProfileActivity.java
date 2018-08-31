@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
 import com.wealthbook.android.R;
 import com.wealthbook.android.common.BaseActivityImpl;
@@ -30,6 +31,9 @@ public class AdviserProfileActivity extends BaseActivityImpl {
 
     @BindView(R.id.txv_adviser_company_logo)
     ImageView mCompanyLogo;
+
+    @BindView(R.id.img_adviser_logo)
+    ImageView mAdvisorLogo;
 
     @BindView(R.id.txv_name)
     TextView mTxvName;
@@ -77,8 +81,8 @@ public class AdviserProfileActivity extends BaseActivityImpl {
         } else {
             setUpRecyclerView();
         }
-        if (data.getmCompanyName() != null) {
-            setTitle(data.getmCompanyName());
+        if (data.getCompanyName() != null) {
+            setTitle(data.getCompanyName());
         }
     }
 
@@ -103,11 +107,19 @@ public class AdviserProfileActivity extends BaseActivityImpl {
         mTxvProfileHeader.setVisibility(View.GONE);
         if (data != null && data.getRepDetails() != null) {
             RepDetails adviserDetails = data.getRepDetails();
+            //Advisor logo
+            Picasso.with(this)
+                    .load(adviserDetails.getLogo())
+                    .transform(new BitmapTransform(AppConstant.MAX_WIDTH, AppConstant.MAX_HEIGHT))
+                    .resize(AppConstant.size, AppConstant.size)
+                    .error(R.mipmap.advisor_placeholder)
+                    .into(mAdvisorLogo);
+            //company logo
             Picasso.with(this)
                     .load(adviserDetails.getCompanyLogo())
                     .transform(new BitmapTransform(AppConstant.MAX_WIDTH, AppConstant.MAX_HEIGHT))
-                    .centerInside()
                     .resize(AppConstant.size, AppConstant.size)
+                    .error(R.mipmap.ic_launcher)
                     .into(mCompanyLogo);
             String name = adviserDetails.getFirstName();
             if (adviserDetails.getLastName() != null) {

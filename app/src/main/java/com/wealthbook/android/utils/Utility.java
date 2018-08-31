@@ -1,7 +1,7 @@
 package com.wealthbook.android.utils;
 
 import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentManager;
 
 import com.wealthbook.android.R;
 import com.wealthbook.android.common.AlertDialogModel;
@@ -68,7 +68,7 @@ public class Utility {
         return sDialogModel;
     }
 
-    public static void showDialog(AppCompatActivity activity, IDialogClickListener listener, AlertDialogModel alertModel) {
+    public static void showDialog(FragmentManager fragManager, IDialogClickListener listener, AlertDialogModel alertModel) {
         mAlertModel = alertModel;
         mListener = listener;
         if (mDialog != null && mDialog.isVisible()) {
@@ -82,7 +82,7 @@ public class Utility {
         mDialog.setDialogListener(mCallback);
         mDialog.setCancelable(alertModel.isCancelable());
         if (mDialog != null && !mDialog.isVisible() && !mDialog.isAdded()) {
-            mDialog.show(activity.getSupportFragmentManager(), "");
+            mDialog.show(fragManager, "");
         }
     }
 
@@ -162,10 +162,10 @@ public class Utility {
 
     /**
      * Create chart for notification alert
-     * @param from     Chart data
-     * @param to       Chart data
-     * @param legend   Legend value
-     * @param size pie char size
+     * @param from   Chart data
+     * @param to     Chart data
+     * @param legend Legend value
+     * @param size   pie char size
      * @return Return chart content
      */
     public static String createContentForNotificationAlert(String from, String to, String legend, int size) {
@@ -186,9 +186,14 @@ public class Utility {
                 "        type: 'pie'\n" +
                 "    },\n" +
                 "    title: {\n" +
+                "        style: {\n" +
+                "            color: '#000000',\n" +
+                "            fontWeight: 'bold',\n" +
+                "            fontSize: '2em'\n" +
+                "        },\n" +
                 "        text: 'From',\n" +
                 "        margin: 20,\n" +
-                "     },\n" +
+                "    },\n" +
                 "       legend: {\n" +
                 "        padding: 10\n" +
                 "    },\n" +
@@ -225,6 +230,11 @@ public class Utility {
                 "        type: 'pie'\n" +
                 "    },\n" +
                 "    title: {\n" +
+                "        style: {\n" +
+                "            color: '#000000',\n" +
+                "            fontWeight: 'bold',\n" +
+                "            fontSize: '2em'\n" +
+                "        },\n" +
                 "        text: 'To',\n" +
                 "    },\n" +
                 "    tooltip: {\n" +
@@ -319,5 +329,36 @@ public class Utility {
     public static String decimalFormator(Double val, String formator) {
         DecimalFormat df = new DecimalFormat(formator);
         return df.format(val);
+    }
+
+    public static String maskString(String strText, int start, int end, char maskChar)
+            throws Exception {
+
+        if (strText == null || strText.equals(""))
+            return "";
+
+        if (start < 0)
+            start = 0;
+
+        if (end > strText.length())
+            end = strText.length();
+
+        if (start > end)
+            throw new Exception("End index cannot be greater than start index");
+
+        int maskLength = end - start;
+
+        if (maskLength == 0)
+            return strText;
+
+        StringBuilder sbMaskString = new StringBuilder(maskLength);
+
+        for (int i = 0; i < maskLength; i++) {
+            sbMaskString.append(maskChar);
+        }
+
+        return strText.substring(0, start)
+                + sbMaskString.toString()
+                + strText.substring(start + maskLength);
     }
 }

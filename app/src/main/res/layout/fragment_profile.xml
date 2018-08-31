@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/txv_header"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorMyProfileTitleBg"
         android:gravity="center_vertical"
         android:paddingEnd="@dimen/padding_normal"
@@ -19,5 +19,5 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/txv_header"/>
+        android:layout_below="@+id/txv_header" />
 </RelativeLayout>

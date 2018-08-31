@@ -23,7 +23,7 @@ public class MyPortfolioManager {
      */
     public void getAllPortfolioList(IMyPortfolioResponseReceiver receiver) {
         this.mResponseReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mAllPortfolioCall = RetrofitClient.getApiService().getAllPortfolio(token);
         mAllPortfolioCall.enqueue(new ResponseWrapper<AllPortfolioRes>(mAllPortfolioCallback));
     }

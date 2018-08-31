@@ -11,8 +11,11 @@
 
     <!-- Dialog button action -->
     <string name="action_logout">Action Logout</string>
+    <string name="action_accepted">Action Accepted</string>
+    <string name="action_allocation_not_available">Action Accepted</string>
     <!-- Side menu text -->
     <string name="nav_my_allocations">My Allocations</string>
+    <string name="nav_my_allocation">My Allocation</string>
     <string name="nav_my_portfolios">My Portfolios</string>
     <string name="nav_updates">Updates</string>
     <string name="nav_news">News</string>
@@ -97,9 +100,9 @@
     <string name="txt_symbol">Symbol: </string>
 
     <!-- Pending alert dialog screen -->
-    <string name="txt_empty_pending_alert">No Pending Alerts Found</string>
+    <string name="txt_empty_pending_alert">No Pending \nAlerts Found</string>
     <string name="action_empty_pending_alert">Action No Pending Alerts Found</string>
-    <string name="txt_pending_alert_heading">Pending Alert</string>
+    <string name="txt_pending_alert_heading">Pending Alerts</string>
     <string name="txt_account_title">Account Title:\ </string>
     <string name="txt_account_no">Account no:\ </string>
     <string name="txt_adviser_name">Advisor Name:\ </string>
@@ -113,4 +116,6 @@
     <string name="txt_btn_decline">Decline</string>
     <string name="channel_name">Channel</string>
     <string name="channel_description">Channel Description</string>
+    <string name="success">Success</string>
+    <string name="allocation_not_available">Portfolio Allocation Not Available, please contact your advisor for any questions!</string>
 </resources>

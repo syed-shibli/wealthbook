@@ -28,7 +28,7 @@ public class PendingNotificationManager {
      */
     public void getPendingNotification(IPendingNotificationResponseReceiver receiver, UpdatePortfolioReq req) {
         this.mResponseReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mUpdatePendingAlertCall = RetrofitClient.getApiService().updatePortfolioNotification(token, req);
         mUpdatePendingAlertCall.enqueue(new ResponseWrapper<PendingAlertRes>(mUpdatePendingAlertCallback));
     }
@@ -52,7 +52,7 @@ public class PendingNotificationManager {
      */
     public void getLatestPortfolioReviewData(IPendingNotificationResponseReceiver receiver, int id) {
         this.mResponseReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         if (id == -1) {
             mLatestPortfolioReviewCall = RetrofitClient.getApiService().latestPortfolioReview(token);
         } else {

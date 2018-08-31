@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wealthbook.android.R;
@@ -48,14 +49,11 @@ public class NewsFragment extends Fragment implements INewsViewListener, SwipeRe
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    @BindView(R.id.txv_adviser_name)
-    TextView mTxvAdviserName;
-
     @BindView(R.id.swipe_refresh_view)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    @BindView(R.id.adviser_logo_container)
-    LinearLayout mLLAdviserLogo;
+    @BindView(R.id.adviser_container)
+    View mLLAdviserViewContainer;
 
     private NewsAdapter mAdapter;
     private HomeActivity mActivity;
@@ -92,7 +90,7 @@ public class NewsFragment extends Fragment implements INewsViewListener, SwipeRe
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         setListener();
-        mActivity.initAdviserView(mTxvAdviserName, mLLAdviserLogo);
+        mActivity.initAdviserView(mLLAdviserViewContainer);
         setUpRecyclerView();
         mNewsPresenter.fetchNewsReq(true);
     }

@@ -19,7 +19,7 @@ public class PortfolioDetailManager {
 
     public void sendReqForSelectedPortfolio(IPortfolioDetailResponseReceiver receiver, int id) {
         this.mPortfolioDetailReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mSelectedPortfolioCall = RetrofitClient.getApiService().getSelectedPortfolio(id, token);
         mSelectedPortfolioCall.enqueue(new ResponseWrapper<PortfolioDetailRes>(mSelectedPortfolioCallback));
     }

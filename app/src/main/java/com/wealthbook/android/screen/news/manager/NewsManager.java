@@ -24,7 +24,7 @@ public class NewsManager {
      */
     public void getNewsList(INewsResponseReceiver receiver) {
         this.mNewsResponseReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mNewsReqCall = RetrofitClient.getApiService().getNews(token);
         mNewsReqCall.enqueue(new ResponseWrapper<>(mNewsReqCallBack));
     }

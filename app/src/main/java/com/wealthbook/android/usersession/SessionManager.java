@@ -13,6 +13,7 @@ public final class SessionManager implements ISessionManager {
     private static final String DEFAULT_USER_DATA = null;
     private final String PREFERENCE_FILE_NAME = "user_session_file";
     private final String USER_PREFERENCE_KEY = "USER_PREFERENCE_KEY";
+    public static final String USER_EMAIL_KEY = "email";
     private SharedPreferences mSharedPreference;
     private static ISessionManager sInstance;
 
@@ -38,13 +39,26 @@ public final class SessionManager implements ISessionManager {
         editor.putString(USER_PREFERENCE_KEY, userDataJsonObject).apply();
     }
 
+    @Override
+    public void saveKeyValue(String key, String value) {
+        checkForInitialization();
+        final SharedPreferences.Editor editor = mSharedPreference.edit();
+        editor.putString(key, value).apply();
+    }
+
+    @Override
+    public String getKeyValue(String key) {
+        checkForInitialization();
+        return mSharedPreference.getString(key, DEFAULT_USER_DATA);
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void destroySession() throws IllegalStateException {
         checkForInitialization();
-        mSharedPreference.edit().clear().apply();
+        mSharedPreference.edit().remove(USER_PREFERENCE_KEY).apply();
     }
 
 
@@ -63,7 +77,7 @@ public final class SessionManager implements ISessionManager {
      */
     @Override
     public boolean isCurrentUserLoggedIn() {
-        return !(mSharedPreference == null || readSession() == null || readSession().getmToken() == null) && mSharedPreference != null && readSession().getmToken() != null;
+        return !(mSharedPreference == null || readSession() == null || readSession().getToken() == null) && mSharedPreference != null && readSession().getToken() != null;
     }
 
     /**

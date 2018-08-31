@@ -28,7 +28,6 @@ public class LoginManager {
 
     /**
      * To send login req to server
-     *
      * @param receiver Response receiver
      * @param request  Request body
      */
@@ -42,6 +41,7 @@ public class LoginManager {
         @Override
         public void onSuccess(@NonNull LoginRes data) {
             SessionManager.getNewInstance().saveSession(new Gson().fromJson(new Gson().toJson(data), UserSessionData.class));
+            SessionManager.getNewInstance().saveKeyValue(SessionManager.USER_EMAIL_KEY, data.getEmail());
             mResponseReceiver.onSuccess(data);
             DeviceRegistrationManager manager = new DeviceRegistrationManager();
             manager.reqDeviceRegister(data.getToken(), FirebaseInstanceId.getInstance().getToken());

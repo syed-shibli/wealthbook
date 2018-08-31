@@ -23,7 +23,7 @@ public class MyAllocationManager {
      */
     public void getAllAllocation(IMyAllocationResponseReceiver receiver) {
         this.mAllocationReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mAllAllocationCall = RetrofitClient.getApiService().allAllocation(token);
         mAllAllocationCall.enqueue(new ResponseWrapper<MyAllocationRes>(mAllAllocationCallback));
     }

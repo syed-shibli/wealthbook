@@ -26,7 +26,7 @@ public class UpdateManager {
      */
     public void reqUpdateList(IUpdateResponseReceiver receiver) {
         this.mResponseReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mUpdateListCall = RetrofitClient.getApiService().updateList(token);
         mUpdateListCall.enqueue(new ResponseWrapper<List<UpdateRes>>(mUpdateListCallback));
     }
@@ -50,7 +50,7 @@ public class UpdateManager {
      */
     public void reqGetUpdateDetails(IUpdateResponseReceiver receiver, String id) {
         this.mResponseReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mSetectedUpdateDetailsCall = RetrofitClient.getApiService().getSelectedUpdateDetails(id, token);
         mSetectedUpdateDetailsCall.enqueue(new ResponseWrapper<UpdateRes>(mSelectedUpdateDetailsCallback));
     }

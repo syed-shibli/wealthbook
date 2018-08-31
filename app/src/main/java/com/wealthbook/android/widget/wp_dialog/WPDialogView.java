@@ -108,18 +108,21 @@ public class WPDialogView extends DialogFragment {
         viewInitialize();
     }
 
-    /** Initialize view */
+    /**
+     * Initialize view
+     */
     private void viewInitialize() {
-        if(!mTitle.isEmpty()) {
+        if (!mTitle.isEmpty()) {
             mWPTxvTitle.setVisibility(View.VISIBLE);
             mWPTxvTitle.setText(mTitle);
-        }else{
+        } else {
             mWPTxvTitle.setVisibility(View.GONE);
         }
-        if (mStrBody != null) {
-            mWPTxvBody.setText(mStrBody);
-        } else {
+        if (mBody != null) {
+            mWPTxvBody.setVisibility(View.VISIBLE);
             mWPTxvBody.setText(mBody);
+        } else {
+            mWPTxvBody.setVisibility(View.GONE);
         }
         mWPBtnPositive.setText(mPosBtn);
         if (mNegBtn != null) {
@@ -140,13 +143,17 @@ public class WPDialogView extends DialogFragment {
         mIWPDialogListener = listener;
     }
 
-    /** Invoke when clicked on positive btn */
+    /**
+     * Invoke when clicked on positive btn
+     */
     @OnClick(R.id.btn_positive)
     public void onClickPositiveBtn() {
         mIWPDialogListener.onClickPositiveButton();
     }
 
-    /** Invoke when clicked on negative btn */
+    /**
+     * Invoke when clicked on negative btn
+     */
     @OnClick(R.id.btn_negative)
     public void onClickNegativeBtn() {
         mIWPDialogListener.onClickNegativeButton();

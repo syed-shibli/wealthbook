@@ -51,39 +51,50 @@ public class UserSessionData {
     @SerializedName("wb_eula_agreement")
     private UserAgreement userAgreement;
 
+    @SerializedName("logo")
+    private String logo;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
     public String getmUserId() {
         return mUserId;
     }
 
-    public String getmEmail() {
+    public String getEmail() {
         return mEmail;
     }
 
-    public String getmFirstName() {
+    public String getFirstName() {
         return mFirstName;
     }
 
-    public String getmMiddleName() {
+    public String getMiddleName() {
         return mMiddleName;
     }
 
-    public String getmLastName() {
+    public String getLastName() {
         return mLastName;
     }
 
-    public String getmPhone() {
+    public String getPhone() {
         return mPhone;
     }
 
-    public String getmToken() {
+    public String getToken() {
         return mToken;
     }
 
-    public String getmCountry() {
+    public String getCountry() {
         return mCountry;
     }
 
-    public String getmCompanyName() {
+    public String getCompanyName() {
         return mCompanyName;
     }
 
@@ -95,39 +106,39 @@ public class UserSessionData {
         return repDetails;
     }
 
-    public void setmUserId(String mUserId) {
+    public void setUserId(String mUserId) {
         this.mUserId = mUserId;
     }
 
-    public void setmEmail(String mEmail) {
+    public void setEmail(String mEmail) {
         this.mEmail = mEmail;
     }
 
-    public void setmFirstName(String mFirstName) {
+    public void setFirstName(String mFirstName) {
         this.mFirstName = mFirstName;
     }
 
-    public void setmMiddleName(String mMiddleName) {
+    public void setMiddleName(String mMiddleName) {
         this.mMiddleName = mMiddleName;
     }
 
-    public void setmLastName(String mLastName) {
+    public void setLastName(String mLastName) {
         this.mLastName = mLastName;
     }
 
-    public void setmPhone(String mPhone) {
+    public void setPhone(String mPhone) {
         this.mPhone = mPhone;
     }
 
-    public void setmCountry(String mCountry) {
+    public void setCountry(String mCountry) {
         this.mCountry = mCountry;
     }
 
-    public void setmToken(String mToken) {
+    public void setToken(String mToken) {
         this.mToken = mToken;
     }
 
-    public void setmCompanyName(String mCompanyName) {
+    public void setCompanyName(String mCompanyName) {
         this.mCompanyName = mCompanyName;
     }
 

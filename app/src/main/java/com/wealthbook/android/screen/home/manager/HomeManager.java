@@ -10,7 +10,6 @@ import com.wealthbook.android.screen.home.model.PendingAlertCountRes;
 import com.wealthbook.android.screen.home.presenter.IHomeResponseReceiver;
 import com.wealthbook.android.usersession.SessionManager;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 
 public class HomeManager {
@@ -23,7 +22,7 @@ public class HomeManager {
      */
     public void getPendingAlert(IHomeResponseReceiver receiver) {
         this.mPendingAlertReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mPendingAlertCountCall = RetrofitClient.getApiService().pendingAlertCount(token);
         mPendingAlertCountCall.enqueue(new ResponseWrapper<>(mPendingAlertCountCallback));
     }

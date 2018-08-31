@@ -6,8 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.wealthbook.android.R;
 import com.wealthbook.android.common.BaseActivityImpl;
@@ -34,11 +32,8 @@ public class UpdateDetailsActivity extends BaseActivityImpl implements IUpdateDe
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    @BindView(R.id.txv_adviser_name)
-    TextView mTxvAdviserName;
-
-    @BindView(R.id.adviser_logo_container)
-    LinearLayout mLLAdviserLogo;
+    @BindView(R.id.adviser_container)
+    View mLLAdviserViewContainer;
 
     private UpdateDetailsAdapter mAdapter;
     private List<UpdateDetailsImage> mUpdateDetailsImageList = new ArrayList<>();
@@ -56,7 +51,7 @@ public class UpdateDetailsActivity extends BaseActivityImpl implements IUpdateDe
         getIntentData();
         setUpRecyclerView();
         initializeView();
-        initAdviserView(mTxvAdviserName, mLLAdviserLogo);
+        initAdviserView(mLLAdviserViewContainer);
         mUpdatePresenter = new UpdatePresenter(this, new UpdateManager());
         mUpdatePresenter.getUpdateDetails(mUpdateDetailsID);
     }
@@ -83,8 +78,8 @@ public class UpdateDetailsActivity extends BaseActivityImpl implements IUpdateDe
      * View initialize
      */
     private void initializeView() {
-        if (data.getmCompanyName() != null) {
-            setTitle(data.getmCompanyName());
+        if (data.getCompanyName() != null) {
+            setTitle(data.getCompanyName());
         }
     }
 

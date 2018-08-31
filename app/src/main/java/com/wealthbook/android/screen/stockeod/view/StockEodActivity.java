@@ -68,8 +68,8 @@ public class StockEodActivity extends BaseActivityImpl implements IStockEodView 
         if (data == null) {
             return;
         }
-        if (data.getmCompanyName() != null) {
-            setTitle(data.getmCompanyName());
+        if (data.getCompanyName() != null) {
+            setTitle(data.getCompanyName());
         }
     }
 

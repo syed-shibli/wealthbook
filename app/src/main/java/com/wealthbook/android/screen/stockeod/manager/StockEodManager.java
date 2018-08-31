@@ -29,7 +29,7 @@ public class StockEodManager {
      */
     public void sendReqToSelectedStockEod(IStockEodResponseReceiver receiver, int id, String ticker) {
         this.mResponseReceiver = receiver;
-        String token = SessionManager.getNewInstance().readSession().getmToken();
+        String token = SessionManager.getNewInstance().readSession().getToken();
         mStockEodCall = RetrofitClient.getApiService().getSpecificStockEOD(token, id, ticker);
         mStockEodCall.enqueue(new ResponseWrapper<List<StockEodRes>>(mStockEodCallback));
     }

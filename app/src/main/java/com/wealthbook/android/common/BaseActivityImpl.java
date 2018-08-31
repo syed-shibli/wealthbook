@@ -12,10 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nispok.snackbar.Snackbar;
 import com.nispok.snackbar.enums.SnackbarType;
+import com.squareup.picasso.Picasso;
 import com.wealthbook.android.R;
 import com.wealthbook.android.api.ErrorResponse;
 import com.wealthbook.android.deviceregistration.manager.DeviceRegistrationManager;
@@ -31,6 +34,7 @@ import com.wealthbook.android.usersession.SessionManager;
 import com.wealthbook.android.usersession.UserSessionData;
 import com.wealthbook.android.utils.AppConstant;
 import com.wealthbook.android.utils.BadgeDrawable;
+import com.wealthbook.android.utils.BitmapTransform;
 import com.wealthbook.android.utils.Utility;
 
 import org.greenrobot.eventbus.EventBus;
@@ -163,6 +167,9 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
      */
     public static void setBadgeCount(Context context, LayerDrawable icon, int count) {
 
+        if (context == null || icon == null) {
+            return;
+        }
         BadgeDrawable badge;
 
         // Reuse drawable if possible
@@ -183,6 +190,8 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
         switch (id) {
             case R.id.action_alert:
                 showProgress();
+                count = 0;
+                setBadgeCount(this, icon, count);
                 PendingAlertManager manager = new PendingAlertManager();
                 manager.getPendingAlertList(this);
                 return true;
@@ -212,8 +221,8 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
         hideProgress();
         setBadgeCount(this, icon, count);
         if (data == null || data.size() == 0) {
-            alert = Utility.prepareDialogObj("", getString(R.string.txt_empty_pending_alert), getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
-            Utility.showDialog(this, this, alert);
+            alert = Utility.prepareDialogObj(getString(R.string.txt_empty_pending_alert), null, getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
+            Utility.showDialog(getSupportFragmentManager(), this, alert);
             return;
         }
         PendingAlertFragment pendingAlert = PendingAlertFragment.newInstance(data);
@@ -225,26 +234,40 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
         hideProgress();
         setBadgeCount(this, icon, count);
         alert = Utility.prepareDialogObj("", getString(R.string.txt_empty_pending_alert), getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
-        Utility.showDialog(this, this, alert);
+        Utility.showDialog(getSupportFragmentManager(), this, alert);
     }
 
     /**
      * Init adviser view
-     * @param mTxvAdviserName Text view for adviser name
-     * @param mLLAdviserLogo  Adviser view container view
+     * @param mLLAdviserLogo Adviser view container view
      */
-    public void initAdviserView(TextView mTxvAdviserName, View mLLAdviserLogo) {
-        RepDetails adviserDetails = data.getRepDetails();
-        if (adviserDetails == null) {
+    public void initAdviserView(View mLLAdviserLogo) {
+        if (data == null) {
             return;
         }
+        ImageView advisorLogo = mLLAdviserLogo.findViewById(R.id.img_adviser_logo);
+        TextView advisorNAme = mLLAdviserLogo.findViewById(R.id.txv_adviser_name);
         if (data.getUserType() == AppConstant.USER_TYPE_ADVISER) {
-            mLLAdviserLogo.setVisibility(View.GONE);
-            return;
-        }
-        if (adviserDetails.getFirstName() != null) {
-            String name = adviserDetails.getFirstName() + " " + (adviserDetails.getLastName() != null ? adviserDetails.getLastName() : "");
-            mTxvAdviserName.setText(name);
+            Picasso.with(this).load(data.getLogo())
+                    .transform(new BitmapTransform(AppConstant.MAX_WIDTH, AppConstant.MAX_HEIGHT))
+                    .resize(AppConstant.size, AppConstant.size)
+                    .error(R.mipmap.advisor_placeholder)
+                    .into(advisorLogo);
+            if (data.getFirstName() != null) {
+                String name = data.getFirstName() + " " + (data.getLastName() != null ? data.getLastName() : "");
+                advisorNAme.setText(name);
+            }
+        } else if (data.getRepDetails() != null) {
+            RepDetails adviserDetails = data.getRepDetails();
+            Picasso.with(this).load(adviserDetails.getLogo())
+                    .transform(new BitmapTransform(AppConstant.MAX_WIDTH, AppConstant.MAX_HEIGHT))
+                    .resize(AppConstant.size, AppConstant.size)
+                    .error(R.mipmap.advisor_placeholder)
+                    .into(advisorLogo);
+            if (adviserDetails.getFirstName() != null) {
+                String name = adviserDetails.getFirstName() + " " + (adviserDetails.getLastName() != null ? adviserDetails.getLastName() : "");
+                advisorNAme.setText(name);
+            }
         }
     }
 
@@ -254,8 +277,10 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setBadgeCount(BaseActivityImpl.this, icon, 1);
-                    showPendingAlert(pendingAlertType.getId());
+                    if (icon != null) {
+                        setBadgeCount(BaseActivityImpl.this, icon, 1);
+                        showPendingAlert(pendingAlertType.getId());
+                    }
                 }
             });
         }

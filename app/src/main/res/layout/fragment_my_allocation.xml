@@ -6,12 +6,12 @@
     <TextView
         android:id="@+id/txv_header"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorMyAllocationTitleBg"
         android:gravity="center"
         android:paddingEnd="@dimen/padding_normal"
         android:paddingStart="@dimen/padding_normal"
-        android:text="@string/txt_my_profile"
+        android:text="@string/nav_my_allocations"
         android:textColor="@android:color/white"
         android:textSize="@dimen/txt_large" />
 
@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/txv_header"
-        android:padding="@dimen/padding_small">
+        android:paddingStart="@dimen/padding_small"
+        android:paddingEnd="@dimen/padding_small">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,7 +32,6 @@
                 style="@style/spinner_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
                 android:drawableEnd="@drawable/ic_down_arrow"
                 android:ellipsize="end"
                 android:maxLines="1"
@@ -44,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/select_speaker_spinner"
-                android:layout_marginTop="@dimen/margin_small"
                 android:background="@color/colorHint"
                 android:ellipsize="end"
                 android:maxLines="1"

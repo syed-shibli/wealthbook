@@ -3,6 +3,7 @@ package com.wealthbook.android.screen.notificationalert.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -22,7 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wealthbook.android.R;
+import com.wealthbook.android.common.AlertDialogModel;
 import com.wealthbook.android.common.BaseActivityImpl;
+import com.wealthbook.android.common.IDialogClickListener;
 import com.wealthbook.android.screen.notificationalert.manager.PendingNotificationManager;
 import com.wealthbook.android.screen.notificationalert.model.LatestPortfolioReviewData;
 import com.wealthbook.android.screen.notificationalert.model.LatestPortfolioReviewRes;
@@ -39,7 +42,7 @@ import butterknife.OnClick;
  * Use the {@link NotificationAlertFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotificationAlertFragment extends DialogFragment implements INotificationAlertView {
+public class NotificationAlertFragment extends DialogFragment implements INotificationAlertView, IDialogClickListener {
 
     @BindView(R.id.web_view)
     WebView mWebView;
@@ -123,6 +126,7 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
         super.onResume();
         Window window = getDialog().getWindow();
         if (window == null) return;
+        window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         WindowManager.LayoutParams params = window.getAttributes();
         params.height = heightInDpToPx();
         params.width = widthInDpToPx();
@@ -191,6 +195,8 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
     public void bindAcceptDeclineViewModel() {
         if (isAccept == 1) {
             // Accepted
+            AlertDialogModel alert = Utility.prepareDialogObj(getString(R.string.success), "Portfolio Changes Accepted Successfully", getString(R.string.btn_ok), null, R.string.action_accepted, false);
+            Utility.showDialog(getFragmentManager(), this, alert);
             this.mPendingAlertData.setIsEditable(0);
             this.mPendingAlertData.setWbStatusId(1);
         } else if (isAccept == 2) {
@@ -271,5 +277,18 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
 
     public void refresh() {
         mPresenter.reqLatestPortfolioReview(id);
+    }
+
+    @Override
+    public void onDialogClick(int val) {
+        switch (val) {
+            case R.string.action_accepted:
+                break;
+        }
+    }
+
+    @OnClick(R.id.img_close)
+    void closeDialog() {
+        dismiss();
     }
 }

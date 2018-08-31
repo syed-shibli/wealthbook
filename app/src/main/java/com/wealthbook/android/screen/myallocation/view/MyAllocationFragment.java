@@ -15,9 +15,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.wealthbook.android.R;
+import com.wealthbook.android.common.AlertDialogModel;
+import com.wealthbook.android.common.IDialogClickListener;
 import com.wealthbook.android.screen.home.view.HomeActivity;
 import com.wealthbook.android.screen.myallocation.adapter.InvestmentAdapter;
 import com.wealthbook.android.screen.myallocation.manager.MyAllocationManager;
@@ -45,7 +48,7 @@ import butterknife.OnClick;
  * Use the {@link MyAllocationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyAllocationFragment extends DialogFragment implements IMyAllocationView, CustomAlertDialog.AlertDialogListener {
+public class MyAllocationFragment extends DialogFragment implements IMyAllocationView, CustomAlertDialog.AlertDialogListener, IDialogClickListener {
 
     @BindView(R.id.txv_header1)
     TextView mTxvHeader;
@@ -159,6 +162,9 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
             mAllAllocationList = data.getAccounts();
             mPortfolioList = createPortfolioList(mAllAllocationList);
             viewInitialize(mSelectedPortfolio);
+        } else {
+            AlertDialogModel alert = Utility.prepareDialogObj(getString(R.string.nav_my_allocation), getString(R.string.allocation_not_available), getString(R.string.btn_ok), null, R.string.action_allocation_not_available, false);
+            Utility.showDialog(getFragmentManager(), this, alert);
         }
     }
 
@@ -275,6 +281,14 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
         viewInitialize(pos);
         if (mDialog != null && !mDialog.isHidden()) {
             mDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onDialogClick(int val) {
+        switch (val) {
+            case R.string.action_allocation_not_available:
+                break;
         }
     }
 }
