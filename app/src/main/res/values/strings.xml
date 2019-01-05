@@ -67,7 +67,7 @@
 
     <!-- My allocation screen text -->
     <string name="txt_fund_name">Fund Name</string>
-    <string name="txt_percentage">% percentage</string>
+    <string name="txt_percentage">% Percentage</string>
     <string name="txt_portfolio">Select Portfolio</string>
     <string name="txt_acc_holder">Account Holder</string>
     <string name="txt_acc_title">Account Title</string>

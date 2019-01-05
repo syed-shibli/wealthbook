@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:padding="@dimen/padding_small"
-        android:textSize="@dimen/txt_x_normal"
+        android:textSize="@dimen/txt_normal"
+        android:textColor="@android:color/black"
         tools:text="Allocation" />
 
     <TextView
@@ -28,7 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_weight=".3"
         android:padding="@dimen/padding_small"
-        android:textSize="@dimen/txt_x_normal"
+        android:textSize="@dimen/txt_normal"
         android:textStyle="bold"
+        android:textColor="@android:color/black"
         tools:text="100%" />
 </LinearLayout>

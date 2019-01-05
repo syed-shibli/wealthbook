@@ -16,8 +16,8 @@
     <color name="colorMyAllocationTitleBg">#8a8a8a</color>
     <color name="colorSelectPortfolioBg">#1e78f7</color>
     <color name="colorSelectedPortfolioTitleBg">#c6c6c6</color>
-    <color name="colorAssetsByInvestTitleBg">#a5c071</color>
-    <color name="colorInvestTableTitleBg">#fffed8</color>
+    <color name="colorAssetsByInvestTitleBg">#9abb58</color>
+    <color name="colorInvestTableTitleBg">#fdf8cd</color>
     <color name="colorAllocation">#c7140f</color>
     <color name="colorInternationalEquity">#147dc1</color>
     <color name="colorUSEquity">#fefdb0</color>

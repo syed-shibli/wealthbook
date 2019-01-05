@@ -91,7 +91,8 @@
                 android:paddingBottom="@dimen/padding_normal"
                 android:paddingTop="@dimen/padding_normal"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/txt_large" />
+                android:textStyle="bold"
+                android:textSize="@dimen/txt_xx_normal" />
 
             <LinearLayout
                 android:id="@+id/btn_container_view"

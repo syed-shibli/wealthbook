@@ -27,20 +27,37 @@
             android:textSize="@dimen/txt_large"
             android:textStyle="bold" />
 
-        <com.wealthbook.android.widget.wbedittext.WBEditTextWithRounded
-            android:id="@+id/edt_username"
+        <FrameLayout
+            android:id="@+id/user_name_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/logo"
-            android:inputType="textEmailAddress"
-            app:WBETRColor="@color/colorTextDefault"
-            app:WBETRHintText="@string/placeholder_email" />
+            android:layout_below="@+id/logo">
+
+            <com.wealthbook.android.widget.wbedittext.WBEditTextWithRounded
+                android:id="@+id/edt_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                app:WBETRColor="@color/colorTextDefault"
+                app:WBETRHintText="@string/placeholder_email" />
+
+            <TextView
+                android:id="@+id/txv_email_mask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edit_text"
+                android:maxLines="1"
+                android:padding="@dimen/padding_14dp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorTextDefault"
+                android:visibility="gone" />
+        </FrameLayout>
 
         <com.wealthbook.android.widget.wbedittext.WBEditTextWithRounded
             android:id="@+id/edt_user_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/edt_username"
+            android:layout_below="@+id/user_name_container"
             android:layout_marginTop="@dimen/margin_large"
             android:inputType="textPassword"
             app:WBETRColor="@color/colorTextDefault"

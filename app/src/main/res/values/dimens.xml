@@ -42,6 +42,7 @@
     <!-- Height and weidth -->
     <dimen name="adviser_logo_width">56dp</dimen>
     <dimen name="adviser_logo_height">44dp</dimen>
+    <dimen name="adviser_logo_height2">35dp</dimen>
     <dimen name="logo_width">24dp</dimen>
     <dimen name="logo_height">24dp</dimen>
 </resources>

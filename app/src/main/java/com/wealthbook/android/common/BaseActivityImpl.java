@@ -179,7 +179,11 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
         } else {
             badge = new BadgeDrawable(context);
         }
-        badge.setCount(String.valueOf(count + badge.getCount()));
+        if (count == 0) {
+            badge.setCount(String.valueOf(count));
+        } else {
+            badge.setCount(String.valueOf(count + badge.getCount()));
+        }
         icon.mutate();
         icon.setDrawableByLayerId(R.id.ic_badge, badge);
     }
@@ -219,7 +223,6 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     @Override
     public void onSuccess(ArrayList<PendingAlertViewModel> data) {
         hideProgress();
-        setBadgeCount(this, icon, count);
         if (data == null || data.size() == 0) {
             alert = Utility.prepareDialogObj(getString(R.string.txt_empty_pending_alert), null, getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
             Utility.showDialog(getSupportFragmentManager(), this, alert);
@@ -232,6 +235,7 @@ public class BaseActivityImpl extends AppCompatActivity implements UIBase, IDial
     @Override
     public void onFailure(ErrorResponse errorResponse) {
         hideProgress();
+        count = 0;
         setBadgeCount(this, icon, count);
         alert = Utility.prepareDialogObj("", getString(R.string.txt_empty_pending_alert), getString(R.string.btn_ok), "", R.string.action_empty_pending_alert, false);
         Utility.showDialog(getSupportFragmentManager(), this, alert);

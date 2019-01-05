@@ -6,22 +6,25 @@
     <TextView
         android:id="@+id/txv_header"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@color/colorMyAllocationTitleBg"
         android:gravity="center"
+        android:paddingBottom="@dimen/padding_small"
         android:paddingEnd="@dimen/padding_normal"
         android:paddingStart="@dimen/padding_normal"
+        android:paddingTop="@dimen/padding_small"
         android:text="@string/nav_my_allocations"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/txt_large" />
+        android:textSize="@dimen/txt_large"
+        android:textStyle="bold" />
 
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/txv_header"
-        android:paddingStart="@dimen/padding_small"
-        android:paddingEnd="@dimen/padding_small">
+        android:paddingEnd="@dimen/padding_small"
+        android:paddingStart="@dimen/padding_small">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -37,7 +40,8 @@
                 android:maxLines="1"
                 android:text="@string/txt_portfolio"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/txt_xx_normal" />
+                android:textSize="@dimen/txt_x_normal"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txv_header1"
@@ -48,8 +52,9 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="@dimen/padding_x_small"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/txt_xx_normal"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txt_x_normal"
+                android:textStyle="bold"
                 tools:text="Jackson national life (Jackson Perspective)" />
 
             <include
@@ -105,7 +110,8 @@
                 android:padding="@dimen/padding_x_small"
                 android:text="@string/txt_assets_by_invest"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/txt_xx_normal" />
+                android:textSize="@dimen/txt_x_normal"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/table_header"
@@ -123,7 +129,8 @@
                     android:layout_weight="1"
                     android:text="@string/txt_fund_name"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/txt_xx_normal" />
+                    android:textSize="@dimen/txt_x_normal"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -132,7 +139,8 @@
                     android:text="@string/txt_percentage"
                     android:textAlignment="viewEnd"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/txt_xx_normal" />
+                    android:textSize="@dimen/txt_x_normal"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -154,14 +162,15 @@
                 android:paddingTop="@dimen/padding_smallest"
                 android:text="@string/txt_charts"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/txt_xx_normal" />
+                android:textSize="@dimen/txt_x_normal"
+                android:textStyle="bold" />
 
             <WebView
                 android:id="@+id/webView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:layout_below="@id/txv_chart" />
+                android:layout_below="@id/txv_chart"
+                android:layout_marginTop="@dimen/margin_normal" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

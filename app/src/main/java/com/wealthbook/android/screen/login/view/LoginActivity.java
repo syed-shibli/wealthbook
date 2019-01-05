@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.wealthbook.android.R;
 import com.wealthbook.android.common.BaseActivityImpl;
@@ -26,10 +27,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.internal.Util;
 
-public class LoginActivity extends BaseActivityImpl implements ILoginView, WBEditTextWithRounded.EditTextClickCallback {
+public class LoginActivity extends BaseActivityImpl implements ILoginView {
 
     @BindView(R.id.edt_username)
     WBEditTextWithRounded mEdtEmail;
+
+    @BindView(R.id.txv_email_mask)
+    TextView mTxvMaskEmail;
 
     @BindView(R.id.edt_user_password)
     WBEditTextWithRounded mEdtUserPassword;
@@ -47,20 +51,23 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView, WBEdi
         mLoginPresenter = new LoginPresenter(this, new LoginManager());
         email = SessionManager.getNewInstance().getKeyValue(SessionManager.USER_EMAIL_KEY);
         setMask(email, true);
-        mEdtEmail.setClickListener(this);
     }
 
     private void setMask(String email, boolean mask) {
         if (email != null) {
+            mEdtEmail.setValue(email);
             if (mask) {
                 try {
                     maskEmail = Utility.maskString(email, 5, email.length(), '*');
-                    mEdtEmail.setValue(maskEmail);
+                    mTxvMaskEmail.setVisibility(View.VISIBLE);
+                    mTxvMaskEmail.setText(maskEmail);
+                    mEdtEmail.setVisibility(View.GONE);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             } else {
-                mEdtEmail.setValue(email);
+                mTxvMaskEmail.setVisibility(View.GONE);
+                mEdtEmail.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -77,7 +84,6 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView, WBEdi
     private void setListener() {
         mEdtEmail.setError(getString(R.string.error_user_email));
         mEdtUserPassword.setError(getString(R.string.error_password));
-        mEdtEmail.setInputType(InputType.TYPE_CLASS_TEXT);
         mEdtUserPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         mEdtEmail.registerKeyListener();
         mEdtUserPassword.registerKeyListener();
@@ -160,8 +166,8 @@ public class LoginActivity extends BaseActivityImpl implements ILoginView, WBEdi
         hideProgress();
     }
 
-    @Override
-    public void onClick() {
+    @OnClick(R.id.txv_email_mask)
+    public void onTabEmalMask(){
         setMask(email, false);
     }
 }

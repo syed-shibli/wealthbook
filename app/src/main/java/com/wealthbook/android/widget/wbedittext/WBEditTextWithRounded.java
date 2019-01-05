@@ -192,20 +192,11 @@ public class WBEditTextWithRounded extends BaseView implements IWBEditTextWithRo
         });
     }
 
+    public void setSelectionText(int index) {
+        mEditText.setSelection(index);
+    }
+
     public void setError(String error) {
         mTxvError.setText(error);
-    }
-
-    public void setClickListener(final EditTextClickCallback callback) {
-        mEditText.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callback.onClick();
-            }
-        });
-    }
-
-    public interface EditTextClickCallback {
-        void onClick();
     }
 }

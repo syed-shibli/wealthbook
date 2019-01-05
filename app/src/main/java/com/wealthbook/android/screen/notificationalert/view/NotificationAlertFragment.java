@@ -110,12 +110,6 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mActivity = null;
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         mPresenter.disconnect();
@@ -140,7 +134,9 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
             ft.add(this, tag);
             ft.commitAllowingStateLoss();
         } catch (IllegalStateException e) {
-            getActivity().finish();
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
         }
     }
 
@@ -149,6 +145,9 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
      * @return Return height
      */
     private int heightInDpToPx() {
+        if (getActivity() == null) {
+            return 0;
+        }
         DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
         return metrics.heightPixels - (metrics.heightPixels / 10);
     }
@@ -158,7 +157,11 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
      * @return Return width
      */
     private int widthInDpToPx() {
-        DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
+        DisplayMetrics metrics;
+        if (getActivity() == null) {
+            return 0;
+        }
+        metrics = getActivity().getResources().getDisplayMetrics();
         return metrics.widthPixels;
     }
 
@@ -169,8 +172,17 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
      */
     private void displayPieChartView(String from, String to, String legend) {
         String showLegend = legend.equalsIgnoreCase("1") ? "true" : "false";
-        int size = widthInDpToPx() / 4;
-        String chartContent = Utility.createContentForNotificationAlert(from, to, showLegend, size);
+        String size1;
+        String size2;
+//        size = widthInDpToPx() / 4;
+        if (showLegend.equalsIgnoreCase("true")) {
+            size1 = "height: 400px;";
+            size2 = "height: 250px;margin: 30px";
+        } else {
+            size1 = "";
+            size2 = "";
+        }
+        String chartContent = Utility.createContentForNotificationAlert(from, to, showLegend, size1, size2);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.requestFocusFromTouch();
@@ -212,12 +224,14 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
 
     @Override
     public void onError(String error) {
-        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+        if (getActivity() != null) {
+            Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void bindLatestPortfolioReviewViewModel(LatestPortfolioReviewRes data) {
-        if (data != null) {
+        if (data != null && isAdded()) {
             this.mPendingAlertData = data.getData();
             viewInitialize(mPendingAlertData);
             displayPieChartView(data.getFrom(), data.getTo(), data.getShowLegend());
@@ -289,6 +303,7 @@ public class NotificationAlertFragment extends DialogFragment implements INotifi
 
     @OnClick(R.id.img_close)
     void closeDialog() {
+        hideLoader();
         dismiss();
     }
 }

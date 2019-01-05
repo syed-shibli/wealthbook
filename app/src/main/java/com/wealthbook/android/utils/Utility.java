@@ -133,6 +133,9 @@ public class Utility {
                 "    title: {\n" +
                 "        text: ''\n" +
                 "    },\n" +
+                "   credits: {\n" +
+                "       enabled: false\n" +
+                "   },\n" +
                 "    tooltip: {\n" +
                 "        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'\n" +
                 "    },\n" +
@@ -151,7 +154,7 @@ public class Utility {
                 "        }\n" +
                 "    },\n" +
                 "    series: [{\n" +
-                "        name: 'Brands',\n" +
+                "        name: 'Percentage',\n" +
                 "        colorByPoint: true,\n" +
                 "        data: " + data +
                 "    }]\n" +
@@ -165,18 +168,19 @@ public class Utility {
      * @param from   Chart data
      * @param to     Chart data
      * @param legend Legend value
-     * @param size   pie char size
      * @return Return chart content
      */
-    public static String createContentForNotificationAlert(String from, String to, String legend, int size) {
+    public static String createContentForNotificationAlert(String from, String to, String legend, String size1, String size2) {
         return "<html>"
                 + "<head>"
                 + "<script src=\"http://code.highcharts.com/highcharts.js\"></script>"
                 + "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js\"></script>"
+                + "<link href=\"http://wealthbook-staging.elasticbeanstalk.com/assets/action_items.css?body=1\" media=\"screen\" rel=\"stylesheet\">"
                 + "</head>"
-                + "<body>"
-                + "<div id=\"fromContainer\"></div>"
-                + "<div id=\"toContainer\"></div>"
+                + "<body style=\"background-color:'#f0f0f0';display: block;text-align:center; font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 0\">"
+                + "<div id=\"fromContainer\" style=\"" + size1 + "\"></div>"
+                + "<div id=\"toContainer\" style=\"" + size2 + "\">"
+                + "</div>"
                 + "<script type=\"text/javascript\">\n" +
                 "    Highcharts.chart('fromContainer', {\n" +
                 "    chart: {\n" +
@@ -194,6 +198,9 @@ public class Utility {
                 "        text: 'From',\n" +
                 "        margin: 20,\n" +
                 "    },\n" +
+                "   credits: {\n" +
+                "       enabled: false\n" +
+                "   },\n" +
                 "       legend: {\n" +
                 "        padding: 10\n" +
                 "    },\n" +
@@ -203,7 +210,7 @@ public class Utility {
                 "    plotOptions: {\n" +
                 "        pie: {\n" +
                 "            allowPointSelect: true,\n" +
-                "size: " + size + ",\n" +
+//                "size: " + size + ",\n" +
                 "            cursor: 'pointer',\n" +
                 "            dataLabels: {\n" +
                 "                enabled: true,\n" +
@@ -217,7 +224,7 @@ public class Utility {
                 "        }\n" +
                 "    },\n" +
                 "    series: [{\n" +
-                "        name: 'Brands',\n" +
+                "        name: 'Percentage',\n" +
                 "        colorByPoint: true,\n" +
                 "        data: " + from +
                 "    }]\n" +
@@ -237,13 +244,16 @@ public class Utility {
                 "        },\n" +
                 "        text: 'To',\n" +
                 "    },\n" +
+                "   credits: {\n" +
+                "       enabled: false\n" +
+                "   },\n" +
                 "    tooltip: {\n" +
                 "        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'\n" +
                 "    },\n" +
                 "    plotOptions: {\n" +
                 "        pie: {\n" +
                 "            allowPointSelect: true,\n" +
-                "size: " + size + ",\n" +
+//                "size: " + size + ",\n" +
                 "            cursor: 'pointer',\n" +
                 "            dataLabels: {\n" +
                 "                enabled: true,\n" +
@@ -252,11 +262,12 @@ public class Utility {
                 "                style: {\n" +
                 "                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'\n" +
                 "                }\n" +
-                "            }\n" +
+                "            },\n" +
+//                "               showInLegend: " + legend +
                 "        }\n" +
                 "    },\n" +
                 "    series: [{\n" +
-                "        name: 'Brands',\n" +
+                "        name: 'Percentage',\n" +
                 "        colorByPoint: true,\n" +
                 "        data: " + to +
                 "    }]\n" +
@@ -291,6 +302,9 @@ public class Utility {
                 "        title: {\n" +
                 "            text: 'titleText'\n" +
                 "        },\n" +
+                "   credits: {\n" +
+                "       enabled: false\n" +
+                "   },\n" +
                 "        series: [{\n" +
                 "            name: 'titleText',\n" +
                 "            data: " + data + ",\n" +

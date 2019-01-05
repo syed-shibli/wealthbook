@@ -161,6 +161,11 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
         if (data != null && data.getAccounts() != null && data.getAccounts().size() != 0) {
             mAllAllocationList = data.getAccounts();
             mPortfolioList = createPortfolioList(mAllAllocationList);
+            mScrollView.post(new Runnable() {
+                public void run() {
+                    mScrollView.scrollTo(0, 0);
+                }
+            });
             viewInitialize(mSelectedPortfolio);
         } else {
             AlertDialogModel alert = Utility.prepareDialogObj(getString(R.string.nav_my_allocation), getString(R.string.allocation_not_available), getString(R.string.btn_ok), null, R.string.action_allocation_not_available, false);
@@ -209,11 +214,11 @@ public class MyAllocationFragment extends DialogFragment implements IMyAllocatio
         }
         displayChartTableView(data);
         displayPieChartView(data);
-        mScrollView.post(new Runnable() {
+        /*mScrollView.post(new Runnable() {
             public void run() {
                 mScrollView.scrollTo(0, mScrollView.getBottom());
             }
-        });
+        });*/
         mTxvHeader.setText(data.getDisplayName());
 
         // Set value name
